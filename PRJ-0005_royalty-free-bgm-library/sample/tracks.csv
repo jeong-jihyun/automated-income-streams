@@ -1,0 +1,3 @@
+id,title,file,mood,genre,bpm,made_by,tool,rights_basis,terms_checked
+T001,예시 곡 이름,example.wav,밝음,팝,120,self,,직접 작곡,
+T002,예시 AI 곡,example2.wav,차분함,로파이,80,ai,도구 이름,도구 약관의 상업 이용 조항 확인,2026-10-20
