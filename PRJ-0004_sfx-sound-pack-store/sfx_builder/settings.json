@@ -1,0 +1,9 @@
+{
+  "_notice": "샘플레이트·비트 수·음량은 예시 기본값입니다. 마켓(AudioJungle, Pond5) 공식 안내를 확인하고 고치세요.",
+  "sample_rate": 44100,
+  "target_lufs": -16,
+  "silence_threshold_db": -50,
+  "min_peak_db": -30,
+  "clip_peak_db": -0.1,
+  "demo_seconds": 30
+}
