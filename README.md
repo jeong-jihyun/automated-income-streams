@@ -6,3 +6,4 @@
 |---|---|---|---|
 | PRJ-0001 | 굿노트 디지털 플래너 판매 | [PRJ-0001_goodnotes-digital-planner](PRJ-0001_goodnotes-digital-planner) | 개발 완료 (엔진 테스트 15건 통과, 굿노트 실제 동작·한글 폰트 미확인) |
 | PRJ-0002 | 구글 시트 템플릿 판매 | [PRJ-0002_google-sheets-template-shop](PRJ-0002_google-sheets-template-shop) | 개발 완료 (Python 테스트 15건·JS 테스트 5건 통과, 구글 시트 실제 열기·확장 프로그램 사이트 동작 미확인) |
+| PRJ-0003 | 카카오 이모티콘 제작·판매 | [PRJ-0003_kakao-emoticon-studio](PRJ-0003_kakao-emoticon-studio) | 개발 완료 (규격 검수 도구, 테스트 10건 통과. 규격 숫자는 예시값이라 공식 안내 확인 필요, 실제 심사 통과 미확인) |

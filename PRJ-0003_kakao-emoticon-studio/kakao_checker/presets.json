@@ -1,0 +1,5 @@
+{
+  "_notice": "아래 숫자는 예시 기본값입니다. 사용 전에 카카오 이모티콘 스튜디오 공식 안내를 확인하고 이 파일의 숫자를 고치세요.",
+  "kakao_static": {"count": 32, "width": 360, "height": 360, "formats": ["PNG"], "max_kb": 150, "need_transparent": true},
+  "ogq_static": {"count": 24, "width": 740, "height": 640, "formats": ["PNG"], "max_kb": 1024, "need_transparent": false}
+}
