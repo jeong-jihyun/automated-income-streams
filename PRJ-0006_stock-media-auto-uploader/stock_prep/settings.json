@@ -1,0 +1,19 @@
+{
+  "_note": "아래 숫자와 열 이름은 '예시값'입니다. 올리기 전에 각 사이트의 공식 안내를 확인하고 이 파일을 고치세요.",
+  "check": {
+    "min_megapixels": 4.0,
+    "max_file_mb": 45,
+    "allowed_formats": ["JPEG"],
+    "blur_min_variance": 30.0,
+    "blur_analysis_max_side": 1000
+  },
+  "keywords": {
+    "max_count": 49,
+    "banned": ["nike", "adidas", "apple", "iphone", "samsung", "google", "coca-cola", "disney", "starbucks", "gucci", "louis vuitton", "chanel", "tesla"],
+    "person_words": ["person", "people", "man", "woman", "girl", "boy", "child", "face", "사람", "남자", "여자", "아이", "얼굴"]
+  },
+  "sites": {
+    "adobe_stock": {"label": "Adobe Stock (예시 열)", "columns": ["Filename", "Title", "Keywords"]},
+    "crowdpic": {"label": "크라우드픽 (예시 열)", "columns": ["파일명", "제목", "설명", "키워드"]}
+  }
+}
