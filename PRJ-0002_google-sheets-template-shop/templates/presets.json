@@ -1,0 +1,30 @@
+{
+  "jobs": {
+    "freelancer": {
+      "label": {"ko": "프리랜서", "en": "Freelancer"},
+      "income": ["프로젝트 수입", "유지보수 수입", "기타 수입"],
+      "expense": ["식비", "교통", "장비·소프트웨어", "세금·보험", "사무실", "기타"],
+      "project_stages": ["요청", "견적", "진행", "검수", "완료"],
+      "inventory_units": ["개"]
+    },
+    "shop_owner": {
+      "label": {"ko": "소상공인", "en": "Small shop owner"},
+      "income": ["매출", "기타 수입"],
+      "expense": ["원재료", "임대료", "인건비", "광고", "공과금", "기타"],
+      "project_stages": ["기획", "준비", "진행", "점검", "완료"],
+      "inventory_units": ["개", "박스", "kg"]
+    },
+    "student": {
+      "label": {"ko": "학생", "en": "Student"},
+      "income": ["용돈", "아르바이트", "장학금"],
+      "expense": ["식비", "교통", "교재", "여가", "통신", "기타"],
+      "project_stages": ["계획", "자료조사", "작성", "검토", "제출"],
+      "inventory_units": ["개"]
+    }
+  },
+  "themes": {
+    "navy": {"main": "1F3864", "sub": "DCE6F5"},
+    "sage": {"main": "5B7F6A", "sub": "E3EEE7"},
+    "rose": {"main": "B45A6E", "sub": "F7E3E8"}
+  }
+}

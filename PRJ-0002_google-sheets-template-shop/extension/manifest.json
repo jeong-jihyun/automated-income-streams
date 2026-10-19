@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "시트 템플릿 등록 도우미",
+  "version": "0.1.0",
+  "description": "상품 문구(제목·설명·태그)를 복사하기 쉽게 보여 주는 보조 패널. 자동 입력·자동 등록은 하지 않습니다.",
+  "permissions": ["storage", "clipboardWrite"],
+  "host_permissions": ["https://*.gumroad.com/*", "https://www.etsy.com/*"],
+  "action": { "default_popup": "popup.html" },
+  "content_scripts": [{
+    "matches": ["https://*.gumroad.com/*", "https://www.etsy.com/*"],
+    "js": ["lib.js", "content.js"], "run_at": "document_idle"
+  }]
+}
