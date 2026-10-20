@@ -1,0 +1,16 @@
+{
+  "_note": "아래 숫자는 '예시값'입니다. KDP 공식 안내에서 현재 규격을 확인하고 이 파일을 고치세요.",
+  "trim_sizes_in": {"8.5x11": [8.5, 11.0], "8.5x8.5": [8.5, 8.5], "6x9": [6.0, 9.0], "8x10": [8.0, 10.0]},
+  "bleed_in": 0.125,
+  "dpi": 300,
+  "size_tolerance_pct": 5,
+  "page_margin_in": 0.5,
+  "min_pages": 24,
+  "max_pages": 828,
+  "paper_thickness_in_per_page": {"white": 0.002252, "cream": 0.0025},
+  "cover_wrap_in": 0.0,
+  "white_background_min_mean": 245,
+  "colored_pixel_max_ratio": 0.01,
+  "gray_pixel_max_ratio": 0.35,
+  "metadata_keywords_max": 7
+}
