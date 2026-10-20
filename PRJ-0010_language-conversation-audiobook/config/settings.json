@@ -1,0 +1,11 @@
+{
+  "_note": "음성(TTS) 서비스의 상업 이용·재판매 조건은 서비스마다 다릅니다. 판매 전에 공식 약관을 확인하세요.",
+  "tts_provider": "silent",
+  "voice": "en-US-AriaNeural",
+  "gap_sec": 3.0,
+  "sample_rate": 24000,
+  "max_text_len": 120,
+  "pdf_font": "HYSMyeongJo-Medium",
+  "book_title": "상황별 회화 오디오북",
+  "mp3_bitrate": "96k"
+}

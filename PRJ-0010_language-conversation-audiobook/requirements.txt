@@ -1,0 +1,4 @@
+pytest
+reportlab
+pypdf
+# 선택: edge-tts (약관 확인 후)
