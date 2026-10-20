@@ -1,0 +1,11 @@
+{
+  "_note": "아래 숫자는 '예시값'입니다. Creative Market, Freepik 등 실제 마켓의 공식 안내를 확인하고 고치세요.",
+  "sizes": [64, 128, 256, 512],
+  "min_source_px": 512,
+  "name_pattern": "^[a-z0-9][a-z0-9-]*\\.png$",
+  "corner_alpha_max": 10,
+  "duplicate_hash_distance": 3,
+  "style_min_share": 0.02,
+  "style_min_coverage": 0.5,
+  "contact_sheet": {"columns": 10, "cell": 96, "gap": 8}
+}
