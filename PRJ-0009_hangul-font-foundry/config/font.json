@@ -1,0 +1,15 @@
+{
+  "_note": "마켓별 최소 글자 수와 규격은 예시입니다. 입점할 마켓의 공식 안내를 확인하고 고치세요.",
+  "family_name": "MyHangulFont",
+  "style_name": "Regular",
+  "version": "1.000",
+  "units_per_em": 1000,
+  "canvas": 1000,
+  "baseline_y": 800,
+  "ascent": 800,
+  "descent": -200,
+  "advance_hangul": 1000,
+  "advance_other": 600,
+  "advance_space": 300,
+  "sample_sentence": "다람쥐 헌 쳇바퀴에 타고파"
+}

@@ -12,3 +12,4 @@
 | PRJ-0006 | 스톡 사진·영상 자동 업로드 | [PRJ-0006_stock-media-auto-uploader](PRJ-0006_stock-media-auto-uploader) | 개발 완료 (업로드 준비 도구, 테스트 10건 통과. 자동 업로드는 약관 위험으로 제외. 규격 값은 예시, 실제 스톡 심사·영상 검사 미확인) |
 | PRJ-0007 | AI 컬러링북 출판 | [PRJ-0007_ai-coloring-book-publisher](PRJ-0007_ai-coloring-book-publisher) | 개발 완료 (컬러링북 제작 보조 도구, 테스트 9건 통과. KDP 규격 숫자는 예시값, 실제 KDP 미리보기·인쇄 품질 미확인) |
 | PRJ-0008 | 유튜브 썸네일·채널아트 템플릿 판매 | [PRJ-0008_youtube-thumbnail-template-pack](PRJ-0008_youtube-thumbnail-template-pack) | 개발 완료 (템플릿 묶음 준비 도구, 테스트 7건 통과. 규격 값은 예시, 실제 Canva·Gumroad 규정과 화면 미확인) |
+| PRJ-0009 | 한글 폰트 제작·판매 | [PRJ-0009_hangul-font-foundry](PRJ-0009_hangul-font-foundry) | 개발 완료 (폰트 제작 보조 도구, 테스트 10건 통과. TTF만 지원, 실제 글자 디자인·OS별 표시·마켓 심사 미확인) |
