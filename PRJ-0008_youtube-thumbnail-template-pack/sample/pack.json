@@ -1,0 +1,10 @@
+{
+  "pack_name": "게임 썸네일 팩 Vol.1",
+  "theme": "게임",
+  "price_text": "9.9달러 (예시, 가격은 직접 결정)",
+  "items": [
+    {"file": "thumb_game-01.png", "title": "게임 하이라이트", "canva_url": "https://www.canva.com/design/예시-링크-1/view"},
+    {"file": "art_game-01.png", "title": "게임 채널아트", "canva_url": "https://www.canva.com/design/예시-링크-2/view"}
+  ],
+  "fonts": ["오픈 라이선스 글꼴 이름을 적으세요"]
+}

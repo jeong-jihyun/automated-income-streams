@@ -1,0 +1,10 @@
+{
+  "_note": "아래 숫자는 '예시값'입니다. Canva·Gumroad·유튜브 공식 안내를 확인하고 고치세요.",
+  "kinds": {
+    "thumb": {"label": "썸네일", "size": [1280, 720], "max_mb": 2.0},
+    "art": {"label": "채널아트", "size": [2560, 1440], "max_mb": 6.0}
+  },
+  "name_pattern": "^(thumb|art)_[a-z0-9][a-z0-9-]*\\.(png|jpg)$",
+  "allowed_formats": ["PNG", "JPEG"],
+  "contact_sheet": {"columns": 3, "cell": [320, 180], "gap": 16}
+}
