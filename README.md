@@ -20,3 +20,4 @@
 | PRJ-0014 | 자격증·시험 요약노트 PDF 판매 | [PRJ-0014_exam-summary-note-pdf](PRJ-0014_exam-summary-note-pdf) | 작업완료 (테스트 12개, 한글 렌더링 미확인) |
 | PRJ-0015 | 설문 결과 자동 리포트 SaaS | [PRJ-0015_survey-auto-report-saas](PRJ-0015_survey-auto-report-saas) | 작업완료 (테스트 10개, 로컬 CLI로 범위 축소) |
 | PRJ-0016 | 예약·결제 미니 사이트 빌더 | [PRJ-0016_booking-payment-mini-site-builder](PRJ-0016_booking-payment-mini-site-builder) | 작업완료 (테스트 11개, 시험용 결제만) |
+| PRJ-0017 | 링크 단축·클릭 분석 서비스 | [PRJ-0017_link-shortener-click-analytics](PRJ-0017_link-shortener-click-analytics) | 작업완료 (테스트 14개, 로컬 시험용) |
