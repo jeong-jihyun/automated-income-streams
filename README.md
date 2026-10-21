@@ -22,3 +22,4 @@
 | PRJ-0016 | 예약·결제 미니 사이트 빌더 | [PRJ-0016_booking-payment-mini-site-builder](PRJ-0016_booking-payment-mini-site-builder) | 작업완료 (테스트 11개, 시험용 결제만) |
 | PRJ-0017 | 링크 단축·클릭 분석 서비스 | [PRJ-0017_link-shortener-click-analytics](PRJ-0017_link-shortener-click-analytics) | 작업완료 (테스트 14개, 로컬 시험용) |
 | PRJ-0018 | 모바일 청첩장·초대장 자동 제작 서비스 | [PRJ-0018_mobile-invitation-generator](PRJ-0018_mobile-invitation-generator) | 작업완료 (테스트 13개, 파일 생성 도구) |
+| PRJ-0019 | 웹사이트 가동·상태 모니터링 SaaS | [PRJ-0019_website-uptime-status-monitor](PRJ-0019_website-uptime-status-monitor) | 작업완료 (테스트 6개, 로컬 도구) |

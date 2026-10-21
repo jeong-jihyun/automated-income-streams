@@ -1,0 +1,6 @@
+{
+  "_note": "예시값입니다. 본인이 운영하는 사이트만 넣으세요. 남의 사이트에 잦은 요청을 보내지 마세요.",
+  "timeout_sec": 5, "fail_threshold": 2, "slow_ms": 2000,
+  "sites": [{"name": "내 블로그", "url": "https://example.com", "keyword": "Example"}],
+  "webhook_url": ""
+}
