@@ -1,0 +1,9 @@
+{
+  "_note": "아래 숫자는 '예시값'입니다. 굿노트·Etsy·아이디어스의 안내와 실제 기기 해상도를 확인하고 고치세요.",
+  "name_pattern": "^[a-z0-9][a-z0-9-]*\\.(png|jpg|jpeg)$",
+  "sticker": {"max_px": 400, "border_px": 8, "padding_px": 12, "min_source_px": 200, "corner_alpha_max": 10},
+  "sheet": {"size": [2048, 2732], "margin": 48, "gap": 32, "background": "transparent"},
+  "wallpaper": {"min_short_side_px": 1080,
+                "sizes": [[1170, 2532], [1080, 2400], [1284, 2778]], "jpeg_quality": 92},
+  "preview": {"sheet_width": 1000, "wallpaper_height": 640}
+}
