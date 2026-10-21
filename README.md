@@ -24,3 +24,4 @@
 | PRJ-0018 | 모바일 청첩장·초대장 자동 제작 서비스 | [PRJ-0018_mobile-invitation-generator](PRJ-0018_mobile-invitation-generator) | 작업완료 (테스트 13개, 파일 생성 도구) |
 | PRJ-0019 | 웹사이트 가동·상태 모니터링 SaaS | [PRJ-0019_website-uptime-status-monitor](PRJ-0019_website-uptime-status-monitor) | 작업완료 (테스트 6개, 로컬 도구) |
 | PRJ-0020 | 국내 커머스 API 통합 중개 서비스 | [PRJ-0020_kr-commerce-api-gateway](PRJ-0020_kr-commerce-api-gateway) | 작업완료 (테스트 9개, 실제 API 연동 없음) |
+| PRJ-0021 | 다채널 재고 동기화 SaaS | [PRJ-0021_multichannel-inventory-sync](PRJ-0021_multichannel-inventory-sync) | 작업완료 (테스트 10개, 실제 쇼핑몰 연결 없음) |

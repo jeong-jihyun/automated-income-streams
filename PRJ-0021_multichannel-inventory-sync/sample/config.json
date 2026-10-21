@@ -1,0 +1,2 @@
+{"_note": "예시값입니다. 채널 이름과 안전재고는 실제 운영에 맞게 바꾸세요.",
+ "channels": ["naver", "coupang", "kakao"], "safety_buffer": 1}
