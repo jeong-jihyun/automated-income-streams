@@ -17,3 +17,4 @@
 | PRJ-0011 | AI 일러스트·아이콘 팩 판매 | [PRJ-0011_ai-illustration-icon-pack](PRJ-0011_ai-illustration-icon-pack) | 개발 완료 (아이콘 팩 준비 도구, 테스트 7건 통과. 마켓 실제 규격·AI 표시 규칙·디자인 품질 미확인) |
 | PRJ-0012 | 영상 편집 프리셋·자막 템플릿 판매 | [PRJ-0012_video-preset-subtitle-template](PRJ-0012_video-preset-subtitle-template) | 개발 완료 (자막 스타일 묶음 준비 도구, 테스트 14건 통과. ASS는 ffmpeg로만 확인, 프리미어·캡컷 실제 열기와 마켓 승인 미확인) |
 | PRJ-0013 | 디지털 스티커·배경화면 판매 | [PRJ-0013_digital-sticker-wallpaper-shop](PRJ-0013_digital-sticker-wallpaper-shop) | 개발 완료 (스티커·배경화면 묶음 준비 도구, 테스트 10건 통과. 굿노트·실제 폰 표시와 Etsy·아이디어스 정책 미확인) |
+| PRJ-0014 | 자격증·시험 요약노트 PDF 판매 | [PRJ-0014_exam-summary-note-pdf](PRJ-0014_exam-summary-note-pdf) | 작업완료 (테스트 12개, 한글 렌더링 미확인) |
