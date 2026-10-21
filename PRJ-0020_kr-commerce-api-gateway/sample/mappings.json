@@ -1,0 +1,9 @@
+{
+  "_note": "필드 이름은 '예시값(추정)'입니다. 실제 네이버·쿠팡·카카오 API 문서를 보고 반드시 고치세요. 여기 이름이 실제 API와 같다고 확인되지 않았습니다.",
+  "naver":  {"orders_path": "data.orders", "id": "orderId", "status": "orderStatus", "amount": "totalPaymentAmount", "buyer": "buyerName", "ordered_at": "orderDate",
+             "status_map": {"PAYED": "paid", "DELIVERING": "shipping", "DELIVERED": "delivered", "CANCELED": "cancelled"}},
+  "coupang": {"orders_path": "orders", "id": "orderId", "status": "status", "amount": "orderPrice", "buyer": "receiver.name", "ordered_at": "orderedAt",
+              "status_map": {"ACCEPT": "paid", "DELIVERING": "shipping", "FINAL_DELIVERY": "delivered", "CANCEL": "cancelled"}},
+  "kakao":  {"orders_path": "result", "id": "order_id", "status": "state", "amount": "amount.total", "buyer": "buyer.nickname", "ordered_at": "created_at",
+             "status_map": {"paid": "paid", "shipping": "shipping", "done": "delivered", "canceled": "cancelled"}}
+}
