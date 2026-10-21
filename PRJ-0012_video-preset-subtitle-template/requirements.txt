@@ -1,0 +1,4 @@
+reportlab
+pypdf
+pytest
+# 미리보기: ffmpeg (ass 필터 포함) 필요

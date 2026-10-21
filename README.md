@@ -15,3 +15,4 @@
 | PRJ-0009 | 한글 폰트 제작·판매 | [PRJ-0009_hangul-font-foundry](PRJ-0009_hangul-font-foundry) | 개발 완료 (폰트 제작 보조 도구, 테스트 10건 통과. TTF만 지원, 실제 글자 디자인·OS별 표시·마켓 심사 미확인) |
 | PRJ-0010 | 외국어 회화 오디오북 교재 판매 | [PRJ-0010_language-conversation-audiobook](PRJ-0010_language-conversation-audiobook) | 개발 완료 (회화 오디오북 제작 보조 도구, 테스트 9건 통과. 음성은 시험용 무음으로만 확인, edge-tts 실행·발음 품질·마켓 심사 미확인) |
 | PRJ-0011 | AI 일러스트·아이콘 팩 판매 | [PRJ-0011_ai-illustration-icon-pack](PRJ-0011_ai-illustration-icon-pack) | 개발 완료 (아이콘 팩 준비 도구, 테스트 7건 통과. 마켓 실제 규격·AI 표시 규칙·디자인 품질 미확인) |
+| PRJ-0012 | 영상 편집 프리셋·자막 템플릿 판매 | [PRJ-0012_video-preset-subtitle-template](PRJ-0012_video-preset-subtitle-template) | 개발 완료 (자막 스타일 묶음 준비 도구, 테스트 14건 통과. ASS는 ffmpeg로만 확인, 프리미어·캡컷 실제 열기와 마켓 승인 미확인) |

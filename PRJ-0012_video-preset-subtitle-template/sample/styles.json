@@ -1,0 +1,17 @@
+{
+  "pack_name": "예능 자막 스타일 Vol.1",
+  "theme": "예능",
+  "resolution": [1280, 720],
+  "background": "#334455",
+  "fonts": [
+    {"name": "Noto Sans CJK KR", "license": "SIL OFL 1.1", "source_url": "https://fonts.google.com/noto/specimen/Noto+Sans+KR", "redistribute": "unknown"}
+  ],
+  "styles": [
+    {"id": "fun-01", "label": "굵은 흰 글씨", "font": "Noto Sans CJK KR", "size": 64, "color": "#FFFFFF",
+     "outline_color": "#000000", "outline": 4, "shadow": 2, "bold": true, "alignment": 2, "margin_v": 60,
+     "fade_in_ms": 150, "fade_out_ms": 150, "sample_text": "이거 진짜 맛있다!"},
+    {"id": "fun-02", "label": "노란 강조", "font": "Noto Sans CJK KR", "size": 72, "color": "#FFE066",
+     "outline_color": "#222222", "outline": 5, "shadow": 0, "bold": true, "alignment": 8, "margin_v": 50,
+     "fade_in_ms": 0, "fade_out_ms": 300, "sample_text": "대박 사건 발생"}
+  ]
+}
