@@ -26,3 +26,4 @@
 | PRJ-0020 | 국내 커머스 API 통합 중개 서비스 | [PRJ-0020_kr-commerce-api-gateway](PRJ-0020_kr-commerce-api-gateway) | 작업완료 (테스트 9개, 실제 API 연동 없음) |
 | PRJ-0021 | 다채널 재고 동기화 SaaS | [PRJ-0021_multichannel-inventory-sync](PRJ-0021_multichannel-inventory-sync) | 작업완료 (테스트 10개, 실제 쇼핑몰 연결 없음) |
 | PRJ-0022 | 인스타그램 예약 발행·댓글 응대 도구 | [PRJ-0022_instagram-scheduler-comment-bot](PRJ-0022_instagram-scheduler-comment-bot) | 작업완료 (테스트 7개, 실제 인스타 연동 없음) |
+| PRJ-0023 | 영수증·명함 OCR 앱 | [PRJ-0023_receipt-namecard-ocr-app](PRJ-0023_receipt-namecard-ocr-app) | 작업완료 (테스트 8개, 한글 OCR 미확인) |

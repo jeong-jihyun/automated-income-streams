@@ -1,0 +1,3 @@
+pillow
+pytest
+# 외부 프로그램: tesseract-ocr (+ 한글은 tesseract-ocr-kor)
