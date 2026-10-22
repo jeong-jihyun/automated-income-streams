@@ -1,0 +1,5 @@
+{"_note": "예시값입니다. 가게 이름과 문구를 바꾸세요. 문자는 실제로 보내지 않습니다.",
+ "shop": "예시 헤어샵",
+ "remind_hours_before": [24, 2],
+ "offer_valid_minutes": 15,
+ "template": "[{shop}] {name}님 {when} 예약입니다. 확인은 1, 취소는 2를 보내주세요."}

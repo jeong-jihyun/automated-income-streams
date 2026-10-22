@@ -28,3 +28,4 @@
 | PRJ-0022 | 인스타그램 예약 발행·댓글 응대 도구 | [PRJ-0022_instagram-scheduler-comment-bot](PRJ-0022_instagram-scheduler-comment-bot) | 작업완료 (테스트 7개, 실제 인스타 연동 없음) |
 | PRJ-0023 | 영수증·명함 OCR 앱 | [PRJ-0023_receipt-namecard-ocr-app](PRJ-0023_receipt-namecard-ocr-app) | 작업완료 (테스트 8개, 한글 OCR 미확인) |
 | PRJ-0024 | 개인정보 비식별화 도구 | [PRJ-0024_pii-anonymizer-tool](PRJ-0024_pii-anonymizer-tool) | 작업완료 (테스트 8개, 탐지 한계 있음) |
+| PRJ-0025 | 병원·미용실 노쇼 방지 예약 알림 SaaS | [PRJ-0025_noshow-prevention-booking-reminder](PRJ-0025_noshow-prevention-booking-reminder) | 작업완료 (테스트 8개, 실제 문자 발송 없음) |
