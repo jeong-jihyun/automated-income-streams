@@ -1,0 +1,8 @@
+{"_note": "예시값입니다. admin_token은 반드시 긴 무작위 문자열로 바꾸세요(여기 값은 예시).",
+ "admin_token": "example-admin-token-change-me",
+ "rate_per_min": 5,
+ "sites": {
+  "blog": {"origins": ["https://example.github.io"],
+           "forms": {"contact": {"fields": {"name": {"required": true, "max": 50}, "email": {"required": true, "type": "email", "max": 100}, "message": {"required": true, "max": 2000}}}},
+           "comments": {"require_approval": true, "max_len": 1000}}
+ }}
