@@ -1,0 +1,9 @@
+{"_note": "예시값입니다. 앱 정보로 바꾸세요. 스토어 규격·글자 수 제한은 알려진 값이며 등록 전 공식 안내로 확인하세요.",
+ "app_name": "예시 가계부", "subtitle": "쉽고 빠른 지출 기록",
+ "language": "ko",
+ "features": ["사진 한 장으로 영수증 입력", "월별 지출 그래프", "예산 초과 알림"],
+ "keywords": ["가계부", "지출", "예산", "영수증", "절약"],
+ "screens": [
+  {"image": "shot1.png", "headline": "영수증을 찍으면 끝", "bg": "#2E5BFF"},
+  {"image": "shot2.png", "headline": "한눈에 보는 월별 지출", "bg": "#1FA37A"},
+  {"image": "shot3.png", "headline": "예산을 넘기 전에 알려줘요", "bg": "#E8590C"}]}
