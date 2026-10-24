@@ -33,3 +33,4 @@
 | PRJ-0027 | 정적 사이트 폼·댓글 백엔드 서비스 | [PRJ-0027_static-site-form-comment-backend](PRJ-0027_static-site-form-comment-backend) | 시험 10개 통과 (HTTPS·메일·캡차 미확인) |
 | PRJ-0028 | 앱스토어 스크린샷·문구 생성기 | [PRJ-0028_appstore-screenshot-copy-generator](PRJ-0028_appstore-screenshot-copy-generator) | 시험 8개 통과 (스토어 규격 공식 확인 필요) |
 | PRJ-0029 | API 문서 자동 생성·번역 도구 | [PRJ-0029_api-docs-generator-translator](PRJ-0029_api-docs-generator-translator) | 시험 8개 통과 (번역 품질 미확인) |
+| PRJ-0030 | 학부모-교사 알림장 앱 | [PRJ-0030_parent-teacher-notice-app](PRJ-0030_parent-teacher-notice-app) | 시험 8개 통과 (실제 발송·화면 없음) |
