@@ -42,3 +42,4 @@
 | PRJ-0036 | 음식 사진 칼로리 분석 앱 | [PRJ-0036_food-photo-calorie-analyzer](PRJ-0036_food-photo-calorie-analyzer) | 시험 9개 통과 (영양값 예시, 사진 인식 미연동) |
 | PRJ-0037 | AI 일기 요약·회고 앱 | [PRJ-0037_ai-diary-reflection-app](PRJ-0037_ai-diary-reflection-app) | 시험 8개 통과 (암호화 없음, 위기 표현 목록 예시) |
 | PRJ-0038 | AI 계약서 위험 조항 검토 서비스 | [PRJ-0038_ai-contract-risk-reviewer](PRJ-0038_ai-contract-risk-reviewer) | 시험 7개 통과 (법률 자문 아님, 기준 예시) |
+| PRJ-0039 | 소상공인 SNS 문구 일괄 생성기 | [PRJ-0039_smb-sns-caption-batch-generator](PRJ-0039_smb-sns-caption-batch-generator) | 시험 9개 통과 (플랫폼 규정 공식 확인 필요) |
