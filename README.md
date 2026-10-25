@@ -39,3 +39,4 @@
 | PRJ-0033 | AI 여행 일정 자동 생성 서비스 | [PRJ-0033_ai-travel-itinerary-planner](PRJ-0033_ai-travel-itinerary-planner) | 시험 10개 통과 (실제 장소·AI 미연동) |
 | PRJ-0034 | AI 영어 회화 튜터 앱 | [PRJ-0034_ai-english-speaking-tutor](PRJ-0034_ai-english-speaking-tutor) | 시험 8개 통과 (발음 평가 불가) |
 | PRJ-0035 | AI 맞춤 문제 출제 서비스 | [PRJ-0035_ai-custom-quiz-generator](PRJ-0035_ai-custom-quiz-generator) | 시험 8개 통과 (교사 검수 전) |
+| PRJ-0036 | 음식 사진 칼로리 분석 앱 | [PRJ-0036_food-photo-calorie-analyzer](PRJ-0036_food-photo-calorie-analyzer) | 시험 9개 통과 (영양값 예시, 사진 인식 미연동) |
