@@ -48,3 +48,4 @@
 | PRJ-0042 | AI 증명사진·프로필 사진 생성 | [PRJ-0042_ai-id-profile-photo-maker](PRJ-0042_ai-id-profile-photo-maker) | 작업완료 (깃 반영 완료) |
 | PRJ-0043 | AI 부동산 계약 서류 쉬운 해설 | [PRJ-0043_ai-realestate-contract-explainer](PRJ-0043_ai-realestate-contract-explainer) | 작업완료 (깃 반영 완료) |
 | PRJ-0044 | AI 공시·뉴스 요약 알림 (투자자용) | [PRJ-0044_ai-disclosure-news-digest-alert](PRJ-0044_ai-disclosure-news-digest-alert) | 작업완료 (깃 반영 완료) |
+| PRJ-0045 | AI 한국어 발음·말하기 교정 앱 | [PRJ-0045_korean-pronunciation-coach-app](PRJ-0045_korean-pronunciation-coach-app) | 작업완료 (깃 반영 완료) |
