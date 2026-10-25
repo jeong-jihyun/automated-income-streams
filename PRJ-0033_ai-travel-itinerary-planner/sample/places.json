@@ -1,0 +1,84 @@
+[
+ {
+  "id": "a1",
+  "name": "바다전망대",
+  "category": "view",
+  "cost": 0,
+  "minutes": 60,
+  "open": "09:00-18:00",
+  "lat": 33.5,
+  "lon": 126.5
+ },
+ {
+  "id": "a2",
+  "name": "해물식당",
+  "category": "food",
+  "cost": 25000,
+  "minutes": 60,
+  "open": "11:00-21:00",
+  "lat": 33.51,
+  "lon": 126.52
+ },
+ {
+  "id": "a3",
+  "name": "숲길 산책",
+  "category": "nature",
+  "cost": 0,
+  "minutes": 90,
+  "open": "06:00-19:00",
+  "lat": 33.4,
+  "lon": 126.6
+ },
+ {
+  "id": "a4",
+  "name": "도자기 체험",
+  "category": "craft",
+  "cost": 30000,
+  "minutes": 90,
+  "open": "10:00-17:00",
+  "lat": 33.52,
+  "lon": 126.55,
+  "link": "https://example.invalid/book/a4",
+  "affiliate": true
+ },
+ {
+  "id": "a5",
+  "name": "야시장",
+  "category": "food",
+  "cost": 15000,
+  "minutes": 60,
+  "open": "18:00-23:00",
+  "lat": 33.51,
+  "lon": 126.53
+ },
+ {
+  "id": "a6",
+  "name": "민속박물관",
+  "category": "museum",
+  "cost": 5000,
+  "minutes": 80,
+  "open": "09:00-17:00",
+  "lat": 33.49,
+  "lon": 126.56
+ },
+ {
+  "id": "a7",
+  "name": "해변 카페",
+  "category": "food",
+  "cost": 12000,
+  "minutes": 45,
+  "open": "08:00-20:00",
+  "lat": 33.5,
+  "lon": 126.51
+ },
+ {
+  "id": "a8",
+  "name": "폭포",
+  "category": "nature",
+  "cost": 3000,
+  "minutes": 60,
+  "open": "08:00-18:00",
+  "lat": 33.3,
+  "lon": 126.65
+ }
+]

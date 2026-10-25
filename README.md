@@ -36,3 +36,4 @@
 | PRJ-0030 | 학부모-교사 알림장 앱 | [PRJ-0030_parent-teacher-notice-app](PRJ-0030_parent-teacher-notice-app) | 시험 8개 통과 (실제 발송·화면 없음) |
 | PRJ-0031 | 사주·타로·MBTI AI 상담 앱 | [PRJ-0031_ai-fortune-tarot-mbti-app](PRJ-0031_ai-fortune-tarot-mbti-app) | 시험 9개 통과 (사주 월주 미구현) |
 | PRJ-0032 | 반려동물 건강 기록·상담 앱 | [PRJ-0032_pet-health-log-advisor](PRJ-0032_pet-health-log-advisor) | 시험 8개 통과 (수의사 검수 전 예시 기준) |
+| PRJ-0033 | AI 여행 일정 자동 생성 서비스 | [PRJ-0033_ai-travel-itinerary-planner](PRJ-0033_ai-travel-itinerary-planner) | 시험 10개 통과 (실제 장소·AI 미연동) |
