@@ -45,3 +45,4 @@
 | PRJ-0039 | 소상공인 SNS 문구 일괄 생성기 | [PRJ-0039_smb-sns-caption-batch-generator](PRJ-0039_smb-sns-caption-batch-generator) | 시험 9개 통과 (플랫폼 규정 공식 확인 필요) |
 | PRJ-0040 | AI 상품 리뷰 요약·구매 가이드 앱 | [PRJ-0040_ai-review-summary-buying-guide](PRJ-0040_ai-review-summary-buying-guide) | 시험 8개 통과 (실제 리뷰 미시험, 수집 기능 없음) |
 | PRJ-0041 | AI 영상 요약·하이라이트 서비스 | [PRJ-0041_ai-video-summary-highlights](PRJ-0041_ai-video-summary-highlights) | 시험 9개 통과 (자막 기반, 음성 인식 없음) |
+| PRJ-0042 | AI 증명사진·프로필 사진 생성 | [PRJ-0042_ai-id-profile-photo-maker](PRJ-0042_ai-id-profile-photo-maker) | 작업완료 (깃 반영 완료) |
