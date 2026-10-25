@@ -35,3 +35,4 @@
 | PRJ-0029 | API 문서 자동 생성·번역 도구 | [PRJ-0029_api-docs-generator-translator](PRJ-0029_api-docs-generator-translator) | 시험 8개 통과 (번역 품질 미확인) |
 | PRJ-0030 | 학부모-교사 알림장 앱 | [PRJ-0030_parent-teacher-notice-app](PRJ-0030_parent-teacher-notice-app) | 시험 8개 통과 (실제 발송·화면 없음) |
 | PRJ-0031 | 사주·타로·MBTI AI 상담 앱 | [PRJ-0031_ai-fortune-tarot-mbti-app](PRJ-0031_ai-fortune-tarot-mbti-app) | 시험 9개 통과 (사주 월주 미구현) |
+| PRJ-0032 | 반려동물 건강 기록·상담 앱 | [PRJ-0032_pet-health-log-advisor](PRJ-0032_pet-health-log-advisor) | 시험 8개 통과 (수의사 검수 전 예시 기준) |
