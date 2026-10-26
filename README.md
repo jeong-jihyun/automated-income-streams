@@ -54,3 +54,4 @@
 | PRJ-0048 | 네이버 쇼핑 커넥트 운영 | [PRJ-0048_naver-shopping-connect-ops](PRJ-0048_naver-shopping-connect-ops) | 작업완료 (깃 반영 완료) |
 | PRJ-0049 | 노트북·가전 비교표 제휴 사이트 | [PRJ-0049_laptop-appliance-comparison-site](PRJ-0049_laptop-appliance-comparison-site) | 작업완료 (깃 반영 완료) |
 | PRJ-0050 | 지역 맛집·카페 리뷰 블로그 | [PRJ-0050_local-restaurant-cafe-review-blog](PRJ-0050_local-restaurant-cafe-review-blog) | 작업완료 (깃 반영 완료) |
+| PRJ-0051 | 숏폼 쇼핑 채널 | [PRJ-0051_shortform-shopping-channel](PRJ-0051_shortform-shopping-channel) | 작업완료 (깃 반영 완료) |
