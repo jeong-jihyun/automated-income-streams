@@ -51,3 +51,4 @@
 | PRJ-0045 | AI 한국어 발음·말하기 교정 앱 | [PRJ-0045_korean-pronunciation-coach-app](PRJ-0045_korean-pronunciation-coach-app) | 작업완료 (깃 반영 완료) |
 | PRJ-0046 | 상품 사진 배경 제거·보정 대량 처리 서비스 | [PRJ-0046_product-photo-bg-removal-batch](PRJ-0046_product-photo-bg-removal-batch) | 작업완료 (깃 반영 완료) |
 | PRJ-0047 | 쿠팡파트너스 상품 큐레이션 사이트 | [PRJ-0047_coupang-partners-curation-site](PRJ-0047_coupang-partners-curation-site) | 작업완료 (깃 반영 완료) |
+| PRJ-0048 | 네이버 쇼핑 커넥트 운영 | [PRJ-0048_naver-shopping-connect-ops](PRJ-0048_naver-shopping-connect-ops) | 작업완료 (깃 반영 완료) |
