@@ -50,3 +50,4 @@
 | PRJ-0044 | AI 공시·뉴스 요약 알림 (투자자용) | [PRJ-0044_ai-disclosure-news-digest-alert](PRJ-0044_ai-disclosure-news-digest-alert) | 작업완료 (깃 반영 완료) |
 | PRJ-0045 | AI 한국어 발음·말하기 교정 앱 | [PRJ-0045_korean-pronunciation-coach-app](PRJ-0045_korean-pronunciation-coach-app) | 작업완료 (깃 반영 완료) |
 | PRJ-0046 | 상품 사진 배경 제거·보정 대량 처리 서비스 | [PRJ-0046_product-photo-bg-removal-batch](PRJ-0046_product-photo-bg-removal-batch) | 작업완료 (깃 반영 완료) |
+| PRJ-0047 | 쿠팡파트너스 상품 큐레이션 사이트 | [PRJ-0047_coupang-partners-curation-site](PRJ-0047_coupang-partners-curation-site) | 작업완료 (깃 반영 완료) |

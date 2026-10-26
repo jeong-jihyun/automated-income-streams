@@ -1,0 +1,7 @@
+[
+ {"id":"p1","name":"예시 무선 청소기 A","topic":"청소가전","url":"https://link.coupang.com/a/example1","price":189000,"price_date":"2026-10-25","pros":["가볍다","배터리 40분"],"cons":["먼지통이 작다"],"note":"원룸용으로 적당"},
+ {"id":"p2","name":"예시 로봇청소기 B","topic":"청소가전","url":"https://link.coupang.com/a/example2","price":329000,"price_date":"2026-10-10","pros":["물걸레 지원"],"cons":["소음"]},
+ {"id":"p3","name":"예시 <b>선풍기</b> C","topic":"계절가전","url":"https://link.coupang.com/a/example3","pros":["조용"]},
+ {"id":"p4","name":"가짜 링크 상품","topic":"청소가전","url":"https://evil.example.com/x"},
+ {"id":"p5","name":"무조건 최고 제품","topic":"계절가전","url":"https://link.coupang.com/a/example5"}
+]
