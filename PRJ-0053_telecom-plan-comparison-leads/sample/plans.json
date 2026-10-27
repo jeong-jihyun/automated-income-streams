@@ -1,0 +1,6 @@
+[
+ {"id":"a-5g-light","carrier":"가상통신 A","name":"5G 라이트 (예시)","monthly":55000,"data_gb":12,"call":"unlimited","price_date":"2026-10-20"},
+ {"id":"a-5g-max","carrier":"가상통신 A","name":"5G 맥스 (예시)","monthly":89000,"data_gb":null,"call":"unlimited","price_date":"2026-10-20"},
+ {"id":"b-lte","carrier":"가상통신 B","name":"LTE 실속 (예시)","monthly":39000,"data_gb":8,"call":300,"price_date":"2026-09-01"},
+ {"id":"c-mvno","carrier":"가상알뜰 C","name":"알뜰 20GB (예시)","monthly":22000,"data_gb":20,"call":"unlimited","price_date":"2026-10-25"}
+]

@@ -56,3 +56,4 @@
 | PRJ-0050 | 지역 맛집·카페 리뷰 블로그 | [PRJ-0050_local-restaurant-cafe-review-blog](PRJ-0050_local-restaurant-cafe-review-blog) | 작업완료 (깃 반영 완료) |
 | PRJ-0051 | 숏폼 쇼핑 채널 | [PRJ-0051_shortform-shopping-channel](PRJ-0051_shortform-shopping-channel) | 작업완료 (깃 반영 완료) |
 | PRJ-0052 | SNS 광고 성과 자동 리포트 서비스 | [PRJ-0052_ad-performance-auto-report](PRJ-0052_ad-performance-auto-report) | 작업완료 (깃 반영 완료) |
+| PRJ-0053 | 통신·인터넷 가입 비교 제휴 | [PRJ-0053_telecom-plan-comparison-leads](PRJ-0053_telecom-plan-comparison-leads) | 작업완료 (깃 반영 완료) |
