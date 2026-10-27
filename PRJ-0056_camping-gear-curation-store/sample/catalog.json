@@ -1,0 +1,14 @@
+[
+ {"id":"t1","name":"예시 2인 텐트","category":"텐트","cost":60000,"price":89000,"stock":10,"capacity":2,"seasons":["봄가을","여름"]},
+ {"id":"t2","name":"예시 4인 텐트","category":"텐트","cost":110000,"price":159000,"stock":6,"capacity":4,"seasons":["봄가을","여름","겨울"]},
+ {"id":"s1","name":"예시 침낭 (여름용)","category":"침낭","cost":15000,"price":25000,"stock":30,"capacity":1,"comfort_c":15},
+ {"id":"s2","name":"예시 침낭 (3계절)","category":"침낭","cost":30000,"price":49000,"stock":20,"capacity":1,"comfort_c":3},
+ {"id":"s3","name":"예시 침낭 (동계)","category":"침낭","cost":55000,"price":89000,"stock":8,"capacity":1,"comfort_c":-8},
+ {"id":"m1","name":"예시 에어매트","category":"매트","cost":12000,"price":19000,"stock":40,"capacity":1},
+ {"id":"m2","name":"예시 두툼 매트","category":"매트","cost":28000,"price":45000,"stock":15,"capacity":1},
+ {"id":"c1","name":"예시 접이식 의자","category":"의자","cost":9000,"price":15000,"stock":50,"capacity":1},
+ {"id":"l1","name":"예시 LED 랜턴","category":"조명","cost":6000,"price":11000,"stock":50},
+ {"id":"k1","name":"예시 가스버너 세트","category":"취사","cost":14000,"price":23000,"stock":25},
+ {"id":"k2","name":"예시 코펠 세트","category":"취사","cost":30000,"price":49000,"stock":12},
+ {"id":"h1","name":"예시 차량용 햇빛가리개","category":"햇빛가리개","cost":8000,"price":14000,"stock":3}
+]

@@ -59,3 +59,4 @@
 | PRJ-0053 | 통신·인터넷 가입 비교 제휴 | [PRJ-0053_telecom-plan-comparison-leads](PRJ-0053_telecom-plan-comparison-leads) | 작업완료 (깃 반영 완료) |
 | PRJ-0054 | 해외 SaaS 한국어 후기 제휴 | [PRJ-0054_saas-korean-review-affiliate](PRJ-0054_saas-korean-review-affiliate) | 작업완료 (깃 반영 완료) |
 | PRJ-0055 | 해외 구매대행 자동화 스토어 | [PRJ-0055_overseas-purchase-agency-automation](PRJ-0055_overseas-purchase-agency-automation) | 작업완료 (깃 반영 완료) |
+| PRJ-0056 | 캠핑·차박 용품 큐레이션 스토어 | [PRJ-0056_camping-gear-curation-store](PRJ-0056_camping-gear-curation-store) | 작업완료 (깃 반영 완료) |
