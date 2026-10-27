@@ -66,7 +66,7 @@ def build(catalog, persons, season, mode, budget, min_margin_pct=10):
     margin = round((price - cost) / price * 100, 1); warn = []
     if margin < min_margin_pct: warn.append(f"마진 {margin}%가 최소 {min_margin_pct}%보다 낮아요")
     for p in pick():
-        if p["stock"] - qty_needed(p, persons) < 3: warn.append(f"재고 부족 임박: {p['name']} (재고 {p["stock"]}개)")
+        if p["stock"] - qty_needed(p, persons) < 3: warn.append(f"재고 부족 임박: {p['name']} (재고 {p['stock']}개)")
     return {"ok": True, "items": items, "price": price, "cost": cost, "margin_pct": margin, "bundle": len(items) >= BUNDLE_MIN_ITEMS, "warnings": warn}
 
 
