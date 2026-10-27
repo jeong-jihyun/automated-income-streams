@@ -58,3 +58,4 @@
 | PRJ-0052 | SNS 광고 성과 자동 리포트 서비스 | [PRJ-0052_ad-performance-auto-report](PRJ-0052_ad-performance-auto-report) | 작업완료 (깃 반영 완료) |
 | PRJ-0053 | 통신·인터넷 가입 비교 제휴 | [PRJ-0053_telecom-plan-comparison-leads](PRJ-0053_telecom-plan-comparison-leads) | 작업완료 (깃 반영 완료) |
 | PRJ-0054 | 해외 SaaS 한국어 후기 제휴 | [PRJ-0054_saas-korean-review-affiliate](PRJ-0054_saas-korean-review-affiliate) | 작업완료 (깃 반영 완료) |
+| PRJ-0055 | 해외 구매대행 자동화 스토어 | [PRJ-0055_overseas-purchase-agency-automation](PRJ-0055_overseas-purchase-agency-automation) | 작업완료 (깃 반영 완료) |
