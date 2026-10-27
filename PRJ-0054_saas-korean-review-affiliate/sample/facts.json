@@ -1,0 +1,4 @@
+{"tool":"예시노트 (가상 SaaS)","affiliate_link":"https://example.com/ref/abc","tested_on":"2026-10-20","version_note":"웹 버전, 무료 플랜 기준","usd_krw_rate":1400,"rate_date":"2026-10-27",
+ "plans":[{"name":"Free","usd_month":0},{"name":"Plus","usd_month":10},{"name":"Team","usd_month":null}],
+ "steps":[{"title":"가입하기","how":"이메일로 가입하고 인증 메일의 링크를 누릅니다."},{"title":"첫 문서 만들기","how":"왼쪽 위 '새 문서'를 눌러 제목을 적고 저장합니다."}],
+ "pros":["화면이 단순해요","무료로 충분히 써 볼 수 있어요"],"cons":["한국어 번역이 일부 어색해요","결제는 해외 카드가 필요해요"],"korean_support":"메뉴 대부분 한국어, 고객지원은 영어만 확인했어요"}
