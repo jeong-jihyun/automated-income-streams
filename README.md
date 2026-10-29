@@ -61,3 +61,4 @@
 | PRJ-0055 | 해외 구매대행 자동화 스토어 | [PRJ-0055_overseas-purchase-agency-automation](PRJ-0055_overseas-purchase-agency-automation) | 작업완료 (깃 반영 완료) |
 | PRJ-0056 | 캠핑·차박 용품 큐레이션 스토어 | [PRJ-0056_camping-gear-curation-store](PRJ-0056_camping-gear-curation-store) | 작업완료 (깃 반영 완료) |
 | PRJ-0057 | 주문 제작 포토북·머그 자동 발주 | [PRJ-0057_custom-photobook-mug-auto-order](PRJ-0057_custom-photobook-mug-auto-order) | 작업완료 (깃 반영 완료) |
+| PRJ-0058 | 지역 특산물 정기배송 스토어 | [PRJ-0058_regional-specialty-subscription-store](PRJ-0058_regional-specialty-subscription-store) | 작업완료 (깃 반영 완료) |

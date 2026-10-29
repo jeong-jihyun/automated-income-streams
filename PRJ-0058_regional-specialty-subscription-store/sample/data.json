@@ -1,0 +1,3 @@
+{"plans":[{"id":"p-bi","name":"제철 과일 격주 박스","price":39000,"cycle":"biweekly","capacity":2},{"id":"p-mo","name":"제철 채소 월 1회","price":29000,"cycle":"monthly","capacity":50}],
+ "items":[{"name":"사과","months":[10,11],"supply":3},{"name":"배","months":[10],"supply":10},{"name":"귤","months":[11,12,1],"supply":10},{"name":"딸기","months":[2,3,4],"supply":10}],
+ "subscribers":[{"id":"s1","plan":"p-bi","start":"2026-10-06","status":"active"},{"id":"s2","plan":"p-bi","start":"2026-10-06","status":"active"},{"id":"s3","plan":"p-bi","start":"2026-10-06","status":"active"},{"id":"s4","plan":"p-mo","start":"2026-01-31","status":"active"},{"id":"s5","plan":"p-bi","start":"2026-10-06","status":"paused"}]}
