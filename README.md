@@ -64,3 +64,4 @@
 | PRJ-0058 | 지역 특산물 정기배송 스토어 | [PRJ-0058_regional-specialty-subscription-store](PRJ-0058_regional-specialty-subscription-store) | 작업완료 (깃 반영 완료) |
 | PRJ-0059 | 중고 전자기기 매입·리퍼 판매 | [PRJ-0059_used-electronics-refurb-resale](PRJ-0059_used-electronics-refurb-resale) | 작업완료 (깃 반영 완료) |
 | PRJ-0060 | 라이브커머스 클립 영상 제작 대행 | [PRJ-0060_livecommerce-clip-editing-service](PRJ-0060_livecommerce-clip-editing-service) | 작업완료 (깃 반영 완료) |
+| PRJ-0061 | 스마트스토어 상품 등록 자동화 도구 | [PRJ-0061_smartstore-bulk-listing-tool](PRJ-0061_smartstore-bulk-listing-tool) | 작업완료 (깃 반영 완료) |
