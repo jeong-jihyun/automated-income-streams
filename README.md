@@ -62,3 +62,4 @@
 | PRJ-0056 | 캠핑·차박 용품 큐레이션 스토어 | [PRJ-0056_camping-gear-curation-store](PRJ-0056_camping-gear-curation-store) | 작업완료 (깃 반영 완료) |
 | PRJ-0057 | 주문 제작 포토북·머그 자동 발주 | [PRJ-0057_custom-photobook-mug-auto-order](PRJ-0057_custom-photobook-mug-auto-order) | 작업완료 (깃 반영 완료) |
 | PRJ-0058 | 지역 특산물 정기배송 스토어 | [PRJ-0058_regional-specialty-subscription-store](PRJ-0058_regional-specialty-subscription-store) | 작업완료 (깃 반영 완료) |
+| PRJ-0059 | 중고 전자기기 매입·리퍼 판매 | [PRJ-0059_used-electronics-refurb-resale](PRJ-0059_used-electronics-refurb-resale) | 작업완료 (깃 반영 완료) |
