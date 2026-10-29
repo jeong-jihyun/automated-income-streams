@@ -17,7 +17,7 @@ def test_read_xlsx_and_csv_same():
 
 
 def test_good_row_passes():
-    assert [g["row"] for g in R["good"]] == [2] and R["total"] == 4 and R["bad_rows"] == 3
+    assert [g["row"] for g in R["good"]] == [2, 5] and R["total"] == 4 and R["bad_rows"] == 2          # 5행은 "="로 시작하는 상품명(글자로 저장)이지만 규칙상 통과
 
 
 def test_row3_errors():
@@ -63,7 +63,7 @@ def test_missing_required_header(tmp_path):
 
 def test_export_only_good_and_formula_guard(tmp_path):
     out = str(tmp_path / "o.csv"); core.export(R["good"], out); rows = list(csv.reader(open(out, encoding="utf-8-sig")))
-    assert len(rows) == 2 and rows[0][0] == "상품명" and rows[1][0].startswith("여름 린넨")
+    assert len(rows) == 3 and rows[0][0] == "상품명" and rows[1][0].startswith("여름 린넨") and rows[2][0].startswith("'=SUM") and rows[2][4] == ""      # 빈 옵션 칸에 작은따옴표가 붙지 않음
     g = dict(R["good"][0]); g["title"] = "=1+1 셔츠"; core.export([g], out); assert list(csv.reader(open(out, encoding="utf-8-sig")))[1][0].startswith("'=")
 
 
@@ -74,5 +74,5 @@ def test_blank_rows_skipped(tmp_path):
 def test_cli(tmp_path, capsys):
     o, e = str(tmp_path / "ok.csv"), str(tmp_path / "err.csv")
     assert main([X, "--categories", os.path.join(S, "categories.json"), "--out", o, "--errors", e]) == 1
-    out = capsys.readouterr().out; assert "전체 4개 중 통과 1개 / 오류 3개 행" in out and "업로드는 하지 않았어요" in out and os.path.exists(o) and len(list(csv.DictReader(open(e, encoding="utf-8-sig")))) >= 8
+    out = capsys.readouterr().out; assert "전체 4개 중 통과 2개 / 오류 2개 행" in out and "업로드는 하지 않았어요" in out and os.path.exists(o) and len(list(csv.DictReader(open(e, encoding="utf-8-sig")))) >= 7
     assert main([str(tmp_path / "none.csv"), "--categories", os.path.join(S, "categories.json")]) == 2

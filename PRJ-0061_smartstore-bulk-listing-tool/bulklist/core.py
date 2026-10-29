@@ -92,4 +92,4 @@ def export(good, out):
     cols = ["title", "price", "stock", "category", "options", "image", "desc", "shipping", "brand"]
     with open(out, "w", newline="", encoding="utf-8-sig") as f:
         w = csv.writer(f); w.writerow([k for c in cols for k, v in HEADERS.items() if v == c])
-        for r in good: w.writerow([("'" + r.get(c, "") if r.get(c, "")[:1] in "=+-@" else r.get(c, "")) for c in cols])      # 엑셀 수식 방지
+        for r in good: w.writerow([("'" + r.get(c, "") if r.get(c, "") and r.get(c, "")[0] in "=+-@" else r.get(c, "")) for c in cols])      # 엑셀 수식 방지(빈 칸은 그대로)
