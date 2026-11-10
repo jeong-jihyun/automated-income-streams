@@ -68,3 +68,4 @@
 | PRJ-0062 | 도매 상품 수집·등록 대행 | [PRJ-0062_wholesale-product-sourcing-service](PRJ-0062_wholesale-product-sourcing-service) | 개발·시험 완료 (10개 통과) |
 | PRJ-0063 | 홈카페 원두 정기배송 | [PRJ-0063_home-cafe-coffee-subscription](PRJ-0063_home-cafe-coffee-subscription) | 개발·시험 완료 (11개 통과) |
 | PRJ-0064 | K-콘텐츠 굿즈 해외 직배송 대행 | [PRJ-0064_kcontent-goods-global-shipping](PRJ-0064_kcontent-goods-global-shipping) | 개발·시험 완료 (12개 통과) |
+| PRJ-0065 | 가계부 자동 분류·월간 리포트 앱 | [PRJ-0065_expense-auto-categorizer-app](PRJ-0065_expense-auto-categorizer-app) | 개발·시험 완료 (12개 통과) |
