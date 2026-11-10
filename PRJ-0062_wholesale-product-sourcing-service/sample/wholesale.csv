@@ -1,0 +1,7 @@
+도매처,상품명,도매가,최소주문,재고,배송비,이미지,원산지,메모
+가나도매,[도매]★실리콘 주방 집게 2종 세트,"2,500",1,120,3000,https://img.example.com/a.jpg,중국,메모1
+가나도매,나이키 정품 양말 5족,4000,5,40,3000,https://img.example.com/b.jpg,한국,
+가나도매,최저가 무조건 텀블러,6000,1,50,3000,https://img.example.com/c.jpg,한국,
+가나도매,실리콘 주방 집게 2종 세트,2500,1,80,3000,https://img.example.com/a2.jpg,중국,
+가나도매,접이식 장바구니,3000,1,2,3000,https://img.example.com/d.jpg,중국,
+가나도매,=HYPERLINK 접시 받침,1200,10,60,3000,http://img.example.com/e.jpg,중국,
