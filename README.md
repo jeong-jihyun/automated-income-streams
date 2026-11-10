@@ -67,3 +67,4 @@
 | PRJ-0061 | 스마트스토어 상품 등록 자동화 도구 | [PRJ-0061_smartstore-bulk-listing-tool](PRJ-0061_smartstore-bulk-listing-tool) | 작업완료 (깃 반영 완료) |
 | PRJ-0062 | 도매 상품 수집·등록 대행 | [PRJ-0062_wholesale-product-sourcing-service](PRJ-0062_wholesale-product-sourcing-service) | 개발·시험 완료 (10개 통과) |
 | PRJ-0063 | 홈카페 원두 정기배송 | [PRJ-0063_home-cafe-coffee-subscription](PRJ-0063_home-cafe-coffee-subscription) | 개발·시험 완료 (11개 통과) |
+| PRJ-0064 | K-콘텐츠 굿즈 해외 직배송 대행 | [PRJ-0064_kcontent-goods-global-shipping](PRJ-0064_kcontent-goods-global-shipping) | 개발·시험 완료 (12개 통과) |
