@@ -1,0 +1,8 @@
+[
+ {"name":"에티오피아 예가체프","roasted":"2026-11-03","acidity":5,"body":2,"bitter":1,"methods":["핸드드립","에어로프레스"],"stock_g":1000,"price_per_200g":12000},
+ {"name":"콜롬비아 수프리모","roasted":"2026-11-01","acidity":3,"body":3,"bitter":2,"methods":["핸드드립","모카포트","에스프레소"],"stock_g":800,"price_per_200g":10000},
+ {"name":"브라질 다크","roasted":"2026-11-05","acidity":1,"body":5,"bitter":5,"methods":["에스프레소","모카포트"],"stock_g":900,"price_per_200g":9000},
+ {"name":"케냐 AA","roasted":"2026-09-20","acidity":5,"body":3,"bitter":2,"methods":["핸드드립"],"stock_g":500,"price_per_200g":14000},
+ {"name":"과테말라 안티구아","roasted":"2026-11-02","acidity":4,"body":3,"bitter":2,"methods":["핸드드립"],"stock_g":100,"price_per_200g":11000},
+ {"name":"디카페 콜롬비아","roasted":"2026-11-04","acidity":3,"body":2,"bitter":2,"methods":["핸드드립"],"stock_g":600,"price_per_200g":13000,"decaf":true}
+]
