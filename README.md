@@ -72,3 +72,4 @@
 | PRJ-0066 | 배당 캘린더·알림 서비스 | [PRJ-0066_dividend-calendar-alerts](PRJ-0066_dividend-calendar-alerts) | 개발·시험 완료 (10개 통과) |
 | PRJ-0067 | 환율·금리 알림 봇 | [PRJ-0067_fx-rate-alert-bot](PRJ-0067_fx-rate-alert-bot) | 개발·시험 완료 (10개 통과) |
 | PRJ-0068 | 연금저축·IRP 적립 설계 도구 | [PRJ-0068_pension-irp-contribution-planner](PRJ-0068_pension-irp-contribution-planner) | 개발·시험 완료 (10개 통과) |
+| PRJ-0069 | 소액 투자 전략 백테스트 서비스 | [PRJ-0069_small-invest-strategy-backtester](PRJ-0069_small-invest-strategy-backtester) | 개발·시험 완료 (10개 통과) |
