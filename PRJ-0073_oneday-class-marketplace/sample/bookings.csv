@@ -1,0 +1,16 @@
+time,class_id,student,action
+2026-11-05T10:00,C1,kim,book
+2026-11-05T11:00,C1,lee,book
+2026-11-05T12:00,C1,park,book
+2026-11-05T12:30,C1,kim,book
+2026-11-06T09:00,C1,lee,cancel
+2026-11-18T09:00,C1,kim,cancel
+2026-11-05T13:00,C2,kim,book
+2026-11-05T13:10,C2,choi,book
+2026-11-19T09:00,C2,choi,cancel
+2026-11-06T10:00,C3,han,book
+2026-11-06T10:30,C3,yoon,book
+2026-11-16T10:00,C3,han,book
+2026-11-06T11:00,C9,x,book
+2026-11-06T11:10,C3,ghost,cancel
+2026-11-06T11:20,C3,yoon,refund

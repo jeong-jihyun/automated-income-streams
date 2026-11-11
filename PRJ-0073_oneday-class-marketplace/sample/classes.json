@@ -1,0 +1,3 @@
+[{"id":"C1","title":"캔들 만들기","instructor":"공방A","price":40000,"capacity":2,"start":"2026-11-20T14:00","min_students":2},
+ {"id":"C2","title":"가죽 카드지갑","instructor":"공방A","price":60000,"capacity":3,"start":"2026-11-22T10:00","min_students":1},
+ {"id":"C3","title":"수채화 입문","instructor":"강사B","price":30000,"capacity":5,"start":"2026-11-15T10:00","min_students":3}]
