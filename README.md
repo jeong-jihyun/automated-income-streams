@@ -75,3 +75,4 @@
 | PRJ-0069 | 소액 투자 전략 백테스트 서비스 | [PRJ-0069_small-invest-strategy-backtester](PRJ-0069_small-invest-strategy-backtester) | 개발·시험 완료 (10개 통과) |
 | PRJ-0070 | 양도세·배당세 자동 계산기 | [PRJ-0070_capital-gains-dividend-tax-calculator](PRJ-0070_capital-gains-dividend-tax-calculator) | 개발·시험 완료 (11개 통과) |
 | PRJ-0071 | 직무별 오픈채팅 유료 커뮤니티 | [PRJ-0071_job-role-paid-openchat-community](PRJ-0071_job-role-paid-openchat-community) | 개발·시험 완료 (9개 통과) |
+| PRJ-0072 | 러닝·운동 인증 챌린지 서비스 | [PRJ-0072_workout-challenge-refund-service](PRJ-0072_workout-challenge-refund-service) | 개발·시험 완료 (10개 통과) |
