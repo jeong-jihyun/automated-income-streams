@@ -77,3 +77,4 @@
 | PRJ-0071 | 직무별 오픈채팅 유료 커뮤니티 | [PRJ-0071_job-role-paid-openchat-community](PRJ-0071_job-role-paid-openchat-community) | 개발·시험 완료 (9개 통과) |
 | PRJ-0072 | 러닝·운동 인증 챌린지 서비스 | [PRJ-0072_workout-challenge-refund-service](PRJ-0072_workout-challenge-refund-service) | 개발·시험 완료 (10개 통과) |
 | PRJ-0073 | 원데이 클래스 중개 플랫폼 | [PRJ-0073_oneday-class-marketplace](PRJ-0073_oneday-class-marketplace) | 개발·시험 완료 (10개 통과) |
+| PRJ-0074 | 소모임·동호회 관리 앱 | [PRJ-0074_club-meetup-management-app](PRJ-0074_club-meetup-management-app) | 개발·시험 완료 (10개 통과) |
