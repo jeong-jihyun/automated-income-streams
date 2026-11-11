@@ -1,0 +1,11 @@
+date,type,symbol,market,qty,price,fee,fx,withheld
+2025-02-03,buy,AAPL,overseas,10,150,5,1300,
+2025-03-10,buy,AAPL,overseas,10,180,5,1350,
+2025-06-20,sell,AAPL,overseas,15,260,8,1400,
+2025-07-01,buy,NVDA,overseas,5,100,3,1380,
+2025-09-15,sell,NVDA,overseas,5,80,3,1400,
+2025-05-02,buy,005930,domestic,100,70000,500,1,
+2025-11-04,sell,005930,domestic,100,80000,500,1,
+2025-08-30,dividend,AAPL,overseas,20,0.25,0,1390,0.75
+2025-12-20,dividend,005930,domestic,0,300000,0,1,
+2026-01-15,sell,AAPL,overseas,5,270,2,1400,
