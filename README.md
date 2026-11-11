@@ -70,3 +70,4 @@
 | PRJ-0064 | K-콘텐츠 굿즈 해외 직배송 대행 | [PRJ-0064_kcontent-goods-global-shipping](PRJ-0064_kcontent-goods-global-shipping) | 개발·시험 완료 (12개 통과) |
 | PRJ-0065 | 가계부 자동 분류·월간 리포트 앱 | [PRJ-0065_expense-auto-categorizer-app](PRJ-0065_expense-auto-categorizer-app) | 개발·시험 완료 (12개 통과) |
 | PRJ-0066 | 배당 캘린더·알림 서비스 | [PRJ-0066_dividend-calendar-alerts](PRJ-0066_dividend-calendar-alerts) | 개발·시험 완료 (10개 통과) |
+| PRJ-0067 | 환율·금리 알림 봇 | [PRJ-0067_fx-rate-alert-bot](PRJ-0067_fx-rate-alert-bot) | 개발·시험 완료 (10개 통과) |

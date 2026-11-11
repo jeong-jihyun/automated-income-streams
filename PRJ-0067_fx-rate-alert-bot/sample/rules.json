@@ -1,0 +1,2 @@
+[{"id":"usd-high","pair":"USD/KRW","op":">=","threshold":1400,"cooldown_min":60},
+ {"id":"jpy-low","pair":"JPY/KRW","op":"<=","threshold":9.0,"cooldown_min":60}]
