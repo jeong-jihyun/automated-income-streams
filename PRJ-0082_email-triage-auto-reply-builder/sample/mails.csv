@@ -1,0 +1,9 @@
+id,from,subject,body
+1,Kim@Example.com,제품 견적 부탁드립니다,가격이 얼마인지 알고 싶습니다
+2,park@example.com,택배 언제 도착하나요,긴급합니다 오늘까지 필요해요
+3,noreply@shop.com,주문 확인,배송 시작
+4,kim@example.com,견적 추가 문의,가격 한 번 더
+5,lee@example.com,안녕하세요,그냥 인사드립니다
+6,choi@example.com,환불 요청,=HYPERLINK("x") 환불해 주세요
+7,bad-address,제목,본문
+8,jung@example.com,[광고] 행사 안내,견적
