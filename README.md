@@ -87,3 +87,4 @@
 | PRJ-0081 | 견적서·청구서 자동 발행 시스템 | [PRJ-0081_quote-invoice-auto-issuer](PRJ-0081_quote-invoice-auto-issuer) | 개발·시험 완료 (11개 통과) |
 | PRJ-0082 | 이메일 분류·자동 답장 구축 대행 | [PRJ-0082_email-triage-auto-reply-builder](PRJ-0082_email-triage-auto-reply-builder) | 개발·시험 완료 (10개 통과) |
 | PRJ-0083 | 사내 보고서 취합 대시보드 구축 | [PRJ-0083_internal-report-dashboard](PRJ-0083_internal-report-dashboard) | 개발·시험 완료 (10개 통과) |
+| PRJ-0084 | 웹 데이터 수집·가격 모니터링 대행 | [PRJ-0084_web-scraping-price-monitoring-service](PRJ-0084_web-scraping-price-monitoring-service) | 개발·시험 완료 (10개 통과) |
