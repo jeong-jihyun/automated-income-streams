@@ -1,0 +1,11 @@
+{"app": "공방 수강 관리", "roles": ["admin", "teacher", "guest"],
+ "tables": {"수강생": {"fields": {"이름": "text", "연락처": "phone", "담당": "ref:강사"}},
+            "강사": {"fields": {"이름": "text", "이메일": "email"}},
+            "수업": {"fields": {"제목": "text", "날짜": "date", "강사": "ref:직원"}},
+            "메모": {"fields": {"내용": "text", "종류": "emoji"}}},
+ "screens": [{"name": "수강생목록", "table": "수강생", "roles": ["admin", "teacher"], "actions": ["list", "create"]},
+             {"name": "수강생목록", "table": "수강생", "roles": ["admin"], "actions": ["list"]},
+             {"name": "수업표", "table": "수업", "roles": ["admin", "manager"], "actions": ["list", "share"]},
+             {"name": "강사", "table": "강사", "roles": ["admin"], "actions": ["view"]},
+             {"name": "빈화면", "table": "없음", "roles": [], "actions": []}],
+ "needs": {"payment": true, "users": 1500, "offline": true, "external_apis": 4}}
