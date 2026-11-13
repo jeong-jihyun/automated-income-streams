@@ -81,3 +81,4 @@
 | PRJ-0075 | 지역 나눔·교환 플랫폼 | [PRJ-0075_local-sharing-exchange-platform](PRJ-0075_local-sharing-exchange-platform) | 개발·시험 완료 (11개 통과) |
 | PRJ-0076 | 학습 인증 스터디 앱 | [PRJ-0076_study-certification-app](PRJ-0076_study-certification-app) | 개발·시험 완료 (11개 통과) |
 | PRJ-0077 | 반려동물 돌봄 매칭 플랫폼 | [PRJ-0077_pet-sitting-matching-platform](PRJ-0077_pet-sitting-matching-platform) | 개발·시험 완료 (11개 통과) |
+| PRJ-0078 | 시니어 디지털 교육 커뮤니티 | [PRJ-0078_senior-digital-literacy-community](PRJ-0078_senior-digital-literacy-community) | 개발·시험 완료 (9개 통과) |
