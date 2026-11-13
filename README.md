@@ -90,3 +90,4 @@
 | PRJ-0084 | 웹 데이터 수집·가격 모니터링 대행 | [PRJ-0084_web-scraping-price-monitoring-service](PRJ-0084_web-scraping-price-monitoring-service) | 개발·시험 완료 (10개 통과) |
 | PRJ-0085 | 알림톡·문자 발송 시스템 구축 | [PRJ-0085_alimtalk-sms-dispatch-system](PRJ-0085_alimtalk-sms-dispatch-system) | 개발·시험 완료 (8개 통과) |
 | PRJ-0086 | 노코드 앱 제작 대행 | [PRJ-0086_nocode-app-builder-agency](PRJ-0086_nocode-app-builder-agency) | 개발·시험 완료 (9개 통과) |
+| PRJ-0087 | 기업 AI 업무 활용 교육 | [PRJ-0087_corporate-ai-training-workshop](PRJ-0087_corporate-ai-training-workshop) | 개발 완료 (웹앱·APK 대상, 테스트 16건 통과, 실제 폰 설치·화면 미확인) |

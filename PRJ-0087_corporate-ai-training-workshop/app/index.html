@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<title>기업 AI 업무 활용 교육</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>기업 AI 업무 활용 교육</h1>
+<p class="sub">워크숍 견적·손익분기 계산기 + 업무별 AI 활용 체크리스트</p>
+
+<section class="card">
+<h2>1. 견적·손익 계산</h2>
+<label for="instructorFee">강사료 (원)</label><input id="instructorFee" inputmode="numeric">
+<label for="venueFee">장소비 (원)</label><input id="venueFee" inputmode="numeric">
+<label for="materialPerPerson">1인 자료비 (원)</label><input id="materialPerPerson" inputmode="numeric">
+<label for="headcount">참가 인원 (명)</label><input id="headcount" inputmode="numeric">
+<label for="pricePerPerson">1인 참가비 (원)</label><input id="pricePerPerson" inputmode="numeric">
+<button id="calcBtn">계산하기</button>
+<button id="sampleBtn" class="sub2">샘플 값 다시 넣기</button>
+<div id="calcErr" class="err" hidden></div>
+<div id="calcOut" hidden>
+<p id="verdict" class="big"></p>
+<p>총비용 <b id="tCost"></b> / 매출 <b id="tRev"></b> / 손익 <b id="tProfit"></b></p>
+<p>손익분기 인원: <b id="tBe"></b></p>
+<p>1인당 비용 분담: <b id="tShare"></b><br><span class="note" id="tShareNote"></span></p>
+<table><thead><tr><th>인원</th><th>비용</th><th>매출</th><th>손익</th></tr></thead><tbody id="tbl"></tbody></table>
+</div>
+</section>
+
+<section class="card">
+<h2>2. AI 활용 체크리스트</h2>
+<p class="note">업무마다 "안 함 / 가끔 / 자주"를 골라 주세요.</p>
+<div id="checks"></div>
+<button id="scoreBtn">점수 보기</button>
+<div id="scoreOut" hidden>
+<p class="big" id="sPct"></p><p id="sAdv"></p><p class="note" id="sNot"></p>
+</div>
+</section>
+<p class="note">이 앱은 인터넷 없이 폰 안에서만 계산해요. 값은 이 기기에만 저장돼요.</p>
+</main>
+<script src="core.js"></script>
+<script>
+(function () {
+  var C = window.CORE, KEY = 'prj0087.v1';
+  var ids = ['instructorFee', 'venueFee', 'materialPerPerson', 'headcount', 'pricePerPerson'];
+  var checks = {};
+  function $(i) { return document.getElementById(i); }
+  function won(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원'; }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify({ f: getForm(), c: checks })); } catch (e) {} }
+  function load() { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } }
+  function getForm() { var o = {}; ids.forEach(function (i) { o[i] = $(i).value; }); return o; }
+  function setForm(o) { ids.forEach(function (i) { $(i).value = o[i]; }); }
+  function renderChecks() {
+    var h = '';
+    C.CHECK_ITEMS.forEach(function (it) {
+      h += '<div class="q"><span>' + it.label + '</span><div class="opts">';
+      ['안 함', '가끔', '자주'].forEach(function (t, v) {
+        h += '<label data-id="' + it.id + '" data-v="' + v + '" class="' + (checks[it.id] === v ? 'on' : '') + '">' + t + '</label>';
+      });
+      h += '</div></div>';
+    });
+    $('checks').innerHTML = h;
+    Array.prototype.forEach.call($('checks').querySelectorAll('label'), function (l) {
+      l.addEventListener('click', function () { checks[l.dataset.id] = Number(l.dataset.v); renderChecks(); save(); });
+    });
+  }
+  function calc() {
+    var r = C.calcWorkshop(getForm());
+    $('calcErr').hidden = r.ok; $('calcOut').hidden = !r.ok;
+    if (!r.ok) { $('calcErr').textContent = r.errors.join(' '); return; }
+    $('verdict').textContent = r.verdict;
+    $('verdict').className = 'big ' + (r.profit >= 0 ? 'good' : 'bad');
+    $('tCost').textContent = won(r.totalCost); $('tRev').textContent = won(r.revenue);
+    $('tProfit').textContent = (r.profit < 0 ? '-' : '') + won(Math.abs(r.profit));
+    $('tBe').textContent = r.breakEven === null ? '없음' : r.breakEven + '명';
+    $('tShare').textContent = r.perPersonMin === r.perPersonMax ? won(r.perPersonMin) : won(r.perPersonMin) + ' ~ ' + won(r.perPersonMax);
+    $('tShareNote').textContent = '합계 ' + won(r.shareSum) + ' (총비용과 같음, 나머지는 앞사람부터 1원씩)';
+    var h = '';
+    r.table.forEach(function (t) {
+      h += '<tr><td>' + t.n + '명</td><td>' + won(t.cost) + '</td><td>' + won(t.revenue) + '</td><td class="' + (t.profit >= 0 ? 'good' : 'bad') + '">' + (t.profit < 0 ? '-' : '') + won(Math.abs(t.profit)) + '</td></tr>';
+    });
+    $('tbl').innerHTML = h;
+    save();
+  }
+  function score() {
+    var r = C.scoreChecklist(checks);
+    $('scoreOut').hidden = false;
+    $('sPct').textContent = r.percent + '점 (' + r.score + '/' + r.max + ') ' + r.level;
+    $('sAdv').textContent = r.advice;
+    $('sNot').textContent = r.notUsed.length ? '안 하는 업무: ' + r.notUsed.join(' / ') : '모든 업무에 AI를 쓰고 있어요.';
+    save();
+  }
+  var s = load();
+  if (s && s.f) { setForm(s.f); checks = s.c || {}; } else { setForm(C.SAMPLE); checks = Object.assign({}, C.CHECK_SAMPLE); }
+  renderChecks();
+  $('calcBtn').addEventListener('click', calc);
+  $('scoreBtn').addEventListener('click', score);
+  $('sampleBtn').addEventListener('click', function () { setForm(C.SAMPLE); checks = Object.assign({}, C.CHECK_SAMPLE); renderChecks(); calc(); score(); });
+  calc(); score();
+})();
+</script>
+</body>
+</html>
