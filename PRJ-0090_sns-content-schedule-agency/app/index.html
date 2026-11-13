@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SNS 콘텐츠 일정 관리 대행</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1>SNS 콘텐츠 일정 관리 대행</h1>
+<p class="note">게시 계획을 점검하고 월 달력과 견적을 보여 줘요. 자동으로 올리지는 않아요. 인터넷 없이 돼요.</p>
+
+<div class="card">
+  <h2>1. 게시 계획 입력</h2>
+  <label for="plan">한 줄에 하나: 날짜, 채널, 제목</label>
+  <textarea id="plan" spellcheck="false"></textarea>
+  <div class="row">
+    <div><label for="year">연도</label><input id="year" type="number" inputmode="numeric" value="2026"></div>
+    <div><label for="month">월</label><input id="month" type="number" inputmode="numeric" min="1" max="12" value="11"></div>
+  </div>
+  <div class="row">
+    <div><label for="minw">주당 최소 게시</label><input id="minw" type="number" inputmode="numeric" min="0" value="3"></div>
+    <div><label for="skew">쏠림 기준(%)</label><input id="skew" type="number" inputmode="numeric" min="1" max="100" value="40"></div>
+  </div>
+  <div class="row">
+    <div><label for="unit">게시당 단가(원)</label><input id="unit" type="number" inputmode="numeric" min="0" value="30000"></div>
+    <div><label for="vat">부가세(%)</label><input id="vat" type="number" inputmode="numeric" min="0" value="10"></div>
+  </div>
+  <label><input id="wk" type="checkbox" style="width:auto"> 주말은 빈 날로 세지 않기</label>
+  <button id="run">점검하고 견적 보기</button>
+  <button id="sample" class="sec">샘플 데이터로 되돌리기</button>
+</div>
+
+<div id="out" aria-live="polite"></div>
+
+<script src="core.js"></script>
+<script>
+(function () {
+  var C = window.SnsCore;
+  var SAMPLE = [
+    '# 날짜, 채널, 제목',
+    '2026-11-02, 인스타, 가을 신메뉴 소개',
+    '2026-11-03, 블로그, 매장 이야기',
+    '2026-11-05, 인스타, 후기 모음',
+    '2026-11-05, 인스타, 이벤트 안내',
+    '2026-11-06, 유튜브, 제작 과정 영상',
+    '2026-11-09, 인스타, 주간 추천',
+    '2026-11-09, 블로그, 사용법 정리',
+    '2026-11-16, 인스타, 고객 사연',
+    '2026-11-16, 블로그, 연말 준비',
+    '2026-11-16, 유튜브, 매장 투어',
+    '2026-11-23, 인스타, 감사 이벤트',
+    '2026-11-30, 블로그, 월말 결산',
+    '2026-12-01, 인스타, 12월 예고'
+  ].join('\n');
+  var KEY = 'prj0090-state';
+  var $ = function (id) { return document.getElementById(id); };
+  var ids = ['plan', 'year', 'month', 'minw', 'skew', 'unit', 'vat'];
+
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function save() { try { var o = { wk: $('wk').checked }; ids.forEach(function (i) { o[i] = $(i).value; }); localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {} }
+  function load() {
+    $('plan').value = SAMPLE;
+    try { var o = JSON.parse(localStorage.getItem(KEY) || 'null'); if (o) { ids.forEach(function (i) { if (o[i] != null) $(i).value = o[i]; }); $('wk').checked = !!o.wk; } } catch (e) {}
+  }
+  function num(id, def) { var v = parseInt($(id).value, 10); return isNaN(v) ? def : v; }
+
+  function run() {
+    save();
+    var year = num('year', 2026), month = num('month', 11);
+    var out = $('out');
+    if (month < 1 || month > 12) { out.innerHTML = '<div class="card bad">월은 1~12로 넣어 주세요.</div>'; return; }
+    var p = C.parsePlan($('plan').value);
+    var a = C.analyze(p.items, { year: year, month: month, minPerWeek: num('minw', 3), skewPct: num('skew', 40), skipWeekendEmpty: $('wk').checked });
+    var q = C.quote(a.channels, num('unit', 0), num('vat', 10));
+    var h = '';
+
+    h += '<div class="card"><h2>2. 점검 결과</h2>';
+    h += '<p class="big ' + (a.ok && !p.errors.length ? 'ok' : 'warn') + '">' + (a.ok && !p.errors.length ? '문제 없어요' : '확인할 것 ' + (a.warnings.length + (p.errors.length ? 1 : 0)) + '가지') + '</p>';
+    h += '<p>' + year + '년 ' + month + '월 게시 ' + a.total + '건</p><ul>';
+    if (p.errors.length) { h += '<li class="bad">읽지 못한 줄 ' + p.errors.length + '개<ul>'; p.errors.forEach(function (e) { h += '<li>' + e.line + '번째 줄: ' + esc(e.reason) + '</li>'; }); h += '</ul></li>'; }
+    a.warnings.forEach(function (w) { h += '<li class="warn">' + esc(w) + '</li>'; });
+    h += '</ul>';
+    if (a.duplicates.length) { h += '<b>중복</b><ul>'; a.duplicates.forEach(function (d) { h += '<li>' + esc(d.date) + ' ' + esc(d.channel) + ' ' + d.count + '건: ' + esc(d.titles.join(' / ')) + '</li>'; }); h += '</ul>'; }
+    if (a.emptyDays.length) h += '<p><b>빈 날</b>: ' + a.emptyDays.join(', ') + '일</p>';
+    h += '<b>주별 게시 수 (월~일)</b><ul>';
+    a.weekCounts.forEach(function (w) { h += '<li class="' + (w.low ? 'warn' : '') + '">' + w.week + '주차: ' + w.count + '건' + (w.partial ? ' (일부 날짜만 이 달)' : '') + (w.low ? ' - 적어요' : '') + '</li>'; });
+    h += '</ul><b>요일별</b><p>';
+    h += C.WD.map(function (n, i) { return n + ' ' + a.skew.counts[i]; }).join(' · ');
+    h += a.skew.topWeekday ? '<br>가장 많은 요일: ' + a.skew.topWeekday + ' (' + a.skew.topShare + '%)' : '';
+    h += '</p></div>';
+
+    var dupDays = {}; a.duplicates.forEach(function (d) { dupDays[+d.date.slice(8)] = 1; });
+    var emp = {}; a.emptyDays.forEach(function (d) { emp[d] = 1; });
+    h += '<div class="card"><h2>3. ' + month + '월 달력</h2><div class="sc"><table class="cal"><tr>' + C.WD.map(function (n) { return '<th>' + n + '</th>'; }).join('') + '</tr>';
+    C.buildCalendar(year, month, p.items).forEach(function (w) {
+      h += '<tr>';
+      w.forEach(function (c) {
+        if (!c) { h += '<td></td>'; return; }
+        h += '<td class="' + (dupDays[c.day] ? 'dup' : emp[c.day] ? 'e' : '') + '"><span class="dn">' + c.day + '</span>';
+        c.posts.forEach(function (x) { h += '<span class="p">' + esc(x.channel) + '·' + esc(x.title) + '</span>'; });
+        h += '</td>';
+      });
+      h += '</tr>';
+    });
+    h += '</table></div><p class="note">붉은 칸: 같은 날 같은 채널 중복 / 주황 칸: 빈 날</p></div>';
+
+    h += '<div class="card"><h2>4. 대행 월 견적</h2>';
+    h += '<table class="t"><tr><th>채널</th><th>게시</th><th>공급가</th><th>부가세</th><th>합계</th></tr>';
+    q.rows.forEach(function (r) { h += '<tr><td>' + esc(r.channel) + '</td><td>' + r.posts + '</td><td>' + C.won(r.supply) + '</td><td>' + C.won(r.vat) + '</td><td>' + C.won(r.total) + '</td></tr>'; });
+    h += '<tr><th>전체</th><th>' + q.posts + '</th><th>' + C.won(q.supply) + '</th><th>' + C.won(q.vat) + '</th><th>' + C.won(q.total) + '</th></tr></table>';
+    h += '<p class="big">총 ' + C.won(q.total) + '</p><p class="note">부가세는 전체에서 한 번 반올림하고, 채널별로는 나머지 처리로 나눠 합이 꼭 맞아요.</p></div>';
+    out.innerHTML = h;
+  }
+
+  load();
+  $('run').addEventListener('click', run);
+  $('sample').addEventListener('click', function () { $('plan').value = SAMPLE; $('year').value = 2026; $('month').value = 11; run(); });
+  run();
+})();
+</script>
+</body>
+</html>
