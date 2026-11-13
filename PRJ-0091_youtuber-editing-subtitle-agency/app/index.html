@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>유튜버용 영상 편집·자막 대행</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>유튜버용 영상 편집·자막 대행</h1>
+<p class="note">자막(SRT) 글을 붙여넣어 점검하고, 대행 견적을 계산합니다. 영상은 올리지 않고, 인터넷도 쓰지 않습니다.</p>
+
+<section class="card">
+<h2>1. 자막 점검·시간 이동</h2>
+<label for="srt">SRT 자막 글</label>
+<textarea id="srt"></textarea>
+<div class="row">
+<div><label for="shift">시간 이동(초, 예: 1.5 또는 -2)</label><input id="shift" type="number" step="0.1" inputmode="decimal"></div>
+</div>
+<div class="row">
+<div><label for="maxLine">한 줄 최대 글자</label><input id="maxLine" type="number" inputmode="numeric"></div>
+<div><label for="maxCps">초당 최대 글자</label><input id="maxCps" type="number" inputmode="decimal"></div>
+</div>
+<button id="runSrt">점검하고 이동하기</button>
+<button id="resetSrt" class="sub">샘플로 되돌리기</button>
+<div id="srtOut" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>2. 대행 견적</h2>
+<div class="row">
+<div><label for="minutes">영상 길이(분)</label><input id="minutes" type="number" step="0.5" inputmode="decimal"></div>
+<div><label for="rate">분당 단가(원)</label><input id="rate" type="number" inputmode="numeric"></div>
+</div>
+<div class="row">
+<div><label for="edits">자막 수정 횟수</label><input id="edits" type="number" inputmode="numeric"></div>
+<div><label for="editFee">수정 1회 단가(원)</label><input id="editFee" type="number" inputmode="numeric"></div>
+</div>
+<button id="runQuote">견적 계산</button>
+<div id="quoteOut" aria-live="polite"></div>
+</section>
+<p class="note">입력값은 이 휴대폰 안에만 저장됩니다. 결제·전송 기능은 없습니다.</p>
+</main>
+<script src="core.js"></script>
+<script>
+(function () {
+  var C = window.Core, $ = function (id) { return document.getElementById(id); };
+  var KEY = 'prj0091-v1';
+  var ids = ['srt', 'shift', 'maxLine', 'maxCps', 'minutes', 'rate', 'edits', 'editFee'];
+  var DEF = { srt: C.SAMPLE_SRT, shift: '1.5', maxLine: '20', maxCps: '12', minutes: '10', rate: '20000', edits: '3', editFee: '10000' };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function load() {
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { saved = {}; }
+    ids.forEach(function (id) { $(id).value = saved[id] !== undefined ? saved[id] : DEF[id]; });
+  }
+  function save() {
+    try { var o = {}; ids.forEach(function (id) { o[id] = $(id).value; }); localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {}
+  }
+  function runSrt() {
+    save();
+    var r = C.parseSrt($('srt').value), h = '';
+    if (r.errors.length) h += '<p class="bad">' + r.errors.map(esc).join('<br>') + '</p>';
+    if (r.cues.length) {
+      var iss = C.checkCues(r.cues, { maxLineChars: +$('maxLine').value, maxCps: +$('maxCps').value });
+      h += '<p>자막 ' + r.cues.length + '개 확인. ' + (iss.length ? '<span class="bad">문제 ' + iss.length + '건</span>' : '<span class="ok">문제 없음</span>') + '</p>';
+      if (iss.length) h += '<ul>' + iss.map(function (i) { return '<li>' + esc(i.message) + '</li>'; }).join('') + '</ul>';
+      var sh = C.shiftCues(r.cues, $('shift').value);
+      h += '<p>시간 이동 ' + esc($('shift').value || 0) + '초 적용 결과' + (sh.clamped ? ' (0초보다 앞으로 간 ' + sh.clamped + '개는 0초에 맞춤)' : '') + '</p>';
+      h += '<textarea readonly>' + esc(C.buildSrt(sh.cues)) + '</textarea>';
+    }
+    $('srtOut').innerHTML = h;
+  }
+  function runQuote() {
+    save();
+    var q = C.quote({ minutes: $('minutes').value, ratePerMin: $('rate').value, edits: $('edits').value, editFee: $('editFee').value });
+    var h = '<table><tr><th>항목</th><th>공급가</th><th>부가세</th><th>합계</th></tr>';
+    q.items.forEach(function (i) { h += '<tr><td>' + i.name + '</td><td>' + C.won(i.supply) + '</td><td>' + C.won(i.vat) + '</td><td>' + C.won(i.total) + '</td></tr>'; });
+    h += '<tr class="total"><td>총합</td><td>' + C.won(q.supply) + '</td><td>' + C.won(q.vat) + '</td><td>' + C.won(q.total) + '</td></tr></table>';
+    $('quoteOut').innerHTML = h;
+  }
+  $('runSrt').onclick = runSrt; $('runQuote').onclick = runQuote;
+  $('resetSrt').onclick = function () { $('srt').value = C.SAMPLE_SRT; runSrt(); };
+  load(); runSrt(); runQuote();
+})();
+</script>
+</body>
+</html>

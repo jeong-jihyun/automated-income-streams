@@ -94,3 +94,4 @@
 | PRJ-0088 | 계약서·서류 템플릿 자동 생성 시스템 | [PRJ-0088_contract-template-auto-generator](PRJ-0088_contract-template-auto-generator) | 개발 완료 (웹앱·APK 대상, 테스트 18건 통과, 실제 폰 설치·화면 미확인) |
 | PRJ-0089 | 고객 문의 접수·분류 구축 | [PRJ-0089_customer-inquiry-routing-builder](PRJ-0089_customer-inquiry-routing-builder) | 개발 완료 (웹앱·APK 대상, 테스트 25건 통과, 실제 폰 설치·화면 미확인) |
 | PRJ-0090 | SNS 콘텐츠 일정 관리 대행 | [PRJ-0090_sns-content-schedule-agency](PRJ-0090_sns-content-schedule-agency) | 개발 완료 (웹앱·APK 대상, 테스트 15건 통과, 실제 폰 설치·화면 미확인) |
+| PRJ-0091 | 유튜버용 영상 편집·자막 대행 | [PRJ-0091_youtuber-editing-subtitle-agency](PRJ-0091_youtuber-editing-subtitle-agency) | 개발 완료 (웹앱·APK 대상, 테스트 13건 통과, 실제 폰 설치·화면 미확인) |

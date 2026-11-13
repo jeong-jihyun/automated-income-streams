@@ -1,0 +1,17 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Noto Sans KR",sans-serif;font-size:18px;line-height:1.5;background:#f4f6fa;color:#1b2430}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:8px 0 4px}
+h2{font-size:20px;margin:0 0 10px}
+.card{background:#fff;border-radius:14px;padding:16px;margin:14px 0;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+label{display:block;font-weight:600;margin:10px 0 4px}
+textarea,input{width:100%;font-size:18px;padding:10px;border:2px solid #b8c2d0;border-radius:10px;font-family:inherit}
+textarea{min-height:200px;font-family:ui-monospace,monospace;font-size:16px}
+button{font-size:20px;padding:14px 18px;margin:8px 8px 0 0;border:0;border-radius:12px;background:#2563eb;color:#fff;font-weight:700;min-height:52px}
+button.sub{background:#5b6677}
+.row{display:flex;gap:10px}.row>div{flex:1}
+.ok{color:#15803d;font-weight:700}.bad{color:#b91c1c}
+ul{padding-left:20px}li{margin:4px 0}
+table{width:100%;border-collapse:collapse}td,th{padding:6px;border-bottom:1px solid #dde3ec;text-align:right}th:first-child,td:first-child{text-align:left}
+.total td{font-weight:700;font-size:20px}
+.note{font-size:15px;color:#4b5563}
