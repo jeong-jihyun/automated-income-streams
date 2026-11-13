@@ -1,0 +1,3 @@
+{"type": "quote", "date": "2026-11-13", "supplier": {"name": "정지현 스튜디오"}, "client": {"name": "<테스트>상점 & 컴퍼니"},
+ "items": [{"name": "엑셀 자동화", "qty": 3, "unit_price": 33333}, {"name": "교육 1시간", "qty": 1.5, "unit_price": 50000}],
+ "discount_pct": 5, "rounding": "floor"}

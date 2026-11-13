@@ -84,3 +84,4 @@
 | PRJ-0078 | 시니어 디지털 교육 커뮤니티 | [PRJ-0078_senior-digital-literacy-community](PRJ-0078_senior-digital-literacy-community) | 개발·시험 완료 (9개 통과) |
 | PRJ-0079 | 구글 앱스 스크립트 자동화 대행 | [PRJ-0079_apps-script-automation-agency](PRJ-0079_apps-script-automation-agency) | 개발·시험 완료 (13개 통과) |
 | PRJ-0080 | 엑셀 매크로·VBA 자동화 대행 | [PRJ-0080_excel-vba-macro-agency](PRJ-0080_excel-vba-macro-agency) | 개발·시험 완료 (9개 통과) |
+| PRJ-0081 | 견적서·청구서 자동 발행 시스템 | [PRJ-0081_quote-invoice-auto-issuer](PRJ-0081_quote-invoice-auto-issuer) | 개발·시험 완료 (11개 통과) |
