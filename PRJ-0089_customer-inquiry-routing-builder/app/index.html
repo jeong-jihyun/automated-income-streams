@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>고객 문의 접수·분류</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>고객 문의 접수·분류</h1>
+  <p class="lead">문의를 한 줄에 하나씩 붙여 넣고 [분류하기]를 누르세요. 담당 칸별로 긴급한 순서로 보여 줘요. 보내는 기능은 없어요.</p>
+
+  <section class="card">
+    <label for="inq">문의 내용 (한 줄에 하나)</label>
+    <textarea id="inq" rows="9" autocomplete="off"></textarea>
+    <div class="row">
+      <button class="primary" id="run" type="button">분류하기</button>
+      <button id="sample" type="button">샘플 다시 넣기</button>
+      <button id="clear" type="button">입력 지우기</button>
+    </div>
+    <div class="msg" id="msg" role="alert"></div>
+  </section>
+
+  <section class="card">
+    <details>
+      <summary>분류 규칙 고치기 (담당 칸·키워드)</summary>
+      <p class="note">한 줄에 한 칸. 형식: <b>칸 이름: 키워드, 키워드</b>. 키워드가 가장 많이 들어간 칸으로 가고, 같으면 위쪽 칸이 먼저예요.</p>
+      <textarea id="rules" rows="6" autocomplete="off" aria-label="분류 규칙"></textarea>
+      <p class="note">긴급도 단어 (화난 표현 / 기한 표현 / 반복 표현)</p>
+      <textarea id="urg" rows="5" autocomplete="off" aria-label="긴급도 단어"></textarea>
+      <div class="row">
+        <button id="reset" type="button">기본 규칙으로 되돌리기</button>
+      </div>
+    </details>
+  </section>
+
+  <section class="card" id="resultCard" aria-live="polite">
+    <h2>결과</h2>
+    <div id="stats" class="stats"></div>
+    <div id="groups"></div>
+    <details>
+      <summary>복사용 글 보기</summary>
+      <textarea id="plain" rows="8" readonly aria-label="복사용 글"></textarea>
+    </details>
+  </section>
+
+  <p class="note">키워드 방식이라 뜻을 이해하지는 못해요. "화나지 않았어요"처럼 부정하는 말도 화난 표현으로 셀 수 있어요. 사람이 한 번 더 확인하세요. 입력한 내용은 이 폰 안에만 저장돼요.</p>
+</main>
+<script src="core.js"></script>
+<script>
+(function () {
+  'use strict';
+  var C = window.InquiryCore;
+  var KEY = 'prj0089-state-v1';
+  var $ = function (id) { return document.getElementById(id); };
+
+  function load() {
+    try { var s = localStorage.getItem(KEY); return s ? JSON.parse(s) : null; } catch (e) { return null; }
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify({ inq: $('inq').value, rules: $('rules').value, urg: $('urg').value })); } catch (e) {}
+  }
+  function showMsg(t) { $('msg').textContent = t || ''; }
+
+  function setDefaults(keepInput) {
+    if (!keepInput) $('inq').value = C.SAMPLE_TEXT;
+    $('rules').value = C.rulesToText(C.DEFAULT_RULES);
+    $('urg').value = C.urgencyToText(C.DEFAULT_URGENCY);
+  }
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function run() {
+    var pr = C.parseRules($('rules').value);
+    var pu = C.parseUrgency($('urg').value, C.DEFAULT_URGENCY);
+    var errs = pr.errors.concat(pu.errors);
+    if (pr.rules.length === 0) errs.push('분류 규칙이 하나도 없어요. 규칙을 넣거나 [기본 규칙으로 되돌리기]를 누르세요.');
+    if (errs.length) { showMsg(errs.join('\n')); $('msg').style.whiteSpace = 'pre-line'; return; }
+    showMsg('');
+    var items = C.processBatch($('inq').value, pr.rules, pu.cfg);
+    var groups = C.groupByTeam(items, pr.rules);
+    var s = C.summarize(items);
+
+    var st = $('stats'); st.textContent = '';
+    [['전체', s.total], ['긴급', s.urgent], ['주의', s.caution], ['담당 미정', s.unassigned]].forEach(function (p) {
+      var d = el('div', 'stat'); d.appendChild(el('b', null, String(p[1]))); d.appendChild(el('span', null, p[0])); st.appendChild(d);
+    });
+
+    var gr = $('groups'); gr.textContent = '';
+    if (!items.length) gr.appendChild(el('p', 'empty', '문의가 없어요. 위 칸에 한 줄에 하나씩 넣어 주세요.'));
+    groups.forEach(function (g) {
+      var t = el('div', 'team');
+      var h = el('h3', null, g.team);
+      h.appendChild(el('small', null, g.items.length + '건' + (g.urgentCount ? ' · 긴급 ' + g.urgentCount : '')));
+      t.appendChild(h);
+      g.items.forEach(function (it) {
+        var d = el('div', 'item l-' + it.level);
+        var top = el('div');
+        top.appendChild(el('span', 'badge', it.level + ' ' + it.score + '점'));
+        top.appendChild(document.createTextNode(it.text));
+        d.appendChild(top);
+        var why = [];
+        if (it.matched.length) why.push('분류 근거: ' + it.matched.join(', '));
+        if (it.reasons.length) why.push(it.reasons.join(' / '));
+        if (why.length) d.appendChild(el('div', 'why', why.join(' | ')));
+        t.appendChild(d);
+      });
+      gr.appendChild(t);
+    });
+    $('plain').value = C.toPlainText(groups);
+    save();
+  }
+
+  var saved = load();
+  setDefaults(false);
+  if (saved && typeof saved.inq === 'string') {
+    $('inq').value = saved.inq;
+    if (typeof saved.rules === 'string' && saved.rules) $('rules').value = saved.rules;
+    if (typeof saved.urg === 'string' && saved.urg) $('urg').value = saved.urg;
+  }
+
+  $('run').addEventListener('click', run);
+  $('sample').addEventListener('click', function () { $('inq').value = C.SAMPLE_TEXT; run(); });
+  $('clear').addEventListener('click', function () { $('inq').value = ''; run(); });
+  $('reset').addEventListener('click', function () { setDefaults(true); run(); });
+  ['inq', 'rules', 'urg'].forEach(function (id) { $(id).addEventListener('input', save); });
+  run();
+})();
+</script>
+</body>
+</html>

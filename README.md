@@ -92,3 +92,4 @@
 | PRJ-0086 | 노코드 앱 제작 대행 | [PRJ-0086_nocode-app-builder-agency](PRJ-0086_nocode-app-builder-agency) | 개발·시험 완료 (9개 통과) |
 | PRJ-0087 | 기업 AI 업무 활용 교육 | [PRJ-0087_corporate-ai-training-workshop](PRJ-0087_corporate-ai-training-workshop) | 개발 완료 (웹앱·APK 대상, 테스트 16건 통과, 실제 폰 설치·화면 미확인) |
 | PRJ-0088 | 계약서·서류 템플릿 자동 생성 시스템 | [PRJ-0088_contract-template-auto-generator](PRJ-0088_contract-template-auto-generator) | 개발 완료 (웹앱·APK 대상, 테스트 18건 통과, 실제 폰 설치·화면 미확인) |
+| PRJ-0089 | 고객 문의 접수·분류 구축 | [PRJ-0089_customer-inquiry-routing-builder](PRJ-0089_customer-inquiry-routing-builder) | 개발 완료 (웹앱·APK 대상, 테스트 25건 통과, 실제 폰 설치·화면 미확인) |

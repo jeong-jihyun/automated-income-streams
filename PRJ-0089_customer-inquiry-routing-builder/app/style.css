@@ -1,0 +1,43 @@
+:root{--bg:#f6f7fb;--card:#fff;--ink:#1b1f2a;--sub:#5b6475;--line:#d9deea;--accent:#2457d6;--red:#c62828;--redbg:#fdecec;--amb:#a15c00;--ambbg:#fff3df;--ok:#1b6e3a;--okbg:#e6f4ea}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Noto Sans KR","Malgun Gothic",sans-serif;font-size:18px;line-height:1.55}
+main{max-width:640px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:8px 0 4px}
+h2{font-size:20px;margin:0 0 8px}
+p.lead{color:var(--sub);margin:0 0 12px}
+section.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+label{display:block;font-weight:700;margin-bottom:6px}
+textarea{width:100%;font:inherit;font-size:18px;padding:10px;border:2px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);resize:vertical}
+textarea:focus{outline:3px solid #9db6f5;border-color:var(--accent)}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+button{font:inherit;font-size:18px;font-weight:700;min-height:52px;padding:10px 16px;border-radius:12px;border:2px solid var(--accent);background:#fff;color:var(--accent);flex:1 1 auto}
+button.primary{background:var(--accent);color:#fff}
+button:active{opacity:.8}
+details{margin-top:10px}
+summary{font-weight:700;min-height:44px;padding:8px 0;cursor:pointer}
+.msg{margin-top:8px;padding:10px;border-radius:10px;background:var(--redbg);color:var(--red);font-weight:700}
+.msg:empty{display:none}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;text-align:center}
+.stat{border:1px solid var(--line);border-radius:10px;padding:6px 2px;background:#fff}
+.stat b{display:block;font-size:24px}
+.stat span{font-size:14px;color:var(--sub)}
+.team{margin:14px 0}
+.team h3{font-size:20px;margin:0 0 6px;display:flex;justify-content:space-between;gap:8px}
+.team h3 small{font-size:15px;color:var(--sub);font-weight:400}
+.item{background:#fff;border:1px solid var(--line);border-left:8px solid var(--ok);border-radius:10px;padding:10px;margin:8px 0}
+.item.l-긴급{border-left-color:var(--red);background:var(--redbg)}
+.item.l-주의{border-left-color:var(--amb);background:var(--ambbg)}
+.badge{display:inline-block;font-size:14px;font-weight:700;padding:2px 8px;border-radius:99px;margin-right:6px;background:var(--okbg);color:var(--ok)}
+.l-긴급 .badge{background:var(--red);color:#fff}
+.l-주의 .badge{background:var(--amb);color:#fff}
+.why{font-size:15px;color:var(--sub);margin-top:4px}
+.note{font-size:15px;color:var(--sub)}
+.empty{color:var(--sub);padding:8px 0}
+@media (prefers-color-scheme:dark){
+:root{--bg:#12151c;--card:#1a1f2b;--ink:#eef1f7;--sub:#a5aec0;--line:#33394a;--accent:#8fb0ff;--red:#ff8a80;--redbg:#3a1f22;--amb:#ffc46b;--ambbg:#3a2d14;--ok:#7fd69a;--okbg:#17301f}
+textarea,button,.stat,.item{background:#222836;color:var(--ink)}
+button.primary{background:#2f5fe0;color:#fff;border-color:#2f5fe0}
+.item.l-긴급{background:var(--redbg)}.item.l-주의{background:var(--ambbg)}
+.l-긴급 .badge{background:#b3261e}.l-주의 .badge{background:#8a5200}
+}
