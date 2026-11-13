@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>계약서·서류 템플릿 자동 생성</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>계약서·서류 템플릿 자동 생성</h1>
+  <p>빈칸을 채우면 문서 초안과 점검 결과가 나옵니다</p>
+</header>
+<main>
+  <div class="notice" id="disclaimer"></div>
+
+  <label for="tpl">서류 종류</label>
+  <select id="tpl"></select>
+
+  <div id="form"></div>
+
+  <div class="row">
+    <button id="make">문서 만들기·점검</button>
+    <button id="sample" class="sub">샘플로 채우기</button>
+    <button id="clear" class="sub">모두 지우기</button>
+  </div>
+  <div class="row" id="splitRow" hidden>
+    <button id="split" class="sub">총 대금 30/30/40 자동 나누기</button>
+  </div>
+
+  <h2>점검 결과</h2>
+  <div id="check" class="box" aria-live="polite"></div>
+
+  <h2>금액 한글 표기</h2>
+  <div id="hangul" class="box"></div>
+
+  <h2>문서 초안</h2>
+  <div class="box"><pre id="doc"></pre></div>
+  <div class="row"><button id="copy">문서 복사하기</button></div>
+  <div class="small" id="msg" role="status"></div>
+</main>
+<script src="core.js"></script>
+<script>
+(function () {
+  var C = window.Core;
+  var KEY = 'prj0088_state_v1';
+  var $ = function (id) { return document.getElementById(id); };
+  var state = { id: 'service', all: {} };
+
+  function load() {
+    try {
+      var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (s && s.all && C.getTemplate(s.id)) state = s;
+    } catch (e) {}
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  function values() { return state.all[state.id] || (state.all[state.id] = C.sampleValues(state.id)); }
+
+  function buildForm() {
+    var tpl = C.getTemplate(state.id), v = values(), box = $('form');
+    box.innerHTML = '';
+    tpl.fields.forEach(function (f) {
+      var lab = document.createElement('label');
+      lab.htmlFor = 'f_' + f.key;
+      lab.textContent = f.label;
+      if (f.required) { var r = document.createElement('span'); r.className = 'req'; r.textContent = ' *'; lab.appendChild(r); }
+      var el;
+      if (f.type === 'textarea') el = document.createElement('textarea');
+      else {
+        el = document.createElement('input');
+        if (f.type === 'date') el.type = 'date';
+        else if (f.type === 'money' || f.type === 'number') { el.type = 'text'; el.inputMode = 'numeric'; }
+        else el.type = 'text';
+      }
+      el.id = 'f_' + f.key;
+      el.value = v[f.key] || '';
+      el.addEventListener('input', function () { v[f.key] = el.value; save(); });
+      box.appendChild(lab);
+      box.appendChild(el);
+      if (f.type === 'money') {
+        var h = document.createElement('div'); h.className = 'hint'; h.id = 'h_' + f.key;
+        box.appendChild(h);
+        el.addEventListener('input', function () { hint(f, el.value); });
+        hint(f, el.value);
+      }
+    });
+    $('splitRow').hidden = state.id !== 'service';
+  }
+  function hint(f, val) {
+    var h = $('h_' + f.key); if (!h) return;
+    var n = C.parseMoney(val);
+    h.textContent = (val.trim() === '') ? '' : (n === null ? '숫자만 써 주세요' : C.formatWon(n) + '원 (일금 ' + C.moneyToHangul(n) + '원정)');
+  }
+
+  function li(parent, text) { var l = document.createElement('li'); l.textContent = text; parent.appendChild(l); }
+
+  function run() {
+    var r = C.build(state.id, values());
+    var c = r.check, box = $('check');
+    box.innerHTML = '';
+    box.className = 'box ' + (c.ok ? (c.warnings.length ? 'warn' : 'ok') : 'bad');
+    var st = document.createElement('div'); st.className = 'status';
+    st.textContent = c.ok ? (c.warnings.length ? '통과 (확인할 점 있음)' : '통과: 문제 없음') : '고칠 곳이 있습니다';
+    box.appendChild(st);
+    function group(title, arr) {
+      if (!arr.length) return;
+      var p = document.createElement('div'); p.textContent = title; p.style.fontWeight = '700'; p.style.marginTop = '8px';
+      var ul = document.createElement('ul');
+      arr.forEach(function (t) { li(ul, t); });
+      box.appendChild(p); box.appendChild(ul);
+    }
+    group('비어 있는 칸 (' + c.missing.length + ')', c.missing);
+    group('오류 (' + c.errors.length + ')', c.errors);
+    group('확인할 점 (' + c.warnings.length + ')', c.warnings);
+
+    var hb = $('hangul'); hb.innerHTML = '';
+    if (!r.hangul.length) hb.textContent = '금액이 아직 없습니다.';
+    else { var ul = document.createElement('ul'); r.hangul.forEach(function (h) { li(ul, h.label + ': ' + h.won + '원 = 일금 ' + h.hangul + '원정'); }); hb.appendChild(ul); }
+
+    $('doc').textContent = r.text + '\n\n※ ' + r.disclaimer;
+    $('msg').textContent = '';
+  }
+
+  function setTemplate(id) {
+    state.id = id; save(); buildForm(); run();
+  }
+
+  function init() {
+    load();
+    $('disclaimer').textContent = C.DISCLAIMER;
+    var sel = $('tpl');
+    C.TEMPLATES.forEach(function (t) { var o = document.createElement('option'); o.value = t.id; o.textContent = t.name; sel.appendChild(o); });
+    sel.value = state.id;
+    sel.addEventListener('change', function () { setTemplate(sel.value); });
+    $('make').addEventListener('click', run);
+    $('sample').addEventListener('click', function () { state.all[state.id] = C.sampleValues(state.id); save(); buildForm(); run(); });
+    $('clear').addEventListener('click', function () { state.all[state.id] = C.emptyValues(state.id); save(); buildForm(); run(); });
+    $('split').addEventListener('click', function () {
+      var v = values(), t = C.parseMoney(v['총액']);
+      if (t === null) { $('msg').textContent = '먼저 총 대금을 숫자로 써 주세요.'; return; }
+      var p = C.splitPayment(t, [30, 30, 40]);
+      v['계약금'] = String(p[0]); v['중도금'] = String(p[1]); v['잔금'] = String(p[2]);
+      save(); buildForm(); run();
+    });
+    $('copy').addEventListener('click', function () {
+      var txt = $('doc').textContent;
+      function done(ok) { $('msg').textContent = ok ? '복사했습니다.' : '복사하지 못했습니다. 글을 길게 눌러 직접 복사해 주세요.'; }
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt).then(function () { done(true); }, function () { done(false); }); return; }
+      } catch (e) {}
+      try {
+        var ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select();
+        var ok = document.execCommand('copy'); document.body.removeChild(ta); done(ok);
+      } catch (e2) { done(false); }
+    });
+    buildForm(); run();
+  }
+  init();
+})();
+</script>
+</body>
+</html>
