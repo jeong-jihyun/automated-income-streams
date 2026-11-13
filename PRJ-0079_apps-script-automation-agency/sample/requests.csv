@@ -1,0 +1,6 @@
+id,client,task,sheets,external_api,personal_data,urgency
+Q1,A상점,dedupe,1,0,0,normal
+Q2,B학원,summary_mail,2,0,1,normal
+Q3,C가게,daily_trigger,1,1,0,rush
+Q4,D팀,macro,1,0,0,normal
+Q5,E팀,form_to_sheet,0,0,0,normal
