@@ -1,0 +1,2 @@
+{"reminder": {"kind": "info", "text": "{name}님, {date} {time} 예약 안내입니다."},
+ "event": {"kind": "ad", "text": "{name}님, 이번 주 할인 행사를 안내드립니다."}}
