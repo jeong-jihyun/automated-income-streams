@@ -1,0 +1,51 @@
+name: build-apk
+on:
+  push:
+    branches: [main]
+    paths: ['PRJ-*/app/**', 'tools/android-wrapper/**']
+  workflow_dispatch:
+    inputs:
+      folder:
+        description: '만들 폴더 (예: PRJ-0087_xxx) 또는 example'
+        required: true
+permissions:
+  contents: write
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: '8.7' }
+      - name: 대상 폴더 찾기
+        id: pick
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "dirs=${{ github.event.inputs.folder }}" >> $GITHUB_OUTPUT
+          else
+            BEFORE="${{ github.event.before }}"
+            if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then BEFORE=HEAD~1; fi
+            CH=$(git diff --name-only "$BEFORE" "${{ github.sha }}")
+            D=$(echo "$CH" | grep -oP '^PRJ-[0-9]{4}_[^/]+(?=/app/)' | sort -u | tr '\n' ' ')
+            if echo "$CH" | grep -q '^tools/android-wrapper/'; then D="$D example"; fi
+            echo "dirs=$D" >> $GITHUB_OUTPUT
+          fi
+      - name: APK 만들기와 릴리스 올리기
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -e
+          for D in ${{ steps.pick.outputs.dirs }}; do
+            if [ "$D" = "example" ]; then APP=tools/android-wrapper/example-app; PRJ=PRJ-0000; NAME="APK 시험"; else
+              APP="$D/app"; PRJ=$(echo "$D" | grep -oE '^PRJ-[0-9]{4}'); NAME=$(grep -m1 '^# ' "$D/README.md" | sed 's/^# //'); [ -z "$NAME" ] && NAME="$D"; fi
+            [ -f "$APP/index.html" ] || { echo "skip $D (no index.html)"; continue; }
+            python3 tools/android-wrapper/build_project.py "$APP" "/tmp/apk-$PRJ" "$PRJ" "$NAME"
+            (cd "/tmp/apk-$PRJ" && gradle --no-daemon assembleDebug)
+            cp "/tmp/apk-$PRJ/app/build/outputs/apk/debug/app-debug.apk" "/tmp/$PRJ.apk"
+            TAG="apk-$PRJ"
+            gh release delete "$TAG" --yes --cleanup-tag 2>/dev/null || true
+            gh release create "$TAG" "/tmp/$PRJ.apk" --title "$PRJ APK" --notes "휴대폰에서 이 페이지의 .apk 파일을 받아 설치합니다. 디버그 서명 시험용입니다."
+          done
