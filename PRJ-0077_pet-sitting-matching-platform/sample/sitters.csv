@@ -1,0 +1,4 @@
+name,regions,pets,max_size,capacity,avail_from,avail_to
+가온,마포;서대문,dog;cat,medium,1,2026-12-01,2026-12-31
+나래,마포;성동,dog;cat,small,2,2026-12-01,2026-12-06
+다솜,성동,cat,small,1,2026-12-01,2026-12-31

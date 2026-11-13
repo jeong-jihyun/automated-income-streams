@@ -80,3 +80,4 @@
 | PRJ-0074 | 소모임·동호회 관리 앱 | [PRJ-0074_club-meetup-management-app](PRJ-0074_club-meetup-management-app) | 개발·시험 완료 (10개 통과) |
 | PRJ-0075 | 지역 나눔·교환 플랫폼 | [PRJ-0075_local-sharing-exchange-platform](PRJ-0075_local-sharing-exchange-platform) | 개발·시험 완료 (11개 통과) |
 | PRJ-0076 | 학습 인증 스터디 앱 | [PRJ-0076_study-certification-app](PRJ-0076_study-certification-app) | 개발·시험 완료 (11개 통과) |
+| PRJ-0077 | 반려동물 돌봄 매칭 플랫폼 | [PRJ-0077_pet-sitting-matching-platform](PRJ-0077_pet-sitting-matching-platform) | 개발·시험 완료 (11개 통과) |
