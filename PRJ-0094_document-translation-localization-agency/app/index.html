@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문서 번역·현지화 자동화 대행</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>문서 번역·현지화 자동화 대행</h1>
+<p class="note">원문과 번역문을 문단별로 붙여 넣으면 빠진 곳·어긋난 곳을 찾아 줍니다. 번역은 하지 않고, 인터넷도 쓰지 않습니다.</p>
+
+<section class="card">
+<h2>1. 번역 점검</h2>
+<p class="note">문단 구분: 줄에 <b>---</b> 만 적거나, 빈 줄로 나눕니다. 두 칸의 문단 수를 맞추세요. (---를 쓰면 빈 문단도 찾아냅니다)</p>
+<label for="src">원문</label>
+<textarea id="src"></textarea>
+<label for="tgt">번역문</label>
+<textarea id="tgt"></textarea>
+<label for="gloss">용어집 (한 줄에 원어=번역어, 여러 개면 | 로 구분)</label>
+<textarea id="gloss"></textarea>
+<div class="row">
+<div><label for="minRatio">길이 비율 하한 (번역/원문)</label><input id="minRatio" type="number" step="0.05" inputmode="decimal"></div>
+<div><label for="maxRatio">길이 비율 상한</label><input id="maxRatio" type="number" step="0.1" inputmode="decimal"></div>
+</div>
+<button id="runCheck">점검하기</button>
+<button id="resetAll" class="sub">샘플로 되돌리기</button>
+<div id="checkOut" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>2. 대행 견적</h2>
+<div class="row">
+<div><label for="words">단어 수 (비우면 원문에서 셈)</label><input id="words" type="number" inputmode="numeric"></div>
+<div><label for="rate">번역 단가(원/단어)</label><input id="rate" type="number" step="any" inputmode="decimal"></div>
+</div>
+<div class="row">
+<div><label for="review">검수 단가(원/단어)</label><input id="review" type="number" step="any" inputmode="decimal"></div>
+<div><label for="rereview">재검수 단가(원/단어)</label><input id="rereview" type="number" step="any" inputmode="decimal"></div>
+</div>
+<label for="fmt">서식 정리 정액(원)</label><input id="fmt" type="number" inputmode="numeric">
+<button id="runQuote">견적 계산</button>
+<div id="quoteOut" aria-live="polite"></div>
+</section>
+<p class="note">입력값은 이 휴대폰 안에만 저장됩니다. 결제·전송 기능은 없습니다. 숫자·날짜·주소·고유명사 점검은 간이 규칙이라 사람의 검수를 대신하지 않습니다.</p>
+</main>
+<script src="core.js"></script>
+<script>
+(function () {
+  var C = window.Core, $ = function (id) { return document.getElementById(id); };
+  var KEY = 'prj0094-v1';
+  var ids = ['src', 'tgt', 'gloss', 'minRatio', 'maxRatio', 'words', 'rate', 'review', 'rereview', 'fmt'];
+  var DEF = { src: C.SAMPLE_SRC, tgt: C.SAMPLE_TGT, gloss: C.SAMPLE_GLOSSARY, minRatio: '0.3', maxRatio: '3',
+    words: '', rate: '30', review: '20', rereview: '10', fmt: '30000' };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function load() {
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { saved = {}; }
+    ids.forEach(function (id) { $(id).value = saved[id] !== undefined ? saved[id] : DEF[id]; });
+  }
+  function save() {
+    try { var o = {}; ids.forEach(function (id) { o[id] = $(id).value; }); localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {}
+  }
+  function runCheck() {
+    save();
+    var r = C.checkTranslation($('src').value, $('tgt').value, $('gloss').value, { minRatio: +$('minRatio').value, maxRatio: +$('maxRatio').value });
+    var h = '<p>원문 ' + r.srcCount + '문단 / 번역문 ' + r.tgtCount + '문단 (' + (r.mode === 'dash' ? '--- 구분' : '빈 줄 구분') + '), 용어집 ' + r.glossaryCount + '개. ';
+    h += r.issues.length ? '<span class="bad">오류 ' + r.errors + '건</span> · <span class="warn">확인 ' + r.warnings + '건</span>' : '<span class="ok">문제 없음</span>';
+    h += '</p>';
+    if (r.glossaryErrors.length) h += '<p class="bad">용어집: ' + r.glossaryErrors.map(esc).join('<br>') + '</p>';
+    if (r.issues.length) h += '<ul>' + r.issues.map(function (i) { return '<li class="' + (i.severity === '오류' ? 'e' : 'w') + '"><b>' + i.severity + '</b> ' + esc(i.message) + '</li>'; }).join('') + '</ul>';
+    $('checkOut').innerHTML = h;
+  }
+  function runQuote() {
+    save();
+    var typed = $('words').value.trim();
+    var words = typed === '' ? C.countWords($('src').value) : +typed;
+    var q = C.quote({ words: words, ratePerWord: $('rate').value, reviewPerWord: $('review').value, reReviewPerWord: $('rereview').value, formatFee: $('fmt').value });
+    var h = '<p>견적에 쓴 단어 수: <b>' + q.words + '</b>' + (typed === '' ? ' (원문에서 셈)' : ' (직접 입력)') + '</p>';
+    h += '<table><tr><th>항목</th><th>공급가</th><th>부가세</th><th>합계</th></tr>';
+    q.items.forEach(function (i) { h += '<tr><td>' + esc(i.name) + '</td><td>' + C.won(i.supply) + '</td><td>' + C.won(i.vat) + '</td><td>' + C.won(i.total) + '</td></tr>'; });
+    h += '<tr class="total"><td>총합</td><td>' + C.won(q.supply) + '</td><td>' + C.won(q.vat) + '</td><td>' + C.won(q.total) + '</td></tr></table>';
+    $('quoteOut').innerHTML = h;
+  }
+  $('runCheck').onclick = runCheck; $('runQuote').onclick = runQuote;
+  $('resetAll').onclick = function () { ids.forEach(function (id) { $(id).value = DEF[id]; }); runCheck(); runQuote(); };
+  load(); runCheck(); runQuote();
+})();
+</script>
+</body>
+</html>
