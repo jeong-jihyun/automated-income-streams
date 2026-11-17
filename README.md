@@ -98,3 +98,4 @@
 | PRJ-0092 | 정부지원사업 공고 매칭·신청서 초안 서비스 | [PRJ-0092_gov-grant-matching-draft-service](PRJ-0092_gov-grant-matching-draft-service) | 휴대폰 웹앱·테스트 통과 (실제 폰 미확인) |
 | PRJ-0093 | 근태·출퇴근 자동 집계 시스템 | [PRJ-0093_attendance-tracking-system](PRJ-0093_attendance-tracking-system) | 휴대폰 웹앱·테스트 통과 (실제 폰 미확인) |
 | PRJ-0094 | 문서 번역·현지화 자동화 대행 | [PRJ-0094_document-translation-localization-agency](PRJ-0094_document-translation-localization-agency) | 휴대폰 웹앱·테스트 통과 (실제 폰 미확인) |
+| PRJ-0095 | 오픈소스 이중 라이선스 판매 | [PRJ-0095_opensource-dual-license-sales](PRJ-0095_opensource-dual-license-sales) | 휴대폰 웹앱·테스트 통과 (실제 폰 미확인) |

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오픈소스 이중 라이선스 판매</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>오픈소스 이중 라이선스 판매</h1>
+<p class="alert">법률 자문이 아닙니다. 아래 직원 수 구간·단가·할인율은 입력칸에서 바꿀 수 있는 예시값입니다. 실제 계약 전에는 전문가에게 확인하세요.</p>
+
+<section class="card">
+<h2>1. 무료·유료 판정기</h2>
+<label for="type">사용자 유형</label>
+<select id="type"><option value="individual">개인</option><option value="nonprofit">비영리 단체</option><option value="company">회사(상업용)</option></select>
+<label for="emp">직원 수(회사일 때 구간 판정)</label>
+<input id="emp" type="number" inputmode="numeric">
+<label for="saas">내 서비스·제품에 넣어 재배포(SaaS 내장)하나요?</label>
+<select id="saas"><option value="0">아니요</option><option value="1">예</option></select>
+<button id="runJudge">판정하기</button>
+<div id="judgeOut" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>2. 라이선스 견적</h2>
+<label for="tiers">직원 수 구간표 (한 줄에 "최대 직원 수,개발자 1명 연 단가")</label>
+<textarea id="tiers"></textarea>
+<div class="row">
+<div><label for="qemp">직원 수</label><input id="qemp" type="number" inputmode="numeric"></div>
+<div><label for="devs">개발자 수</label><input id="devs" type="number" inputmode="numeric"></div>
+</div>
+<div class="row">
+<div><label for="years">계약 연수</label><input id="years" type="number" inputmode="numeric"></div>
+<div><label for="d2">2년 할인(%)</label><input id="d2" type="number" inputmode="decimal"></div>
+<div><label for="d3">3년 이상 할인(%)</label><input id="d3" type="number" inputmode="decimal"></div>
+</div>
+<button id="runQuote">견적 계산</button>
+<div id="quoteOut" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>3. 기여자 동의(CLA) 점검</h2>
+<label class="chk"><input type="checkbox" id="c_ext"><span>외부 사람이 쓴 기여 코드가 들어 있다</span></label>
+<label class="chk"><input type="checkbox" id="c_cla"><span>그 기여자 모두에게 CLA(저작권 양도 또는 재라이선스 허락) 서명을 받았다</span></label>
+<label class="chk"><input type="checkbox" id="c_emp"><span>회사 소속 기여자는 회사의 허락(법인 CLA)도 받았다</span></label>
+<label class="chk"><input type="checkbox" id="c_gpl"><span>GPL·AGPL 같은 카피레프트 라이브러리를 함께 쓴다</span></label>
+<button id="runCla">점검하기</button>
+<div id="claOut" aria-live="polite"></div>
+</section>
+<p class="note">입력값은 이 휴대폰 안에만 저장됩니다. 결제·전송 기능은 없습니다.</p>
+<button id="resetAll" class="sub">샘플로 되돌리기</button>
+</main>
+<script src="core.js"></script>
+<script>
+(function () {
+  var C = window.Core, $ = function (id) { return document.getElementById(id); };
+  var KEY = 'prj0095-v1';
+  var ids = ['type', 'emp', 'saas', 'tiers', 'qemp', 'devs', 'years', 'd2', 'd3'];
+  var checks = ['c_ext', 'c_cla', 'c_emp', 'c_gpl'];
+  var DEF = { type: 'company', emp: '30', saas: '0', tiers: C.DEFAULT_TIERS_TEXT, qemp: '30', devs: '5', years: '3', d2: '5', d3: '10',
+    c_ext: true, c_cla: false, c_emp: true, c_gpl: false };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function put(o) {
+    ids.forEach(function (id) { $(id).value = o[id] !== undefined ? o[id] : DEF[id]; });
+    checks.forEach(function (id) { $(id).checked = o[id] !== undefined ? !!o[id] : DEF[id]; });
+  }
+  function load() {
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { saved = {}; }
+    put(saved);
+  }
+  function save() {
+    try {
+      var o = {};
+      ids.forEach(function (id) { o[id] = $(id).value; });
+      checks.forEach(function (id) { o[id] = $(id).checked; });
+      localStorage.setItem(KEY, JSON.stringify(o));
+    } catch (e) {}
+  }
+  function runJudge() {
+    save();
+    var r = C.judge({ type: $('type').value, employees: $('emp').value, saas: $('saas').value === '1', tiersText: $('tiers').value });
+    var cls = r.verdict === 'free' ? 'ok' : (r.verdict === 'paid' ? 'warn' : 'bad');
+    $('judgeOut').innerHTML = '<p class="verdict ' + cls + '">' + esc(r.label) + '</p><ul>' + r.reasons.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+  }
+  function runQuote() {
+    save();
+    var q = C.quote({ employees: $('qemp').value, devs: $('devs').value, years: $('years').value, disc2: $('d2').value, disc3: $('d3').value, tiersText: $('tiers').value });
+    if (q.error) { $('quoteOut').innerHTML = '<p class="bad">' + esc(q.error) + '</p>'; return; }
+    var h = '<p>개발자 ' + q.devs + '명 x 연 ' + C.won(q.unit) + ' x ' + q.years + '년 = ' + C.won(q.gross) + '</p>';
+    h += '<p>다년 할인 ' + q.discountPct + '% : -' + C.won(q.discount) + '</p>';
+    h += '<table><tr><th>항목</th><th>공급가</th><th>부가세</th><th>합계</th></tr>';
+    q.items.forEach(function (i) { h += '<tr><td>' + i.name + '</td><td>' + C.won(i.supply) + '</td><td>' + C.won(i.vat) + '</td><td>' + C.won(i.total) + '</td></tr>'; });
+    h += '<tr class="total"><td>총합</td><td>' + C.won(q.supply) + '</td><td>' + C.won(q.vat) + '</td><td>' + C.won(q.total) + '</td></tr></table>';
+    $('quoteOut').innerHTML = h;
+  }
+  function runCla() {
+    save();
+    var r = C.claCheck({ external: $('c_ext').checked, claSigned: $('c_cla').checked, employer: $('c_emp').checked, copyleftDep: $('c_gpl').checked });
+    var cls = r.status === 'blocked' ? 'bad' : (r.status === 'warn' ? 'warn' : 'ok');
+    var h = '<p class="verdict ' + cls + '">' + esc(r.label) + '</p>';
+    if (r.warnings.length) h += '<ul>' + r.warnings.map(function (x) { return '<li class="bad">' + esc(x) + '</li>'; }).join('') + '</ul>';
+    h += '<p><b>할 일</b></p><ul>' + r.todos.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>';
+    $('claOut').innerHTML = h;
+  }
+  function all() { runJudge(); runQuote(); runCla(); }
+  $('runJudge').onclick = runJudge; $('runQuote').onclick = runQuote; $('runCla').onclick = runCla;
+  $('resetAll').onclick = function () { put(DEF); all(); };
+  load(); all();
+})();
+</script>
+</body>
+</html>
