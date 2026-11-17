@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>근태·출퇴근 자동 집계 시스템</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>근태·출퇴근 자동 집계 시스템</h1>
+<p class="disc">참고용 계산기입니다. 세법·노동법 자문이 아닙니다. 아래 기준값(소정 8시간, 야간 22~06시, 휴게, 가산 비율, 시급)은 모두 예시값이며 입력칸에서 바꿀 수 있습니다. 실제 급여는 사업장 규정과 전문가 확인이 필요합니다.</p>
+
+<section class="card">
+<h2>1. 출퇴근 기록</h2>
+<label for="rec">한 줄에 "이름 날짜 출근 퇴근" (모르는 시각은 -)</label>
+<textarea id="rec" inputmode="text"></textarea>
+<p class="note">퇴근이 출근보다 이르면 다음 날 퇴근(자정 넘김)으로 계산합니다. 줄 맨 앞 # 는 메모입니다.</p>
+<label for="wages">직원별 시급 (줄마다 "이름=시급", 없으면 기본 시급)</label>
+<textarea id="wages" class="small"></textarea>
+<button id="run">계산하기</button>
+<button id="reset" class="sub">샘플로 되돌리기</button>
+</section>
+
+<section class="card">
+<h2>2. 기준값 (예시, 바꿔 보세요)</h2>
+<div class="row">
+<div><label for="month">집계 월 (예 2026-11, 비우면 전부)</label><input id="month" inputmode="text"></div>
+<div><label for="defaultWage">기본 시급(원)</label><input id="defaultWage" type="number" inputmode="numeric"></div>
+</div>
+<div class="row">
+<div><label for="stdHours">소정 근로(시간)</label><input id="stdHours" type="number" step="0.5" inputmode="decimal"></div>
+<div><label for="graceMin">지각·조퇴 봐주는 분</label><input id="graceMin" type="number" inputmode="numeric"></div>
+</div>
+<div class="row">
+<div><label for="schedStart">소정 출근 시각</label><input id="schedStart" inputmode="text"></div>
+<div><label for="schedEnd">소정 퇴근 시각</label><input id="schedEnd" inputmode="text"></div>
+</div>
+<div class="row">
+<div><label for="nightStart">야간 시작(시)</label><input id="nightStart" type="number" step="0.5" inputmode="decimal"></div>
+<div><label for="nightEnd">야간 끝(시)</label><input id="nightEnd" type="number" step="0.5" inputmode="decimal"></div>
+</div>
+<div class="row">
+<div><label for="breakAt1">휴게1: 이상(시간)</label><input id="breakAt1" type="number" step="0.5" inputmode="decimal"></div>
+<div><label for="breakMin1">휴게1: 분</label><input id="breakMin1" type="number" inputmode="numeric"></div>
+</div>
+<div class="row">
+<div><label for="breakAt2">휴게2: 이상(시간)</label><input id="breakAt2" type="number" step="0.5" inputmode="decimal"></div>
+<div><label for="breakMin2">휴게2: 분</label><input id="breakMin2" type="number" inputmode="numeric"></div>
+</div>
+<div class="row">
+<div><label for="otPremium">연장 가산 비율</label><input id="otPremium" type="number" step="0.1" inputmode="decimal"></div>
+<div><label for="nightPremium">야간 가산 비율</label><input id="nightPremium" type="number" step="0.1" inputmode="decimal"></div>
+</div>
+</section>
+
+<section class="card">
+<h2>3. 결과</h2>
+<div id="out" aria-live="polite"></div>
+</section>
+<p class="note">입력값은 이 휴대폰 안(localStorage)에만 저장됩니다. 결제·전송·로그인 기능은 없습니다.</p>
+</main>
+<script src="core.js"></script>
+<script>
+(function () {
+  var C = window.Core, $ = function (id) { return document.getElementById(id); };
+  var KEY = 'prj0093-v1';
+  var D = C.DEFAULTS;
+  var setIds = ['month', 'defaultWage', 'stdHours', 'graceMin', 'schedStart', 'schedEnd', 'nightStart', 'nightEnd',
+    'breakAt1', 'breakMin1', 'breakAt2', 'breakMin2', 'otPremium', 'nightPremium'];
+  var ids = ['rec', 'wages'].concat(setIds);
+  function defaults() {
+    var o = { rec: C.SAMPLE_TEXT, wages: C.SAMPLE_WAGES };
+    setIds.forEach(function (k) { o[k] = String(D[k]); });
+    return o;
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function fill(o) { ids.forEach(function (id) { $(id).value = o[id] !== undefined ? o[id] : defaults()[id]; }); }
+  function load() {
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { saved = {}; }
+    fill(saved);
+  }
+  function save() {
+    try { var o = {}; ids.forEach(function (id) { o[id] = $(id).value; }); localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {}
+  }
+  function run() {
+    save();
+    var st = {}; setIds.forEach(function (k) { st[k] = $(k).value; });
+    var r = C.summarize($('rec').value, st, $('wages').value), h = '';
+    if (r.errors.length) h += '<p class="bad">' + r.errors.map(esc).join('<br>') + '</p>';
+    if (r.warnings.length) h += '<p class="warn"><b>확인할 것 ' + r.warnings.length + '건</b></p><ul>' + r.warnings.map(function (w) { return '<li class="warn">' + esc(w.message) + '</li>'; }).join('') + '</ul>';
+    else if (r.days.length) h += '<p class="ok">누락·중복 경고 없음</p>';
+    if (!r.employees.length) { $('out').innerHTML = h + '<p>계산할 기록이 없습니다.</p>'; return; }
+    h += '<h3>직원별 월 합계</h3><div class="scroll"><table><tr><th>이름</th><th>일수</th><th>근무</th><th>연장</th><th>야간</th><th>지각</th><th>조퇴</th><th>누락</th><th>시급</th><th>급여 참고</th></tr>';
+    r.employees.forEach(function (e) {
+      h += '<tr><td>' + esc(e.name) + '</td><td>' + e.days + '</td><td>' + C.fmtHM(e.workMin) + '</td><td>' + C.fmtHM(e.otMin) + '</td><td>' + C.fmtHM(e.nightMin) +
+        '</td><td>' + e.lateCount + '회 ' + e.lateMin + '분</td><td>' + e.earlyCount + '회 ' + e.earlyMin + '분</td><td>' + e.missingCount + '</td><td>' + C.won(e.wage) + '</td><td>' + C.won(e.pay) + '</td></tr>';
+    });
+    var t = r.totals;
+    h += '<tr class="total"><td>합계</td><td>' + t.days + '</td><td>' + C.fmtHM(t.workMin) + '</td><td>' + C.fmtHM(t.otMin) + '</td><td>' + C.fmtHM(t.nightMin) +
+      '</td><td>' + t.lateCount + '</td><td>' + t.earlyCount + '</td><td>' + t.missingCount + '</td><td></td><td>' + C.won(t.pay) + '</td></tr></table></div>';
+    h += '<p class="note">급여 참고 = 시급 × (근무 + 연장×가산 + 야간×가산). 직원별 금액의 합이 총액과 항상 같게 원 단위로 나눴습니다. 예시 계산이며 실제 급여가 아닙니다.</p>';
+    h += '<details><summary>하루별 내역 (' + r.days.length + '건)</summary><div class="scroll"><table><tr><th>이름</th><th>날짜</th><th>출근</th><th>퇴근</th><th>휴게</th><th>근무</th><th>연장</th><th>야간</th><th>상태</th></tr>';
+    r.days.forEach(function (d) {
+      var tag = d.missing ? '<span class="warn">누락</span>' : (d.lateMin ? '지각 ' + d.lateMin + '분 ' : '') + (d.earlyMin ? '조퇴 ' + d.earlyMin + '분' : '');
+      h += '<tr><td>' + esc(d.name) + '</td><td>' + d.date + '</td><td>' + (d.inMin === null ? '-' : C.fmtClock(d.inMin)) + '</td><td>' + (d.outMin === null ? '-' : C.fmtClock(d.outMin)) +
+        '</td><td>' + d.breakMin + '분</td><td>' + C.fmtHM(d.workMin) + '</td><td>' + C.fmtHM(d.otMin) + '</td><td>' + C.fmtHM(d.nightMin) + '</td><td>' + (tag || '정상') + '</td></tr>';
+    });
+    h += '</table></div></details>';
+    $('out').innerHTML = h;
+  }
+  $('run').onclick = run;
+  $('reset').onclick = function () { fill(defaults()); run(); };
+  setIds.concat(['rec', 'wages']).forEach(function (id) { $(id).addEventListener('change', run); });
+  load(); run();
+})();
+</script>
+</body>
+</html>
