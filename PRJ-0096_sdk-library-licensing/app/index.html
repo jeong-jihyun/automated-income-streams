@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개발 SDK·라이브러리 라이선스</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<h1>개발 SDK·라이브러리 라이선스</h1>
+<p class="note">자체 개발 모듈을 기업에 연간 라이선스할 때 쓰는 키 검사, 견적, 갱신 일정 도구입니다. 인터넷·서버 없이 이 휴대폰 안에서만 계산합니다. 단가는 예시이고 법률 자문이 아닙니다.</p>
+
+<section class="card">
+<h2>0. 오늘 날짜</h2>
+<label for="today">오늘(YYYY-MM-DD) - 기본값은 샘플 날짜</label>
+<input id="today" type="text" inputmode="numeric" placeholder="2026-11-17">
+<p class="note">기기 시계를 읽지 않고 이 칸의 값만 씁니다. 그래서 같은 입력은 언제나 같은 결과가 나옵니다.</p>
+</section>
+
+<section class="card">
+<h2>1. 라이선스 키 검사기</h2>
+<label for="key">라이선스 키 (예: ACME-2026-0001-XXXX)</label>
+<input id="key" type="text" autocapitalize="characters" autocomplete="off">
+<div class="row">
+<div><label for="expiry">만료일</label><input id="expiry" type="text" inputmode="numeric" placeholder="2026-12-10"></div>
+</div>
+<div class="row">
+<div><label for="seatsAllowed">허용 좌석 수</label><input id="seatsAllowed" type="number" inputmode="numeric"></div>
+<div><label for="seatsUsed">사용 중 좌석 수</label><input id="seatsUsed" type="number" inputmode="numeric"></div>
+</div>
+<button id="runKey">키 검사</button>
+<button id="resetAll" class="sub">샘플로 되돌리기</button>
+<div id="keyOut" aria-live="polite"></div>
+<p class="note">검사값은 글자 코드를 더한 단순 합계 규칙입니다. 연습·점검용이고 암호 보안이 아니므로 위조를 막지 못합니다.</p>
+</section>
+
+<section class="card">
+<h2>2. 연간 라이선스 견적</h2>
+<div class="row">
+<div><label for="seats">좌석 수</label><input id="seats" type="number" inputmode="numeric"></div>
+<div><label for="years">계약 기간(년)</label><select id="years"><option value="1">1년</option><option value="2">2년 (5% 할인)</option><option value="3">3년 (10% 할인)</option></select></div>
+</div>
+<label for="support">지원 등급</label>
+<select id="support"></select>
+<button id="runQuote">견적 계산</button>
+<div id="quoteOut" aria-live="polite"></div>
+</section>
+
+<section class="card">
+<h2>3. 갱신 일정</h2>
+<div class="row">
+<div><label for="start">계약 시작일</label><input id="start" type="text" inputmode="numeric" placeholder="2026-01-01"></div>
+<div><label for="rYears">기간(년)</label><input id="rYears" type="number" inputmode="numeric"></div>
+</div>
+<button id="runRenew">갱신 안내일 계산</button>
+<div id="renewOut" aria-live="polite"></div>
+</section>
+<p class="note">입력값은 이 휴대폰 안에만 저장됩니다. 결제·전송·로그인 기능은 없습니다.</p>
+</main>
+<script src="core.js"></script>
+<script>
+(function () {
+  var C = window.Core, $ = function (id) { return document.getElementById(id); };
+  var KEY = 'prj0096-v1';
+  var ids = ['today', 'key', 'expiry', 'seatsAllowed', 'seatsUsed', 'seats', 'years', 'support', 'start', 'rYears'];
+  var DEF = { today: C.SAMPLE_TODAY, key: C.SAMPLE_KEY, expiry: '2026-12-10', seatsAllowed: '20', seatsUsed: '18',
+    seats: '25', years: '2', support: 'standard', start: '2026-01-01', rYears: '1' };
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  var sel = '';
+  Object.keys(C.SUPPORT).forEach(function (k) { sel += '<option value="' + k + '">' + esc(C.SUPPORT[k].name) + ' +' + C.won(C.SUPPORT[k].fee) + '/년</option>'; });
+  $('support').innerHTML = sel;
+  function setAll(o) { ids.forEach(function (id) { $(id).value = o[id] !== undefined ? o[id] : DEF[id]; }); }
+  function load() {
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { saved = {}; }
+    setAll(saved);
+  }
+  function save() {
+    try { var o = {}; ids.forEach(function (id) { o[id] = $(id).value; }); localStorage.setItem(KEY, JSON.stringify(o)); } catch (e) {}
+  }
+  function runKey() {
+    save();
+    var r = C.checkLicense({ key: $('key').value, expiry: $('expiry').value, seatsAllowed: $('seatsAllowed').value, seatsUsed: $('seatsUsed').value, today: $('today').value });
+    $('keyOut').innerHTML = '<p><span class="badge b-' + r.status + '">' + esc(r.label) + '</span></p><p>' + esc(r.message) + '</p>';
+  }
+  function runQuote() {
+    save();
+    var q = C.quote({ seats: $('seats').value, years: $('years').value, support: $('support').value });
+    if (q.error) { $('quoteOut').innerHTML = '<p class="bad">' + esc(q.error) + '</p>'; return; }
+    var h = '<p>좌석 구간별 연 단가(예시, 구간 누진)</p><table><tr><th>구간</th><th>좌석</th><th>단가</th><th>금액/년</th></tr>';
+    q.tierLines.forEach(function (t) { h += '<tr><td>' + t.from + '~' + t.to + '</td><td>' + t.seats + '</td><td>' + C.won(t.price) + '</td><td>' + C.won(t.amount) + '</td></tr>'; });
+    h += '</table><p>정가 합계(' + q.years + '년, 지원 포함): ' + C.won(q.gross) + '<br>다년 할인 ' + Math.round(q.discountRate * 100) + '%: -' + C.won(q.discount) + '</p>';
+    h += '<table><tr><th>항목</th><th>공급가</th><th>부가세</th><th>합계</th></tr>';
+    q.items.forEach(function (i) { h += '<tr><td>' + esc(i.name) + '</td><td>' + C.won(i.supply) + '</td><td>' + C.won(i.vat) + '</td><td>' + C.won(i.total) + '</td></tr>'; });
+    h += '<tr class="total"><td>총합</td><td>' + C.won(q.supply) + '</td><td>' + C.won(q.vat) + '</td><td>' + C.won(q.total) + '</td></tr></table>';
+    $('quoteOut').innerHTML = h;
+  }
+  var stateText = { past: '지남', today: '오늘', upcoming: '예정' };
+  function runRenew() {
+    save();
+    var r = C.renewalSchedule({ start: $('start').value, years: $('rYears').value, today: $('today').value });
+    if (r.error) { $('renewOut').innerHTML = '<p class="bad">' + esc(r.error) + '</p>'; return; }
+    var h = '<p>계약 기간: ' + r.start + ' ~ ' + r.end + '<br>오늘 기준 만료까지 ' + r.daysToEnd + '일' + (r.daysToEnd < 0 ? ' (이미 만료)' : '') + '</p>';
+    h += '<table><tr><th>안내</th><th>날짜</th><th>상태</th></tr>';
+    r.notices.forEach(function (n) { h += '<tr><td>만료 ' + n.before + '일 전</td><td>' + n.date + '</td><td>' + stateText[n.state] + ' (' + (n.daysFromToday >= 0 ? '+' : '') + n.daysFromToday + '일)</td></tr>'; });
+    h += '<tr class="total"><td>만료일</td><td>' + r.end + '</td><td></td></tr></table>';
+    $('renewOut').innerHTML = h;
+  }
+  $('runKey').onclick = runKey; $('runQuote').onclick = runQuote; $('runRenew').onclick = runRenew;
+  $('resetAll').onclick = function () { setAll({}); runKey(); runQuote(); runRenew(); };
+  load(); runKey(); runQuote(); runRenew();
+})();
+</script>
+</body>
+</html>
