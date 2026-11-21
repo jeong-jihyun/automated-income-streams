@@ -5,7 +5,7 @@ Goodnotes Digital Planner의 설계 기준 문서 모음입니다.
 | 문서 | 설명 |
 |---|---|
 | [UI 설계서](./UI-DESIGN-SPEC.md) | 화면 구조, 사용자 흐름, 반응형 웹, 상태 모델, 웹 API 실행 경계 |
-| [디자인 시스템](./DESIGN-SYSTEM.md) | 컬러·타이포그래피·간격·컴포넌트·접근성 토큰 |
+| [디자인 시스템](./DESIGN-SYSTEM.md) | 컬러·타이포그래피·간격·컴포넌트·접근성 토큰 |\n| [기능정의서·API 설계 통합 HTML](./FUNCTION-API-SPEC.html) | 기능 요구사항, 설정 계약, 실행 아키텍처, REST API 제안, 상태·오류·인수 기준 |
 | [모바일 대응 기획](../MOBILE-RESPONSIVE-PLAN.md) | 기존 구조 분석 및 모바일 대응 전략 |
 
 ## 핵심 결정
