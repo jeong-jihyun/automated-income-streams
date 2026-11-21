@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#26384a">
+<title>Goodnotes Digital Planner | Design System</title>
+<style>
+:root{--canvas:#f7f5f0;--surface:#fff;--subtle:#f1efe9;--ink:#202a35;--muted:#66717c;--line:#e5e1d8;--navy:#26384a;--sage:#a8b6a0;--rose:#d8a6a0;--sand:#d8c5a3;--success:#35745a;--warning:#9a6a25;--error:#b54747;--radius:16px;--shadow:0 8px 28px rgba(32,42,53,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:15px/1.65 Pretendard,"Noto Sans KR",system-ui,sans-serif}
+.wrap{max-width:1120px;margin:auto;padding:32px 22px 64px}.hero{background:var(--navy);color:#fff;padding:38px;border-radius:22px}.eyebrow{font-size:12px;letter-spacing:.14em;color:#cbd5df;font-weight:700}.hero h1{font-size:clamp(28px,4vw,42px);line-height:1.2;margin:12px 0}.hero p{color:#dbe2e8;max-width:680px;margin:0}.tag{display:inline-block;border:1px solid #ffffff55;border-radius:99px;padding:4px 10px;margin:20px 6px 0 0;font-size:12px}
+section{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:var(--shadow)}h2{font-size:21px;margin:0 0 18px}h3{font-size:15px;margin:0 0 10px}.muted{color:var(--muted);font-size:13px}
+.colors{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}.swatch{border:1px solid var(--line);border-radius:12px;overflow:hidden}.chip{height:72px}.swatch div:last-child{padding:10px;font-size:12px}.swatch b{display:block;font-size:13px}
+.type{display:grid;grid-template-columns:1fr 1fr;gap:18px}.typebox{padding:18px;background:var(--subtle);border-radius:12px}.display{font-size:30px;font-weight:650;line-height:1.25}.bodycopy{font-size:16px}.scale{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-top:14px}
+.spacing{display:flex;align-items:end;gap:14px;flex-wrap:wrap}.space{background:var(--sage);border-radius:5px 5px 0 0;width:34px}.space small{display:block;transform:translateY(22px);white-space:nowrap;text-align:center;color:var(--muted)}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.btn{border:0;border-radius:10px;padding:11px 17px;font:inherit;font-weight:600;background:var(--navy);color:#fff}.btn.secondary{background:var(--subtle);color:var(--ink);border:1px solid var(--line)}.field{padding:11px 13px;border:1px solid var(--line);border-radius:10px;background:#fff;min-width:190px;font:inherit}
+.carddemo{border:1px solid var(--line);border-radius:14px;padding:18px;max-width:340px}.pill{display:inline-block;padding:4px 9px;border-radius:99px;background:#e9f1eb;color:var(--success);font-size:12px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.tile{background:var(--subtle);border:1px solid var(--line);padding:16px;border-radius:12px}
+footer{margin:22px 4px;color:var(--muted);font-size:12px}
+@media(max-width:700px){.wrap{padding:16px 14px 42px}.hero{padding:26px 22px}section{padding:20px}.type,.grid{grid-template-columns:1fr}.display{font-size:25px}}
+</style>
+</head>
+<body><main class="wrap">
+<header class="hero"><div class="eyebrow">GOODNOTES DIGITAL PLANNER · DESIGN SYSTEM 1.0</div><h1>Calm structure.<br>Clear productivity.</h1><p>종이 플래너의 차분한 감성과 디지털 생산성 도구의 명료함을 결합한 반응형 UI 디자인 기준입니다.</p><span class="tag">Mobile first</span><span class="tag">Minimal editorial</span><span class="tag">Accessible UI</span></header>
+<section><h2>01 · Color tokens</h2><div class="colors">
+<div class="swatch"><div class="chip" style="background:#f7f5f0"></div><div><b>Canvas</b>#F7F5F0 · 앱 배경</div></div>
+<div class="swatch"><div class="chip" style="background:#ffffff"></div><div><b>Surface</b>#FFFFFF · 카드·입력</div></div>
+<div class="swatch"><div class="chip" style="background:#26384a"></div><div><b>Primary navy</b>#26384A · 주요 액션</div></div>
+<div class="swatch"><div class="chip" style="background:#a8b6a0"></div><div><b>Sage</b>#A8B6A0 · 보조 강조</div></div>
+<div class="swatch"><div class="chip" style="background:#d8a6a0"></div><div><b>Rose</b>#D8A6A0 · 보조 강조</div></div>
+<div class="swatch"><div class="chip" style="background:#d8c5a3"></div><div><b>Sand</b>#D8C5A3 · 보조 강조</div></div>
+<div class="swatch"><div class="chip" style="background:#35745a"></div><div><b>Success</b>#35745A · 성공 상태</div></div>
+<div class="swatch"><div class="chip" style="background:#b54747"></div><div><b>Error</b>#B54747 · 오류 상태</div></div>
+</div></section>
+<section><h2>02 · Typography</h2><div class="type"><div class="typebox"><div class="muted">DISPLAY / 30px / 650</div><div class="display">나만의 디지털 플래너</div><p class="muted">Pretendard, Noto Sans KR, sans-serif</p></div><div class="typebox"><div class="muted">BODY / 16px / 400</div><div class="bodycopy">설정을 선택하고 원하는 페이지 구성을 만든 뒤 PDF를 생성합니다.</div><p class="muted">본문 line-height 1.65 · 보조 14px</p></div></div><div class="scale"><span style="font-size:12px">12px</span><span style="font-size:14px">14px</span><span style="font-size:16px">16px</span><span style="font-size:18px">18px</span><span style="font-size:24px">24px</span><span style="font-size:32px">32px</span></div></section>
+<section><h2>03 · Spacing scale</h2><div class="spacing"><div class="space" style="height:4px"><small>4</small></div><div class="space" style="height:8px"><small>8</small></div><div class="space" style="height:12px"><small>12</small></div><div class="space" style="height:16px"><small>16</small></div><div class="space" style="height:24px"><small>24</small></div><div class="space" style="height:32px"><small>32</small></div><div class="space" style="height:48px"><small>48</small></div></div><p class="muted">기본 단위 4px. 화면 좌우 여백은 모바일 16px, 태블릿 24px, 데스크톱 32px를 기준으로 합니다.</p></section>
+<section><h2>04 · Components</h2><div class="controls"><button class="btn">PDF 생성</button><button class="btn secondary">설정 초기화</button><input class="field" value="2026" aria-label="연도 입력"><span class="pill">검증 완료</span></div><div style="margin-top:18px" class="carddemo"><div class="muted">THEME OPTION</div><h3 style="margin-top:8px">Navy · 기본 테마</h3><p class="muted">차분한 네이비와 밝은 아이보리 기반의 기본 색상 조합입니다.</p><button class="btn secondary">테마 선택됨</button></div></section>
+<section><h2>05 · Responsive layout</h2><div class="grid"><div class="tile"><b>Mobile</b><p class="muted">320–767px<br>단일 열, 터치 중심, 하단 주요 액션</p></div><div class="tile"><b>Tablet</b><p class="muted">768–1023px<br>1–2열, 설정과 미리보기 유연 배치</p></div><div class="tile"><b>Desktop</b><p class="muted">1024px 이상<br>설정과 결과 병렬 배치, 최대 폭 1120px</p></div></div></section>
+<section><h2>06 · Accessibility rules</h2><ul><li>본문과 배경의 텍스트 대비는 WCAG 2.2 AA 기준으로 검증합니다.</li><li>색상만으로 성공·오류·선택 상태를 전달하지 않습니다.</li><li>키보드 포커스 표시와 명확한 레이블을 제공합니다.</li><li>터치 대상은 최소 44×44px를 권장합니다.</li><li>모션 감소 설정을 존중하고 상태 변경을 텍스트로도 안내합니다.</li></ul></section>
+<footer>PRJ-0001 · Goodnotes Digital Planner · Design reference v1.0 · 본 시안은 구현 기준이며 실제 제품 적용 후 접근성·브라우저 검증이 필요합니다.</footer>
+</main></body></html>
