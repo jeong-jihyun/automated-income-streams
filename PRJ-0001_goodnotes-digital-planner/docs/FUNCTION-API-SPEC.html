@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#26384a">
+<title>Goodnotes Digital Planner · 기능/API 설계</title>
+<style>
+:root{--canvas:#f7f5f0;--surface:#fff;--subtle:#f1efe9;--ink:#202a35;--muted:#66717c;--line:#e5e1d8;--navy:#26384a;--blue:#426b8a;--sage:#a8b6a0;--rose:#d8a6a0;--sand:#d8c5a3;--green:#35745a;--red:#b54747;--radius:16px;--shadow:0 8px 28px rgba(32,42,53,.06)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--canvas);color:var(--ink);font:15px/1.65 Pretendard,"Noto Sans KR",system-ui,sans-serif}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}.shell{max-width:1280px;margin:auto;padding:24px}
+header{background:var(--navy);color:#fff;border-radius:22px;padding:34px 38px;position:relative;overflow:hidden}
+header:after{content:"";position:absolute;width:300px;height:300px;border:1px solid rgba(255,255,255,.13);border-radius:50%;right:-70px;top:-150px;box-shadow:0 0 0 32px rgba(255,255,255,.035),0 0 0 64px rgba(255,255,255,.025)}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#cbd5df;font-weight:700}
+h1{font-size:clamp(28px,4vw,42px);line-height:1.2;margin:12px 0 10px}header p{max-width:720px;color:#dbe2e8;margin:0}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.pill{font-size:12px;border:1px solid rgba(255,255,255,.28);padding:5px 10px;border-radius:999px;color:#f4f6f8}
+.layout{display:grid;grid-template-columns:250px minmax(0,1fr);gap:22px;margin-top:22px;align-items:start}
+nav{position:sticky;top:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+nav strong{display:block;font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin:4px 8px 10px}
+nav a{display:block;padding:8px 10px;border-radius:9px;color:var(--ink);font-size:14px}nav a:hover,nav a.active{background:var(--subtle);text-decoration:none;color:var(--navy);font-weight:700}
+main{min-width:0}.toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap}
+input[type=search]{width:min(360px,100%);border:1px solid var(--line);border-radius:10px;padding:10px 13px;background:#fff;font:inherit}
+button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 13px;font:inherit;cursor:pointer;color:var(--navy)}button:hover{background:var(--subtle)}
+section{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:25px;margin-bottom:16px;box-shadow:var(--shadow);scroll-margin-top:18px}
+h2{font-size:21px;color:var(--navy);margin:0 0 14px}h3{font-size:16px;margin:20px 0 8px;color:var(--blue)}p{margin:8px 0 12px}.lead{color:var(--muted);margin-top:-5px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.card{border:1px solid var(--line);border-radius:13px;padding:15px;background:#fff}.card b{display:block;color:var(--navy);font-size:14px}.card small{color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0 18px;display:table}th{background:var(--navy);color:#fff;text-align:left;font-weight:600}td,th{padding:10px 11px;border:1px solid var(--line);vertical-align:top}tbody tr:nth-child(even){background:#faf9f6}
+pre{background:#202a35;color:#eef2f5;padding:16px;border-radius:12px;overflow:auto;font:12px/1.6 ui-monospace,Consolas,monospace}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em;background:var(--subtle);padding:2px 5px;border-radius:5px}
+.callout{border-left:4px solid var(--blue);background:#f2f6f8;padding:13px 16px;border-radius:0 10px 10px 0;margin:14px 0}.warning{border-left-color:#9a6a25;background:#fbf6ed}
+.status{font-size:11px;font-weight:700;border-radius:99px;padding:3px 8px;background:#edf3ef;color:var(--green)}.status.proposed{background:#fbf3e6;color:#8a5d1c}
+.flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.flow span{padding:9px 12px;background:var(--subtle);border:1px solid var(--line);border-radius:9px;font-size:13px}.flow i{font-style:normal;color:var(--muted)}
+ul,ol{padding-left:22px}li{margin:4px 0}.muted{color:var(--muted)}.hidden{display:none!important}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:18px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}nav{position:static;display:flex;gap:4px;flex-wrap:wrap}nav strong{width:100%}nav a{font-size:12px;padding:6px 8px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.shell{padding:12px}header{padding:25px 20px;border-radius:16px}section{padding:18px}.cards{grid-template-columns:1fr}.toolbar{align-items:stretch}input[type=search]{width:100%}table{font-size:12px}td,th{padding:8px 7px}}
+@media print{body{background:#fff}.shell{max-width:none;padding:0}nav,.toolbar button{display:none}header,section{box-shadow:none;break-inside:avoid}.layout{display:block}section{border:0;border-bottom:1px solid #ddd}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header><div class="eyebrow">PRJ-0001 · Product specification</div><h1>Goodnotes Digital Planner</h1><p>기능정의서와 API 설계 요약. 기존 Electron/Python 구현과 신규 웹 API 제안 범위를 구분한 실행 가능한 설계 기준 문서입니다.</p><div class="meta"><span class="pill">문서 버전 1.0</span><span class="pill">2026-11-21</span><span class="pill">Responsive Web</span><span class="pill">React 18 · Electron · Python</span></div></header>
+<div class="layout">
+<nav aria-label="문서 목차"><strong>Contents</strong><a href="#overview">개요</a><a href="#scope">제품 범위</a><a href="#features">기능 정의</a><a href="#settings">설정 데이터</a><a href="#architecture">실행 아키텍처</a><a href="#api">API 목록</a><a href="#contracts">API 계약</a><a href="#states">작업 상태</a><a href="#security">보안·운영</a><a href="#acceptance">인수 기준</a><a href="#decisions">미결정 사항</a></nav>
+<main><div class="toolbar"><input id="search" type="search" placeholder="문서에서 키워드 검색..." aria-label="문서 검색"><button onclick="window.print()">인쇄 / PDF 저장</button></div>
+<section id="overview"><h2>01. 문서 개요</h2><p class="lead">저장소의 실제 코드에서 확인한 동작과 신규 웹 API 설계 제안을 구분합니다.</p><div class="cards"><div class="card"><b>현재 구현</b><small>Electron IPC, Python CLI, ReportLab PDF 생성, PDF 링크 검증, 미리보기 모듈</small></div><div class="card"><b>신규 개발</b><small>HTTPS API 서버, 작업 상태 조회, 웹 다운로드, 브라우저 실행 어댑터</small></div><div class="card"><b>반응형 목표</b><small>Mobile 320–767px, Tablet 768–1023px, Desktop 1024px+</small></div></div><div class="callout warning"><b>구현 상태 주의:</b> 아래 REST API 경로는 설계 계약 제안이며 현재 운영 중인 API가 아닙니다. 설계 문서 작성만으로 웹 PDF 생성 기능이 구현되는 것은 아닙니다.</div></section>
+<section id="scope"><h2>02. 제품 범위</h2><h3>포함 기능</h3><ul><li>연도, 주 시작 요일, 언어, 테마 설정</li><li>주간·일간 페이지 포함 여부 및 노트 페이지 수 설정</li><li>연간·월간·선택형 주간·일간·노트 페이지 PDF 생성</li><li>PDF 내부 링크 및 파일 크기 검증</li><li>생성 결과, 미리보기 및 다운로드 제공</li><li>PC·태블릿·스마트폰 반응형 UI</li><li>기존 Electron 경로 유지 및 웹 API 경로 추가</li></ul><h3>후속 범위</h3><p>계정·구독·결제, 클라우드 생성 이력, 세로형 모바일 PDF, 생성 취소·실시간 진행률은 별도 결정 대상으로 둡니다.</p></section>
+<section id="features"><h2>03. 기능 정의</h2><table><thead><tr><th>ID</th><th>기능</th><th>핵심 규칙</th><th>우선순위/현황</th></tr></thead><tbody>
+<tr><td>FR-001</td><td>기본 설정</td><td>연도 2000~2100, monday/sunday, ko/en</td><td>P0 · 기존 엔진/IPC</td></tr><tr><td>FR-002</td><td>테마 선택</td><td>navy, sage, rose, mono</td><td>P0 · 기존 엔진/IPC</td></tr><tr><td>FR-003</td><td>페이지 구성</td><td>weekly/daily boolean, 기본 true</td><td>P0 · 기존 엔진</td></tr><tr><td>FR-004</td><td>노트 페이지</td><td>입력 0~50, 현 엔진은 최소 1페이지 생성</td><td>P0 · 정책 확인 필요</td></tr><tr><td>FR-005</td><td>설정 검증</td><td>UI/API/엔진 경계에서 검증, 엔진이 최종 기준</td><td>P0 · 일부 구현</td></tr><tr><td>FR-006</td><td>PDF 생성</td><td>ReportLab, A4 가로 842×595pt</td><td>P0 · CLI/데스크톱</td></tr><tr><td>FR-007</td><td>링크 검증</td><td>대상 페이지 존재, 파일 60MB 이하, 링크 1개 이상</td><td>P0 · 검증 모듈</td></tr><tr><td>FR-008</td><td>결과 요약</td><td>pages, links, broken, size_mb, size_ok, ok</td><td>P0 · CLI JSON</td></tr><tr><td>FR-009</td><td>미리보기</td><td>페이지 이미지 생성 결과 제공</td><td>P1 · 모듈 존재</td></tr><tr><td>FR-010</td><td>웹 다운로드</td><td>검증 성공 파일만 다운로드</td><td>P0 · API 미구현</td></tr><tr><td>FR-011</td><td>반응형 UI</td><td>320px부터 가로 넘침 없이 주요 작업 지원</td><td>P0 · 설계/구현 검증 필요</td></tr><tr><td>FR-012</td><td>웹 API</td><td>브라우저에서 Python 엔진 호출</td><td>P0 · 신규 개발</td></tr></tbody></table><h3>주요 기능 상세</h3><ul><li><b>입력 검증:</b> 필드별 오류를 표시하고 생성 전 차단. 클라이언트 검증만 신뢰하지 않습니다.</li><li><b>생성:</b> 작업별 임시 디렉터리에서 PDF 생성. 내부 경로를 사용자 응답에 노출하지 않습니다.</li><li><b>검증:</b> 깨진 링크, 페이지 수, 파일 크기를 확인합니다. 현재 코드에서 링크가 0개이면 검증 실패입니다.</li><li><b>결과:</b> 검증 통과 시에만 다운로드를 제공합니다. 미리보기 오류는 PDF 생성 성공 여부와 분리하는 것을 권장합니다.</li></ul></section>
+<section id="settings"><h2>04. 설정 데이터 계약</h2><table><thead><tr><th>필드</th><th>타입</th><th>기본값</th><th>허용값</th></tr></thead><tbody><tr><td>year</td><td>integer</td><td>2027</td><td>2000~2100</td></tr><tr><td>weekStart</td><td>string</td><td>monday</td><td>monday, sunday</td></tr><tr><td>lang</td><td>string</td><td>ko</td><td>ko, en</td></tr><tr><td>theme</td><td>string</td><td>navy</td><td>navy, sage, rose, mono</td></tr><tr><td>weekly</td><td>boolean</td><td>true</td><td>true/false</td></tr><tr><td>daily</td><td>boolean</td><td>true</td><td>true/false</td></tr><tr><td>notes</td><td>integer</td><td>5</td><td>0~50 입력이나 엔진 동작 정책 정리 필요</td></tr><tr><td>title</td><td>string</td><td>""</td><td>선택값, 서버 길이 제한 필요</td></tr></tbody></table><pre>{
+  "year": 2027,
+  "weekStart": "monday",
+  "lang": "ko",
+  "theme": "navy",
+  "weekly": true,
+  "daily": true,
+  "notes": 5,
+  "title": ""
+}</pre><div class="callout warning"><b>발견된 사양 불일치:</b> PlannerConfig는 notes 0을 허용하지만 planner.py는 max(note_pages, 1)을 사용하므로 0을 입력해도 최소 1페이지가 생성됩니다. 0페이지 허용 여부를 확정한 뒤 엔진·API·테스트를 함께 맞춰야 합니다.</div></section>
+<section id="architecture"><h2>05. 실행 아키텍처</h2><h3>기존 데스크톱 경로 <span class="status">코드 확인</span></h3><div class="flow"><span>React UI</span><i>→</i><span>window.planner.generate</span><i>→</i><span>Electron preload / IPC</span><i>→</i><span>Python CLI</span><i>→</i><span>ReportLab PDF</span></div><p>IPC 채널은 <code>planner:generate</code>이며, main 프로세스가 <code>python -m engine.cli</code>를 실행합니다.</p><h3>웹 브라우저 경로 <span class="status proposed">신규 제안</span></h3><div class="flow"><span>Browser React UI</span><i>→</i><span>HTTPS REST API</span><i>→</i><span>작업 큐/워커</span><i>→</i><span>Python 엔진</span><i>→</i><span>검증/파일 저장</span><i>→</i><span>다운로드</span></div><p>웹은 Electron IPC를 호출할 수 없으므로 API 서버와 파일 제공 경로가 필요합니다.</p></section>
+<section id="api"><h2>06. API 엔드포인트 목록</h2><table><thead><tr><th>Method</th><th>Path</th><th>목적</th><th>상태</th></tr></thead><tbody><tr><td>GET</td><td><code>/health</code></td><td>서비스 헬스체크</td><td>제안</td></tr><tr><td>GET</td><td><code>/api/v1/planner/options</code></td><td>기본값·허용 옵션 조회</td><td>제안</td></tr><tr><td>POST</td><td><code>/api/v1/planner/validate</code></td><td>설정 사전 검증</td><td>제안</td></tr><tr><td>POST</td><td><code>/api/v1/generations</code></td><td>비동기 생성 작업 등록</td><td>제안</td></tr><tr><td>GET</td><td><code>/api/v1/generations/{id}</code></td><td>작업 상태/결과 조회</td><td>제안</td></tr><tr><td>GET</td><td><code>/api/v1/generations/{id}/download</code></td><td>PDF 다운로드</td><td>제안</td></tr><tr><td>GET</td><td><code>/api/v1/generations/{id}/previews</code></td><td>미리보기 목록</td><td>제안</td></tr><tr><td>GET</td><td><code>/api/v1/generations/{id}/previews/{page}</code></td><td>미리보기 이미지</td><td>제안</td></tr></tbody></table></section>
+<section id="contracts"><h2>07. API 요청·응답 예시</h2><h3>작업 생성: POST /api/v1/generations</h3><pre>HTTP/1.1 202 Accepted
+{
+  "generationId": "uuid",
+  "status": "queued",
+  "statusUrl": "/api/v1/generations/uuid",
+  "createdAt": "2026-11-21T10:00:00Z"
+}</pre><h3>상태 조회: GET /api/v1/generations/{id}</h3><pre>{
+  "generationId": "uuid",
+  "status": "succeeded",
+  "result": {
+    "fileName": "planner_2027_ko_navy.pdf",
+    "pageCount": 0,
+    "linkCount": 0,
+    "brokenLinkCount": 0,
+    "sizeMb": 0,
+    "validationPassed": true,
+    "downloadUrl": "/api/v1/generations/uuid/download"
+  }
+}</pre><p class="muted">위 숫자 0은 필드 구조를 보여주기 위한 예시값이며 실제 플래너 생성 결과가 아닙니다. 실제 응답은 엔진 반환값을 사용합니다.</p><h3>검증 오류 예시</h3><pre>HTTP/1.1 422 Unprocessable Entity
+{
+  "code": "VALIDATION_ERROR",
+  "message": "요청 설정을 확인해 주세요.",
+  "errors": [
+    {"field": "year", "reason": "2000~2100 사이 정수여야 합니다"}
+  ],
+  "requestId": "server-generated-id"
+}</pre></section>
+<section id="states"><h2>08. 작업 상태 모델</h2><div class="flow"><span>queued</span><i>→</i><span>validating</span><i>→</i><span>processing</span><i>→</i><span>verifying</span><i>→</i><span>previewing</span><i>→</i><span>succeeded</span></div><p>실패는 각 단계에서 <code>failed</code>로 전이합니다. 진행률 이벤트가 엔진에 구현되기 전까지 <code>progress: null</code>을 반환하며 UI에서 임의 퍼센트를 만들지 않습니다.</p><table><thead><tr><th>HTTP</th><th>오류 코드</th><th>의미</th></tr></thead><tbody><tr><td>400</td><td>BAD_REQUEST</td><td>요청 형식 오류</td></tr><tr><td>401</td><td>UNAUTHORIZED</td><td>인증 실패</td></tr><tr><td>403</td><td>FORBIDDEN</td><td>접근 권한 없음</td></tr><tr><td>404</td><td>GENERATION_NOT_FOUND</td><td>작업 없음</td></tr><tr><td>410</td><td>FILE_EXPIRED</td><td>파일 만료</td></tr><tr><td>422</td><td>VALIDATION_ERROR</td><td>설정 검증 실패</td></tr><tr><td>429</td><td>RATE_LIMITED</td><td>요청 제한</td></tr><tr><td>500</td><td>GENERATION_FAILED</td><td>엔진 오류</td></tr><tr><td>503</td><td>SERVICE_UNAVAILABLE</td><td>서비스 불가</td></tr></tbody></table></section>
+<section id="security"><h2>09. 보안 및 운영</h2><ul><li>운영 환경 HTTPS 강제, CORS 허용 Origin 최소화</li><li>입력 DTO allow-list 검증, 파일 경로와 실행 명령을 클라이언트에서 받지 않음</li><li>작업별 격리 디렉터리, 서버 생성 파일명, Path Traversal 방지</li><li>생성 시간·파일 크기·동시 작업 수 제한</li><li>검증 성공 작업만 다운로드 허용, 사용자별 작업 소유권 검사</li><li>내부 절대 경로·Traceback·토큰·비밀키는 응답에서 제외</li><li>요청 ID를 이용해 서버 로그에서 상세 오류 추적</li></ul></section>
+<section id="acceptance"><h2>10. 인수 기준 및 테스트</h2><ul><li>연도 경계(1999/2000/2100/2101), 잘못된 타입 검증</li><li>요일·언어·테마 허용값 검증</li><li>주간/일간 조합과 노트 페이지 경계 검증</li><li>PDF 페이지 수·링크·파일 크기 검사 및 실패 다운로드 차단</li><li>웹 API 작업 등록·상태 조회·파일 다운로드 E2E</li><li>320/360/390/768/1024/1440px 반응형 검증</li><li>Electron 기존 IPC 회귀 테스트</li><li>네트워크 오류·만료 파일·요청 제한 오류 표시</li></ul></section>
+<section id="decisions"><h2>11. 구현 전 확정할 사항</h2><ol><li>notes=0일 때 0페이지를 생성할지 최소 1페이지를 유지할지.</li><li>링크 0개인 PDF를 검증 성공으로 인정할지.</li><li>웹 API 프레임워크 및 호스팅 플랫폼.</li><li>인증/사용량 제한 도입 시점.</li><li>PDF 및 미리보기 보관 기간·삭제 정책.</li><li>생성 취소·실시간 진행률 이벤트 범위.</li></ol><div class="callout"><b>권장 개발 순서:</b> 공통 DTO → 옵션/검증 API → 비동기 생성 워커 → 상태/다운로드 API → 미리보기 API → 인증·제한·보관 정책 → 반응형 웹 E2E.</div></section>
+<footer>PRJ-0001 · Goodnotes Digital Planner · 기능/API 설계 요약 v1.0 · 2026-11-21</footer>
+</main></div>
+<script>
+const search=document.getElementById('search');
+search.addEventListener('input',()=>{const q=search.value.trim().toLowerCase();document.querySelectorAll('main section').forEach(s=>s.classList.toggle('hidden',!!q&&!s.innerText.toLowerCase().includes(q)));});
+const links=[...document.querySelectorAll('nav a')];
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('active',a.hash==='#'+e.target.id));}}),{rootMargin:'-15% 0px -70% 0px'});
+document.querySelectorAll('main section').forEach(s=>obs.observe(s));
+</script>
+</body></html>
