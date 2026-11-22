@@ -1,26 +1,35 @@
-# 카카오 이모티콘 규격 검수 도구 (PRJ-0003)
+# PRJ-0003 카카오 이모티콘 규격 검수 도구 · 모바일 산출물
 
-이모티콘 그림 폴더의 규격(크기·개수·형식·용량·투명 배경)을 검사하고, 크기 맞춤, 순번 이름 정리, 구성표 CSV, 제안 문구 초안을 만들어 주는 명령줄 도구.
+## 산출물
+- `PRJ-0003_UI-설계서_v1.0.docx`
+- `PRJ-0003_기능정의서_v1.0.docx`
+- `PRJ-0003_API-설계서_v1.0.docx`
+- `PRJ-0003_디자인시스템_v1.0.docx`
+- `PRJ-0003_모바일-컨셉-디자인-시안.html`
 
-## 준비
-pip install pillow pytest
+## HTML 실행
+압축을 푼 후 `docs/PRJ-0003_모바일-컨셉-디자인-시안.html` 파일을 모바일 또는 데스크톱 브라우저에서 엽니다. 별도 패키지 설치 없이 실행할 수 있습니다.
 
-## 사용법
-```
-python -m kakao_checker check ./내그림폴더
-python -m kakao_checker resize ./내그림폴더 ./맞춤결과
-python -m kakao_checker rename ./내그림폴더 --prefix mychar # 미리보기
-python -m kakao_checker rename ./내그림폴더 --prefix mychar --apply # 실제 변경
-python -m kakao_checker plan --count 32 > 구성표.csv
-python -m kakao_checker draft "하루" "졸린 곰" "느긋함"
-```
+## 주요 메뉴
+1. 홈
+2. 작품 이미지 불러오기
+3. 규격 검수
+4. 이미지 크기 맞춤
+5. 파일명 정리
+6. 구성표·제안서
+7. 설정·도움말
 
-## 테스트
-`python -m pytest -q`
+모바일에서는 하단 탭으로 이동하고, 데스크톱에서는 좌측 메뉴를 사용합니다.
 
-## 정책 주의
-카카오 사이트 로그인·자동 제출·자동 입력 기능은 없습니다. 제출은 사람이 직접 합니다. 규격 숫자는 kakao_checker/presets.json 에 예시값이 들어 있으니 공식 안내를 보고 꼭 고치세요.
+## 기존 저장소 기능과 연결 관계
+- `kakao_checker.core.check_folder` → 규격 검수
+- `kakao_checker.core.resize_all` → 이미지 크기 맞춤
+- `kakao_checker.core.rename_files` → 파일명 정리(미리보기/실제 적용 구분)
+- `kakao_checker.core.make_plan_table` → 구성표 CSV
+- `kakao_checker.core.proposal_draft` → 제안 문구 초안
+- `kakao_checker/presets.json` → 규격 프리셋
 
-## 한계 (솔직하게)
-자동 테스트는 프로그램이 만든 더미 파일로만 했습니다. 실제 마켓 심사 통과와 실제 작품 품질은 확인하지 못했습니다.
-테스트 10건은 2026-10-20 이 저장소에서 다시 실행해 통과를 확인했습니다. 규격 숫자는 예시이며 공식 안내와 대조하지 않았습니다.
+## 구현 범위 및 주의
+이 HTML은 모바일 메뉴 이동, 입력 폼, 브라우저 기본 파일 메타 검사, CSV 다운로드, 제안 문구 생성 등 일부 동작을 포함한 **프론트엔드 컨셉 시안**입니다. 기존 Python Pillow 엔진과 REST API는 연결되어 있지 않습니다. 이미지 변환, 투명 픽셀 최종 판정, 실제 파일명 변경은 서버 연동 후에만 실행할 수 있습니다.
+
+저장소의 `README.md` 및 `presets.json`에 명시된 규격 수치는 예시값입니다. 공식 안내를 확인하고 운영 설정을 갱신해야 합니다. 카카오 로그인·자동 제출·자동 업로드 기능은 범위에 포함하지 않습니다.
