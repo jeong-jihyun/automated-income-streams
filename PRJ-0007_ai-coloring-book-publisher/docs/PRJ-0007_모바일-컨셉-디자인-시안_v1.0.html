@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f6f1">
+<title>컬러메이트 · 컬러링북 제작</title>
+<style>
+:root{--bg:#f7f6f1;--paper:#fff;--ink:#26364a;--muted:#748091;--primary:#2f8f83;--soft:#eaf4f1;--line:#e6e8e5;--ok:#287a55;--warn:#a66b18;--bad:#b84a4a;--r:18px;--shadow:0 8px 24px rgba(38,54,74,.06)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif}body{padding-bottom:calc(86px + env(safe-area-inset-bottom))}.app{max-width:520px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative}.top{padding:18px 20px 8px;display:flex;justify-content:space-between;align-items:center}.brand{font-size:13px;font-weight:800;letter-spacing:.08em;color:var(--primary)}.avatar{width:36px;height:36px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-weight:800;color:var(--primary)}main{padding:8px 20px 24px}.screen{display:none;animation:fade .18s ease}.screen.active{display:block}@keyframes fade{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:none}}h1{font-size:25px;line-height:1.25;margin:8px 0 7px;letter-spacing:-.04em}h2{font-size:17px;margin:0 0 12px}h3{font-size:14px;margin:0 0 8px}.sub{font-size:13px;color:var(--muted);line-height:1.55;margin:0 0 20px}.eyebrow{font-size:11px;color:var(--primary);font-weight:800;letter-spacing:.08em}.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:12px 0;box-shadow:var(--shadow)}.hero{background:linear-gradient(140deg,#eaf4f1,#fff 75%);padding:20px;overflow:hidden;position:relative}.hero:after{content:"✿";position:absolute;right:12px;top:5px;font-size:100px;color:#d8ebe5;opacity:.7}.hero>*{position:relative;z-index:1}.hero h2{font-size:21px;max-width:240px;line-height:1.3}.btn{border:0;border-radius:13px;min-height:46px;padding:0 16px;font-weight:750;font-size:14px;cursor:pointer;background:var(--primary);color:white}.btn.secondary{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.ghost{background:var(--soft);color:var(--primary)}.btn.full{width:100%;margin-top:10px}.btn:disabled{opacity:.45;cursor:not-allowed}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.metric{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px}.metric b{font-size:22px;display:block}.metric span{font-size:11px;color:var(--muted)}.step{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.step:last-child{border:0}.num{width:28px;height:28px;flex:none;border-radius:10px;background:var(--soft);color:var(--primary);display:grid;place-items:center;font-weight:800}.step small{display:block;color:var(--muted);margin-top:4px;font-size:12px;line-height:1.45}.field{margin:13px 0}.field label{display:block;font-size:12px;font-weight:750;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:12px;padding:13px 12px;font:inherit;font-size:14px;color:var(--ink);outline:none}.field textarea{min-height:100px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px #2f8f8318}.hint{font-size:11px;color:var(--muted);line-height:1.5;margin-top:6px}.drop{border:1.5px dashed #9fc9bd;border-radius:16px;background:#f4faf7;padding:22px 14px;text-align:center}.drop strong{display:block;margin:8px 0 4px}.drop p{font-size:12px;color:var(--muted);margin:0 0 12px}.file{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}.file:last-child{border:0}.thumb{width:42px;height:48px;border:1px solid var(--line);border-radius:9px;background:repeating-linear-gradient(135deg,#fff,#fff 5px,#f1f1ed 6px,#fff 8px);display:grid;place-items:center;color:#8a9692}.fileinfo{min-width:0;flex:1}.fileinfo b{display:block;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fileinfo small{font-size:10px;color:var(--muted)}.remove{border:0;background:none;color:var(--muted);font-size:18px;padding:8px;cursor:pointer}.status{font-size:10px;font-weight:800;padding:5px 8px;border-radius:20px;background:#f0f2f1;color:var(--muted);white-space:nowrap}.status.ok{background:#e8f4ed;color:var(--ok)}.status.bad{background:#faeeee;color:var(--bad)}.status.warn{background:#fff5e5;color:var(--warn)}.notice{padding:12px;border-radius:12px;background:#fff7e8;color:#79531d;font-size:11px;line-height:1.55;margin:12px 0}.success{padding:12px;border-radius:12px;background:#edf7f0;color:var(--ok);font-size:12px;line-height:1.5;margin:12px 0}.tabs{position:fixed;z-index:10;bottom:0;left:50%;transform:translateX(-50%);width:min(100%,520px);padding:9px 8px calc(9px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr)}.tab{border:0;background:none;color:#89939c;font-size:10px;font-weight:650;display:flex;flex-direction:column;align-items:center;gap:4px;padding:3px;cursor:pointer}.tab .ico{font-size:19px;line-height:22px}.tab.active{color:var(--primary)}.tab.active .ico{transform:translateY(-1px)}.section-head{display:flex;align-items:center;justify-content:space-between;margin:20px 0 8px}.link{border:0;background:none;color:var(--primary);font-weight:750;font-size:12px;cursor:pointer}.progress{height:7px;background:#edf0ed;border-radius:10px;overflow:hidden;margin:9px 0}.progress i{display:block;height:100%;width:0;background:var(--primary);transition:width .3s}.artifact{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.artifact:last-child{border:0}.docicon{width:38px;height:42px;background:var(--soft);border-radius:10px;display:grid;place-items:center;color:var(--primary);font-size:18px}.artifact div:nth-child(2){flex:1;min-width:0}.artifact b{font-size:12px;display:block}.artifact small{color:var(--muted);font-size:10px}.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:#26364a;color:white;padding:11px 16px;border-radius:20px;font-size:12px;z-index:20;display:none;max-width:90%;text-align:center}.empty{text-align:center;padding:24px 12px;color:var(--muted);font-size:12px}.divider{height:1px;background:var(--line);margin:14px 0}
+@media(min-width:700px){body{padding:24px 0 40px}.app{border-radius:26px;overflow:hidden;min-height:850px;box-shadow:0 18px 60px #26364a18}.tabs{position:absolute;bottom:0;border-radius:0 0 26px 26px}.top{padding-top:24px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top"><div><div class="brand">COLOR MATE · STUDIO</div><div style="font-size:10px;color:var(--muted);margin-top:3px">나만의 컬러링북 제작실</div></div><div class="avatar">C</div></header>
+<main>
+<section class="screen active" id="home">
+<div class="eyebrow">YOUR CREATIVE WORKSPACE</div><h1>오늘의 아이디어를<br>한 권의 책으로.</h1><p class="sub">도안을 점검하고, 인쇄용 컬러링북 파일을 준비해 보세요.</p>
+<div class="card hero"><div class="eyebrow">START A NEW BOOK</div><h2>새로운 컬러링북을<br>만들어 볼까요?</h2><p class="sub" style="max-width:220px;margin:8px 0 14px">이미 준비한 흑백 선화로 제작을 시작하세요.</p><button class="btn" onclick="go('create')">새 프로젝트 만들기 →</button></div>
+<div class="grid2"><div class="metric"><b id="fileMetric">0</b><span>선택한 도안</span></div><div class="metric"><b id="projectMetric">0</b><span>내 프로젝트</span></div></div>
+<div class="section-head"><h2>제작 순서</h2><button class="link" onclick="go('make')">제작 설정 보기</button></div>
+<div class="card">
+<div class="step"><div class="num">1</div><div><b style="font-size:13px">도안 준비 및 검수</b><small>이미지 크기, 흰 배경, 색상과 회색 면을 확인합니다.</small></div></div>
+<div class="step"><div class="num">2</div><div><b style="font-size:13px">내지와 표지 구성</b><small>판형·종이·빈 뒷면을 설정하고 PDF를 준비합니다.</small></div></div>
+<div class="step" role="button" tabindex="0" onclick="go('metadata')" onkeydown="if(event.key==='Enter'||event.key===' '){go('metadata')}"><div class="num">3</div><div><b style="font-size:13px">출판 정보 확인</b><small>제목·설명·키워드 초안을 검토합니다. <span style="color:var(--primary)">열기 →</span></small></div></div>
+</div>
+<div class="notice">현재 모바일 화면은 컨셉 시안입니다. 실제 PDF 생성은 기존 Python 엔진과 서버 API 연동이 완료되어야 합니다.</div>
+</section>
+
+<section class="screen" id="create">
+<div class="eyebrow">NEW PROJECT</div><h1>프로젝트 만들기</h1><p class="sub">책의 기본 정보를 입력해 작업을 시작합니다.</p>
+<div class="card">
+<div class="field"><label for="projectName">프로젝트 이름 *</label><input id="projectName" maxlength="60" placeholder="예: 포근한 고양이의 하루"></div>
+<div class="field"><label for="theme">컬러링북 주제 *</label><input id="theme" placeholder="예: 고양이, 식물, 동화 속 정원"></div>
+<div class="field"><label for="description">간단한 설명</label><textarea id="description" placeholder="이 책에 담고 싶은 분위기나 대상 독자를 적어주세요."></textarea></div>
+<button class="btn full" onclick="createProject()">프로젝트 생성하기</button>
+</div>
+</section>
+
+<section class="screen" id="art">
+<div class="eyebrow">ARTWORK CHECK</div><h1>도안 검수</h1><p class="sub">출판할 흑백 선화 이미지를 선택하고 검수 준비를 합니다.</p>
+<div class="card">
+<div class="drop"><div style="font-size:28px">▧</div><strong>도안 이미지 추가하기</strong><p>PNG, JPG 형식 · 여러 장 선택 가능</p><button class="btn ghost" onclick="document.getElementById('files').click()">파일 선택하기</button><input id="files" type="file" accept="image/png,image/jpeg" multiple hidden onchange="addFiles(this.files)"></div>
+<div class="section-head"><h3>선택한 파일 <span id="fileCount" style="color:var(--muted);font-weight:500">0개</span></h3><button class="link" onclick="clearFiles()">전체 삭제</button></div>
+<div id="fileList" class="empty">아직 선택한 도안이 없습니다.</div>
+<button id="checkBtn" class="btn full" disabled onclick="runCheck()">도안 검수 시작</button>
+<div id="checkResult"></div>
+</div>
+<div class="notice">검수 항목: 이미지 크기, 흰 배경, 색상 혼합, 회색 면. 선 굵기나 인쇄 품질 전체를 보증하는 검사는 아닙니다.</div>
+</section>
+
+<section class="screen" id="make">
+<div class="eyebrow">BOOK BUILDER</div><h1>책 만들기</h1><p class="sub">인쇄용 내지와 표지 가이드 제작 조건을 설정하세요.</p>
+<div class="card">
+<h2>내지 설정</h2>
+<div class="field"><label for="trim">책 크기 (Trim size)</label><select id="trim"><option value="8.5x11">8.5 × 11 in (예시)</option><option value="8x10">8 × 10 in (예시)</option><option value="8.25x8.25">8.25 × 8.25 in (예시)</option></select></div>
+<div class="field"><label for="paper">종이 종류</label><select id="paper"><option value="white">White paper</option><option value="cream">Cream paper</option></select></div>
+<div class="field"><label for="blankBack">그림 뒷면 빈 페이지</label><select id="blankBack"><option value="yes">사용 (기본값)</option><option value="no">사용 안 함</option></select><div class="hint">기본값은 그림 1장 뒤에 빈 페이지 1장을 배치합니다.</div></div>
+<div class="field"><label for="bookTheme">주제</label><input id="bookTheme" placeholder="예: 고양이"></div>
+<div class="divider"></div>
+<h2>표지 크기 계산</h2>
+<div class="field"><label for="pages">예상 내지 페이지 수</label><input id="pages" type="number" min="24" max="800" value="60" oninput="calcCover()"></div>
+<div class="success" id="coverCalc">책등 및 전체 표지 크기는 종이 두께 계수로 계산합니다.</div>
+<div class="notice">판형·블리드·종이 두께 수치는 프로젝트 설정의 예시값입니다. 최종 인쇄 전 KDP 공식 템플릿을 확인하세요.</div>
+<button class="btn full" onclick="startBuild()">제작 요청 미리보기</button><button class="btn full secondary" onclick="go('metadata')">출판 정보 입력 →</button>
+<div id="buildResult"></div>
+</div>
+</section>
+
+<section class="screen" id="library">
+<div class="eyebrow">MY LIBRARY</div><h1>내 서재</h1><p class="sub">진행 중인 프로젝트와 제작 결과를 모아봅니다.</p>
+<div class="card" id="projectList"><div class="empty">아직 프로젝트가 없습니다.<br>새 프로젝트를 만들어 시작해 보세요.</div></div>
+<div class="card"><h2>예상 산출물</h2>
+<div class="artifact"><div class="docicon">PDF</div><div><b>interior.pdf</b><small>컬러링북 내지</small></div><span class="status warn">연동 필요</span></div>
+<div class="artifact"><div class="docicon">PDF</div><div><b>cover_guide.pdf</b><small>표지 가이드 · 접는 선 포함</small></div><span class="status warn">연동 필요</span></div>
+<div class="artifact"><div class="docicon">TXT</div><div><b>metadata_draft.txt</b><small>제목·설명·키워드 초안</small></div><span class="status warn">연동 필요</span></div>
+</div>
+</section>
+
+<section class="screen" id="settings">
+<div class="eyebrow">PREFERENCES</div><h1>설정</h1><p class="sub">제작 기본값과 도구 정보를 확인합니다.</p>
+<div class="card">
+<h2>기본 제작 설정</h2>
+<div class="field"><label for="defaultTrim">기본 판형</label><select id="defaultTrim"><option>8.5 × 11 in</option><option>8 × 10 in</option><option>8.25 × 8.25 in</option></select></div>
+<div class="field"><label for="defaultPaper">기본 종이</label><select id="defaultPaper"><option>White</option><option>Cream</option></select></div>
+<button class="btn full secondary" onclick="toast('이 시안에서는 설정을 브라우저 내에서만 사용합니다.')">설정 저장</button>
+</div>
+<div class="card"><h2>엔진 연결 상태</h2><div class="row"><span style="font-size:13px">Python 컬러링북 엔진</span><span class="status warn">API 연동 필요</span></div><div class="divider"></div><p class="hint">현재 저장소는 로컬 CLI 방식입니다. 모바일 브라우저에서 실행하려면 업로드·작업·다운로드 API가 추가되어야 합니다.</p></div>
+<div class="card"><h2>도구 정보</h2><p class="hint">PRJ-0007 · AI 컬러링북 출판<br>모바일 컨셉 프로토타입 v1.0</p></div>
+</section>
+
+<section class="screen" id="metadata">
+<div class="eyebrow">PUBLISHING DETAILS</div><h1>출판 정보 초안</h1><p class="sub">제목·설명·키워드를 검토하고 편집합니다.</p>
+<div class="card">
+<div class="field"><label for="metaTitle">책 제목</label><input id="metaTitle" placeholder="예: 고양이와 함께하는 포근한 하루"></div>
+<div class="field"><label for="metaDesc">책 설명</label><textarea id="metaDesc" placeholder="책의 특징과 독자에게 제공하는 경험을 설명하세요."></textarea></div>
+<div class="field"><label for="metaKeys">키워드 (쉼표로 구분)</label><input id="metaKeys" placeholder="고양이, 컬러링북, 휴식"></div>
+<div class="notice">메타데이터는 초안입니다. 실제 내용과 저작권·상표·플랫폼 정책에 맞는지 직접 검토해야 합니다.</div>
+<button class="btn full" onclick="toast('초안 입력 내용이 화면에 반영되어 있습니다. 실제 저장 API는 연동이 필요합니다.')">초안 확인</button><button class="btn full secondary" onclick="go('library')">내 서재로 돌아가기</button>
+</div>
+</section>
+</main>
+<nav class="tabs" aria-label="주요 메뉴">
+<button class="tab active" data-target="home" onclick="go('home')"><span class="ico">⌂</span>홈</button>
+<button class="tab" data-target="art" onclick="go('art')"><span class="ico">▧</span>도안</button>
+<button class="tab" data-target="make" onclick="go('make')"><span class="ico">▤</span>제작</button>
+<button class="tab" data-target="library" onclick="go('library')"><span class="ico">▣</span>서재</button>
+<button class="tab" data-target="settings" onclick="go('settings')"><span class="ico">⚙</span>설정</button>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+<script>
+const state={files:[],projects:[],checked:false};
+function go(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));
+ document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.target===id));
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.style.display='none',2600)}
+function createProject(){
+ const name=document.getElementById('projectName').value.trim(),theme=document.getElementById('theme').value.trim();
+ if(!name||!theme){toast('프로젝트 이름과 주제를 입력해 주세요.');return}
+ state.projects.unshift({name,theme,description:document.getElementById('description').value,status:'초안'});
+ document.getElementById('projectMetric').textContent=state.projects.length;
+ renderProjects();document.getElementById('bookTheme').value=theme;document.getElementById('metaTitle').value=name;
+ toast('프로젝트가 시안에 추가되었습니다.');go('art');
+}
+function addFiles(files){
+ [...files].forEach(f=>{if(!['image/png','image/jpeg'].includes(f.type)){toast('PNG 또는 JPG 파일만 선택할 수 있습니다.');return}
+ if(state.files.some(x=>x.name===f.name&&x.size===f.size)){toast('이미 추가한 파일입니다.');return}
+ state.files.push({name:f.name,size:f.size,status:'대기',url:URL.createObjectURL(f)});
+ });
+ renderFiles();document.getElementById('files').value='';
+}
+function renderFiles(){
+ document.getElementById('fileCount').textContent=state.files.length+'개';
+ document.getElementById('fileMetric').textContent=state.files.length;
+ document.getElementById('checkBtn').disabled=!state.files.length;
+ const box=document.getElementById('fileList');
+ if(!state.files.length){box.className='empty';box.textContent='아직 선택한 도안이 없습니다.';return}
+ box.className='';
+ box.innerHTML=state.files.map((f,i)=>`<div class="file"><div class="thumb">✎</div><div class="fileinfo"><b>${escapeHtml(f.name)}</b><small>${(f.size/1024).toFixed(0)} KB · ${f.status}</small></div><span class="status ${f.status==='통과'?'ok':f.status==='실패'?'bad':''}">${f.status}</span><button class="remove" aria-label="파일 삭제" onclick="removeFile(${i})">×</button></div>`).join('');
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function removeFile(i){state.files.splice(i,1);state.checked=false;renderFiles();document.getElementById('checkResult').innerHTML=''}
+function clearFiles(){state.files=[];state.checked=false;renderFiles();document.getElementById('checkResult').innerHTML=''}
+function runCheck(){
+ state.files.forEach(f=>f.status='검수 데모 통과');
+ state.checked=true;renderFiles();
+ document.getElementById('checkResult').innerHTML='<div class="success"><b>데모 검수 완료</b><br>파일 선택과 화면 흐름 확인을 위한 시뮬레이션입니다. 실제 이미지 품질 검수는 Python 엔진 API 연결 후 수행됩니다.</div>';
+ toast('화면 시뮬레이션 검수가 완료되었습니다.');
+}
+function calcCover(){
+ const n=Math.max(1,Number(document.getElementById('pages').value)||1);
+ const paper=document.getElementById('paper').value;
+ const coeff=paper==='white'?0.002252:0.0025;
+ const spine=n*coeff;
+ const w=8.5*2+spine+0.25;
+ const h=11+0.25;
+ document.getElementById('coverCalc').textContent=`예시 계산 · 책등 ${spine.toFixed(3)} in · 전체 표지 약 ${w.toFixed(3)} × ${h.toFixed(2)} in (공식 템플릿 대조 필요)`;
+}
+function startBuild(){
+ if(!state.files.length){toast('먼저 도안 이미지를 선택해 주세요.');go('art');return}
+ const theme=document.getElementById('bookTheme').value.trim();
+ if(!theme){toast('책 주제를 입력해 주세요.');return}
+ if(!state.checked){toast('도안 검수를 먼저 진행해 주세요.');go('art');return}
+ const result=document.getElementById('buildResult');
+ result.innerHTML='<div class="success"><b>제작 요청 설정 확인 완료</b><br>판형: '+escapeHtml(document.getElementById('trim').value)+' · 종이: '+escapeHtml(document.getElementById('paper').value)+' · 빈 뒷면: '+(document.getElementById('blankBack').value==='yes'?'사용':'미사용')+'<br><br>실제 PDF 생성 요청은 서버 API 연동이 필요합니다.</div>';
+ toast('제작 옵션을 확인했습니다. 실제 엔진 연결은 필요합니다.');
+}
+function renderProjects(){
+ const box=document.getElementById('projectList');
+ if(!state.projects.length){box.innerHTML='<div class="empty">아직 프로젝트가 없습니다.<br>새 프로젝트를 만들어 시작해 보세요.</div>';return}
+ box.innerHTML=state.projects.map(p=>`<div class="artifact"><div class="docicon">✿</div><div><b>${escapeHtml(p.name)}</b><small>${escapeHtml(p.theme)} · ${escapeHtml(p.status)}</small></div><span class="status warn">초안</span></div>`).join('');
+}
+document.getElementById('paper').addEventListener('change',calcCover);
+calcCover();
+</script>
+</body></html>
