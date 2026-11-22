@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PRJ-0001 · Goodnotes Planner Design System</title>
+<style>
+:root{
+  --ink-950:#172235;--ink-800:#27364D;--ink-600:#536176;--ink-400:#8994A4;
+  --paper:#F7F6F2;--surface:#FFFFFF;--surface-soft:#F1F0EB;--line:#E5E3DC;
+  --navy:#304A70;--navy-deep:#233A5C;--navy-soft:#E8EDF4;
+  --sage:#6E8878;--sage-soft:#EAF0EB;--rose:#B87983;--rose-soft:#F6EAEC;
+  --gold:#B89455;--gold-soft:#F4EFE4;--success:#527B65;--danger:#B45F61;
+  --radius-sm:8px;--radius-md:14px;--radius-lg:22px;--radius-xl:28px;
+  --shadow:0 14px 38px rgba(32,44,63,.08);
+  --font:Inter,"Pretendard","Noto Sans KR",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink-950);font-family:var(--font);line-height:1.55}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+.container{width:min(1160px,calc(100% - 48px));margin:auto}
+.topbar{height:72px;background:rgba(255,255,255,.88);border-bottom:1px solid var(--line);display:flex;align-items:center;position:sticky;top:0;z-index:10;backdrop-filter:blur(14px)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:750;letter-spacing:-.04em}
+.brand-mark{width:34px;height:34px;border-radius:11px;background:var(--navy);display:grid;place-items:center;color:white;font-family:Georgia,serif;font-size:20px}
+.brand small{display:block;color:var(--ink-400);font-size:10px;letter-spacing:.12em;font-weight:650}
+.navlinks{display:flex;gap:24px;color:var(--ink-600);font-size:13px}
+.navlinks a:hover{color:var(--navy)}
+.navtag{font-size:11px;color:var(--navy);background:var(--navy-soft);padding:7px 11px;border-radius:999px;font-weight:700}
+.hero{padding:74px 0 56px;display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:56px}
+.eyebrow{font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+h1{font-size:clamp(38px,5vw,62px);line-height:1.08;letter-spacing:-.055em;margin:18px 0 20px;font-weight:760}
+h1 span{color:var(--navy)}
+.lead{max-width:540px;color:var(--ink-600);font-size:16px;line-height:1.8}
+.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.pill{padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink-600);font-size:11px;background:#fff}
+.hero-art{background:#EDEBE4;border-radius:30px;min-height:370px;position:relative;display:grid;place-items:center;overflow:hidden}
+.hero-art:before,.hero-art:after{content:"";position:absolute;border:1px solid rgba(48,74,112,.12);border-radius:50%;width:360px;height:360px}
+.hero-art:after{width:470px;height:470px}
+.planner-sheet{width:250px;height:310px;background:#fff;border-radius:5px;box-shadow:0 22px 50px rgba(27,39,57,.18);padding:24px 22px;transform:rotate(-5deg);position:relative;z-index:1}
+.sheet-kicker{font-size:8px;letter-spacing:.18em;color:var(--sage);font-weight:800}
+.sheet-title{font-family:Georgia,serif;font-size:30px;color:var(--navy);margin:8px 0 4px}
+.sheet-sub{font-size:8px;color:var(--ink-400);letter-spacing:.12em}
+.sheet-rule{height:1px;background:var(--line);margin:17px 0}
+.sheet-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center;font-size:7px;color:var(--ink-600)}
+.sheet-grid b{font-weight:600;color:var(--ink-400);padding-bottom:5px}
+.sheet-grid span{padding:5px 0;border-radius:50%}
+.sheet-grid .active{background:var(--navy);color:#fff}
+.sheet-lines{margin-top:18px;display:grid;gap:12px}
+.sheet-lines i{height:1px;background:#E9E7E1;display:block}
+.float-note{position:absolute;z-index:2;right:9%;bottom:13%;background:#fff;padding:12px 16px;border-radius:13px;box-shadow:var(--shadow);font-size:11px;color:var(--ink-600)}
+.section{padding:62px 0;border-top:1px solid var(--line)}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:30px}
+.section-kicker{font-size:10px;letter-spacing:.16em;font-weight:800;color:var(--sage)}
+h2{font-size:29px;letter-spacing:-.04em;margin:8px 0 0}
+.section-desc{font-size:13px;color:var(--ink-600);max-width:490px}
+.concept-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.concept{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);padding:22px}
+.concept-no{font-family:Georgia,serif;font-size:26px;color:var(--gold)}
+.concept h3{font-size:15px;margin:12px 0 7px}
+.concept p{font-size:12px;color:var(--ink-600);margin:0;line-height:1.7}
+.color-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.swatch{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.swatch-color{height:94px}
+.swatch-info{padding:12px}
+.swatch-name{font-size:12px;font-weight:750}
+.swatch-code{font-size:10px;color:var(--ink-400);font-family:ui-monospace,monospace;margin-top:3px}
+.color-note{font-size:11px;color:var(--ink-600);margin-top:14px}
+.type-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.type-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px}
+.type-label{font-size:10px;letter-spacing:.12em;color:var(--ink-400);font-weight:800}
+.type-display{font-size:34px;letter-spacing:-.05em;font-weight:760;margin:14px 0 8px}
+.type-body{font-size:13px;color:var(--ink-600)}
+.type-meta{font-size:10px;color:var(--ink-400);margin-top:18px}
+.token-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
+.token{padding:16px;background:#fff;border:1px solid var(--line);border-radius:14px}
+.token strong{display:block;font-size:12px}.token span{font-size:10px;color:var(--ink-400)}
+.component-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.component-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px}
+.component-card h3{font-size:13px;margin:0 0 18px}
+.demo-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn{border:0;border-radius:10px;padding:11px 16px;font-size:12px;font-weight:700}
+.btn-primary{background:var(--navy);color:#fff}
+.btn-secondary{background:var(--navy-soft);color:var(--navy)}
+.btn-quiet{background:transparent;color:var(--ink-600);border:1px solid var(--line)}
+.field{display:grid;gap:6px;margin-bottom:12px}
+.field label{font-size:11px;font-weight:700;color:var(--ink-600)}
+.field input,.field select{width:100%;height:43px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:0 12px;color:var(--ink-800);font:inherit;font-size:12px;outline:none}
+.field input:focus,.field select:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(48,74,112,.1)}
+.theme-options{display:flex;gap:8px}
+.theme-choice{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;display:flex;align-items:center;gap:7px;font-size:11px}
+.dot{width:15px;height:15px;border-radius:50%}
+.theme-choice.selected{border-color:var(--navy);box-shadow:0 0 0 2px var(--navy-soft)}
+.toggle{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line);font-size:12px}
+.switch{width:38px;height:22px;border-radius:20px;background:var(--navy);padding:3px;display:flex;justify-content:flex-end}
+.switch i{width:16px;height:16px;background:white;border-radius:50%}
+.badge{font-size:10px;padding:5px 9px;border-radius:999px;font-weight:700}
+.badge-ok{color:var(--success);background:var(--sage-soft)}
+.badge-info{color:var(--navy);background:var(--navy-soft)}
+.preview-layout{display:grid;grid-template-columns:.75fr 1.25fr;gap:18px;align-items:stretch}
+.preview-panel{background:var(--navy);color:#fff;border-radius:22px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;min-height:330px}
+.preview-panel .muted{color:#C5CFDC;font-size:12px}
+.preview-panel h3{font-size:24px;letter-spacing:-.04em;margin:8px 0}
+.preview-panel .btn{background:#fff;color:var(--navy);align-self:flex-start;margin-top:22px}
+.preview-board{background:#EDEBE4;border-radius:22px;padding:24px;display:flex;gap:14px;align-items:center;justify-content:center;overflow:hidden}
+.mini-page{background:#fff;width:190px;min-height:250px;padding:16px;box-shadow:0 12px 25px rgba(30,40,55,.1);border-radius:4px}
+.mini-page.tilt{transform:rotate(4deg)}
+.mini-title{font-family:Georgia,serif;color:var(--navy);font-size:20px}
+.mini-sub{font-size:7px;color:var(--ink-400);letter-spacing:.1em}
+.mini-line{height:1px;background:var(--line);margin:12px 0}
+.mini-row{display:flex;justify-content:space-between;font-size:8px;color:var(--ink-600);padding:7px 0;border-bottom:1px solid #F0EFEA}
+.mini-check{width:8px;height:8px;border:1px solid var(--sage);border-radius:2px}
+.mobile-demo-wrap{background:#EDEBE4;padding:30px;border-radius:24px;display:grid;place-items:center}
+.phone{width:280px;background:#fff;border:7px solid #202A38;border-radius:32px;overflow:hidden;box-shadow:0 20px 45px rgba(20,30,45,.18)}
+.phone-top{height:24px;background:#fff;display:flex;justify-content:center;align-items:center}
+.notch{width:70px;height:13px;background:#202A38;border-radius:0 0 10px 10px}
+.phone-content{padding:17px 16px 18px}
+.phone-eyebrow{font-size:8px;letter-spacing:.14em;color:var(--sage);font-weight:800}
+.phone h3{font-size:22px;letter-spacing:-.05em;margin:6px 0 3px}
+.phone-copy{font-size:9px;color:var(--ink-400);margin-bottom:15px}
+.phone .field{margin-bottom:9px;gap:4px}
+.phone .field label{font-size:9px}
+.phone .field input,.phone .field select{height:34px;font-size:10px;border-radius:8px}
+.phone .theme-choice{font-size:9px;padding:6px}
+.phone .dot{width:11px;height:11px}
+.phone .btn{width:100%;margin-top:10px;padding:10px;font-size:10px}
+.phone-foot{text-align:center;font-size:8px;color:var(--ink-400);margin-top:9px}
+.mobile-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+.mobile-notes h3{font-size:16px;margin:0 0 8px}
+.mobile-notes p{font-size:12px;color:var(--ink-600);margin:0 0 18px;line-height:1.75}
+.rule-list{display:grid;gap:10px}
+.rule{display:flex;gap:10px;align-items:flex-start;font-size:12px;color:var(--ink-600)}
+.rule b{color:var(--navy);font-size:11px;min-width:22px}
+.footer{padding:34px 0 48px;border-top:1px solid var(--line);color:var(--ink-400);font-size:11px}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media(max-width:800px){
+ .hero{grid-template-columns:1fr;gap:30px;padding-top:48px}
+ .hero-art{min-height:320px}
+ .concept-grid{grid-template-columns:1fr}
+ .color-grid{grid-template-columns:repeat(3,1fr)}
+ .preview-layout{grid-template-columns:1fr}
+ .mobile-grid{grid-template-columns:1fr}
+ .navlinks{display:none}
+}
+@media(max-width:560px){
+ .container{width:min(100% - 32px,1160px)}
+ .topbar{height:62px}
+ .navtag{display:none}
+ .hero{padding:38px 0 38px}
+ h1{font-size:42px}
+ .lead{font-size:14px}
+ .hero-art{min-height:290px}
+ .planner-sheet{transform:scale(.88) rotate(-5deg)}
+ .section{padding:44px 0}
+ .section-head{display:block}
+ .section-desc{margin-top:12px}
+ .color-grid{grid-template-columns:repeat(2,1fr)}
+ .type-grid,.component-grid{grid-template-columns:1fr}
+ .token-row{grid-template-columns:repeat(2,1fr)}
+ .preview-board{padding:18px;gap:8px}
+ .mini-page{width:145px;min-height:210px;padding:12px}
+ .mini-title{font-size:16px}
+ .mobile-demo-wrap{padding:22px 10px}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="#">
+      <span class="brand-mark">g</span>
+      <span>GOODNOTES PLANNER<small>DESIGN SYSTEM · PRJ-0001</small></span>
+    </a>
+    <nav class="navlinks">
+      <a href="#concept">Concept</a><a href="#colors">Colors</a><a href="#type">Typography</a><a href="#components">Components</a><a href="#mobile">Mobile UI</a>
+    </nav>
+    <span class="navtag">VERSION 1.0 · PROPOSAL</span>
+  </div>
+</header>
+
+<main>
+<section class="container hero">
+  <div>
+    <div class="eyebrow">A calmer way to plan your year</div>
+    <h1>Plan with<br><span>clarity & intention.</span></h1>
+    <p class="lead">매일의 기록을 방해하지 않는 조용하고 정돈된 디자인. 플래너를 만드는 과정부터 실제 필기 경험까지 하나의 일관된 언어로 연결합니다.</p>
+    <div class="hero-meta"><span class="pill">Minimal Editorial</span><span class="pill">Mobile First</span><span class="pill">Digital Paper</span><span class="pill">Accessible UI</span></div>
+  </div>
+  <div class="hero-art" aria-label="디지털 플래너 미리보기">
+    <div class="planner-sheet">
+      <div class="sheet-kicker">A YEAR OF INTENTION</div>
+      <div class="sheet-title">2027 Planner</div>
+      <div class="sheet-sub">MAKE SPACE FOR WHAT MATTERS</div>
+      <div class="sheet-rule"></div>
+      <div class="sheet-grid">
+        <b>S</b><b>M</b><b>T</b><b>W</b><b>T</b><b>F</b><b>S</b>
+        <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span>
+        <span>8</span><span>9</span><span class="active">10</span><span>11</span><span>12</span><span>13</span><span>14</span>
+        <span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span>
+      </div>
+      <div class="sheet-lines"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <div class="float-note">A little more focus, every day.</div>
+  </div>
+</section>
+
+<section class="section" id="concept">
+ <div class="container">
+  <div class="section-head"><div><div class="section-kicker">01 / DESIGN DIRECTION</div><h2>디자인 콘셉트</h2></div><p class="section-desc">생산성 도구의 명확함과 종이 플래너의 따뜻한 감성을 결합합니다. 장식보다 콘텐츠와 사용 흐름이 먼저 보이도록 설계합니다.</p></div>
+  <div class="concept-grid">
+   <article class="concept"><div class="concept-no">01</div><h3>Minimal Editorial</h3><p>잡지 편집 디자인처럼 명확한 제목 위계와 넉넉한 여백을 사용합니다. 화면의 모든 요소는 목적을 가져야 합니다.</p></article>
+   <article class="concept"><div class="concept-no">02</div><h3>Soft Neutral</h3><p>순백 대신 따뜻한 아이보리, 짙은 네이비, 절제된 세이지를 사용합니다. 장시간 사용에도 시각적 피로를 줄입니다.</p></article>
+   <article class="concept"><div class="concept-no">03</div><h3>Preview-led Experience</h3><p>사용자가 설정을 바꿀 때 결과물이 어떻게 달라지는지 직관적으로 보여줍니다. 생성 전 확신을 주는 것이 핵심입니다.</p></article>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="colors">
+ <div class="container">
+  <div class="section-head"><div><div class="section-kicker">02 / COLOR SYSTEM</div><h2>컬러 시스템</h2></div><p class="section-desc">기본 테마는 Navy로 통일하고, Sage·Rose·Mono는 플래너 결과물의 선택 테마로 제공합니다.</p></div>
+  <div class="color-grid">
+   <div class="swatch"><div class="swatch-color" style="background:#304A70"></div><div class="swatch-info"><div class="swatch-name">Primary · Navy</div><div class="swatch-code">#304A70</div></div></div>
+   <div class="swatch"><div class="swatch-color" style="background:#F7F6F2"></div><div class="swatch-info"><div class="swatch-name">Canvas · Warm Paper</div><div class="swatch-code">#F7F6F2</div></div></div>
+   <div class="swatch"><div class="swatch-color" style="background:#6E8878"></div><div class="swatch-info"><div class="swatch-name">Accent · Sage</div><div class="swatch-code">#6E8878</div></div></div>
+   <div class="swatch"><div class="swatch-color" style="background:#B87983"></div><div class="swatch-info"><div class="swatch-name">Accent · Rose</div><div class="swatch-code">#B87983</div></div></div>
+   <div class="swatch"><div class="swatch-color" style="background:#27364D"></div><div class="swatch-info"><div class="swatch-name">Text · Ink</div><div class="swatch-code">#27364D</div></div></div>
+  </div>
+  <p class="color-note">운영 규칙: Primary는 주요 CTA와 핵심 내비게이션에만 사용합니다. Accent 컬러는 테마 구분 및 보조 정보에 제한하고, 상태는 텍스트 라벨과 함께 표현합니다.</p>
+ </div>
+</section>
+
+<section class="section" id="type">
+ <div class="container">
+  <div class="section-head"><div><div class="section-kicker">03 / TYPOGRAPHY & TOKENS</div><h2>타이포그래피와 기본 토큰</h2></div><p class="section-desc">UI는 산세리프 계열로 가독성을 확보하고, 플래너 미리보기에서는 세리프 제목을 포인트로 사용합니다.</p></div>
+  <div class="type-grid">
+   <div class="type-card"><div class="type-label">DISPLAY / HEADING</div><div class="type-display">오늘을 정리하다.</div><div class="type-body">Pretendard 또는 Noto Sans KR · 700~800</div><div class="type-meta">Hero 48–62px · H2 29px · H3 16px</div></div>
+   <div class="type-card"><div class="type-label">BODY / PRODUCT PREVIEW</div><div class="type-display" style="font-family:Georgia,serif;font-weight:400;color:var(--navy)">A mindful year.</div><div class="type-body">UI 본문 13–16px · 보조 정보 10–12px</div><div class="type-meta">PDF 표지·월 제목에만 Serif 포인트 사용</div></div>
+  </div>
+  <div class="token-row">
+   <div class="token"><strong>8px</strong><span>Spacing · XS</span></div><div class="token"><strong>16px</strong><span>Spacing · SM</span></div><div class="token"><strong>24px</strong><span>Spacing · MD</span></div><div class="token"><strong>32px</strong><span>Spacing · LG</span></div>
+   <div class="token"><strong>8px</strong><span>Radius · Small</span></div><div class="token"><strong>14px</strong><span>Radius · Medium</span></div><div class="token"><strong>22px</strong><span>Radius · Large</span></div><div class="token"><strong>28px</strong><span>Radius · Hero</span></div>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="components">
+ <div class="container">
+  <div class="section-head"><div><div class="section-kicker">04 / COMPONENT LIBRARY</div><h2>핵심 UI 컴포넌트</h2></div><p class="section-desc">실제 구현 시 공통 컴포넌트로 분리할 기본 요소입니다. 모든 컨트롤은 동일한 높이, 간격, 포커스 규칙을 공유합니다.</p></div>
+  <div class="component-grid">
+   <div class="component-card"><h3>Buttons & Status</h3><div class="demo-row"><button class="btn btn-primary">PDF 만들기</button><button class="btn btn-secondary">미리보기</button><button class="btn btn-quiet">취소</button></div><div class="demo-row" style="margin-top:18px"><span class="badge badge-ok">생성 준비 완료</span><span class="badge badge-info">기본 테마</span></div></div>
+   <div class="component-card"><h3>Form Controls</h3><div class="field"><label>플래너 연도</label><input value="2027" aria-label="플래너 연도"></div><div class="field"><label>주 시작 요일</label><select aria-label="주 시작 요일"><option>월요일</option><option>일요일</option></select></div></div>
+   <div class="component-card"><h3>Theme Selector</h3><div class="theme-options"><button class="theme-choice selected"><i class="dot" style="background:#304A70"></i>Navy</button><button class="theme-choice"><i class="dot" style="background:#6E8878"></i>Sage</button><button class="theme-choice"><i class="dot" style="background:#B87983"></i>Rose</button><button class="theme-choice"><i class="dot" style="background:#333"></i>Mono</button></div></div>
+   <div class="component-card"><h3>Page Options</h3><div class="toggle"><span>주간 페이지 포함</span><span class="switch"><i></i></span></div><div class="toggle"><span>일간 페이지 포함</span><span class="switch"><i></i></span></div><div class="field" style="margin:14px 0 0"><label>노트 페이지 수</label><input value="5" aria-label="노트 페이지 수"></div></div>
+  </div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="container">
+  <div class="section-head"><div><div class="section-kicker">05 / PRODUCT EXPERIENCE</div><h2>결과물 중심의 생성 경험</h2></div><p class="section-desc">설정 폼을 채우는 느낌보다 나만의 플래너를 편집한다는 인상을 줍니다. 데스크톱은 설정과 결과 미리보기를 나란히 배치합니다.</p></div>
+  <div class="preview-layout">
+   <div class="preview-panel"><div><div class="muted">YOUR PLANNER · 2027</div><h3>나의 한 해를<br>설계해 보세요.</h3><p class="muted">테마와 페이지 구성을 선택하고<br>나만의 디지털 플래너를 만듭니다.</p></div><button class="btn">플래너 생성하기</button></div>
+   <div class="preview-board">
+    <div class="mini-page"><div class="mini-sub">MONTHLY OVERVIEW</div><div class="mini-title">January</div><div class="mini-line"></div><div class="mini-row"><span>MON</span><span>TUE</span><span>WED</span><span>THU</span></div><div class="mini-row"><span>01</span><span>02</span><span>03</span><span>04</span></div><div class="mini-row"><span>05</span><span>06</span><span>07</span><span>08</span></div><div class="mini-line"></div><div class="mini-row"><span>Focus</span><i class="mini-check"></i></div><div class="mini-row"><span>Notes</span><i class="mini-check"></i></div></div>
+    <div class="mini-page tilt"><div class="mini-sub">DAILY PLANNER</div><div class="mini-title">Today.</div><div class="mini-line"></div><div class="mini-row"><span>TOP PRIORITIES</span></div><div class="mini-row"><span>01</span><span>________________</span></div><div class="mini-row"><span>02</span><span>________________</span></div><div class="mini-row"><span>03</span><span>________________</span></div><div class="mini-line"></div><div class="mini-row"><span>NOTES</span></div></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="mobile">
+ <div class="container">
+  <div class="section-head"><div><div class="section-kicker">06 / MOBILE FIRST</div><h2>모바일 화면 콘셉트</h2></div><p class="section-desc">스마트폰에서는 설정 단계를 세로로 정리하고, 생성 버튼은 하단에서 쉽게 접근하도록 구성합니다.</p></div>
+  <div class="mobile-grid">
+   <div class="mobile-demo-wrap">
+    <div class="phone">
+     <div class="phone-top"><div class="notch"></div></div>
+     <div class="phone-content">
+      <div class="phone-eyebrow">GOODNOTES PLANNER</div>
+      <h3>나만의 플래너</h3>
+      <div class="phone-copy">원하는 구성으로 한 해를 디자인하세요.</div>
+      <div class="field"><label>플래너 연도</label><input value="2027" readonly></div>
+      <div class="field"><label>주 시작 요일</label><select><option>월요일</option></select></div>
+      <div class="field"><label>테마 선택</label><div class="theme-options"><button class="theme-choice selected"><i class="dot" style="background:#304A70"></i>Navy</button><button class="theme-choice"><i class="dot" style="background:#6E8878"></i>Sage</button></div></div>
+      <div class="field"><label>페이지 구성</label><div style="font-size:10px;color:var(--ink-600);padding:5px 0">✓ 주간 페이지　 ✓ 일간 페이지</div></div>
+      <button class="btn btn-primary">PDF 플래너 만들기</button>
+      <div class="phone-foot">생성된 PDF는 기기에 저장할 수 있습니다.</div>
+     </div>
+    </div>
+   </div>
+   <div class="mobile-notes">
+    <h3>모바일 UI 설계 원칙</h3>
+    <p>작은 화면에서 정보를 한 번에 많이 보여주지 않습니다. 입력 → 구성 확인 → 생성 → 결과 확인의 흐름을 유지하고, 손가락으로 조작하기 쉬운 크기를 우선합니다.</p>
+    <div class="rule-list">
+     <div class="rule"><b>01</b><span>320px부터 가로 넘침 없이 동작하는 단일 열 레이아웃</span></div>
+     <div class="rule"><b>02</b><span>주요 입력과 버튼의 터치 영역은 44px 이상 목표</span></div>
+     <div class="rule"><b>03</b><span>하단 생성 CTA는 키보드와 겹치지 않도록 처리</span></div>
+     <div class="rule"><b>04</b><span>생성 중·완료·실패 상태를 버튼과 별도 영역에서 안내</span></div>
+     <div class="rule"><b>05</b><span>모바일 브라우저는 API를 통해 Python PDF 엔진에 연결</span></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer class="footer"><div class="container footer-inner"><span>PRJ-0001 · GOODNOTES DIGITAL PLANNER</span><span>Design System Proposal v1.0 · 2026.11</span><span>Concept: Minimal Editorial / Soft Neutral</span></div></footer>
+</body>
+</html>
