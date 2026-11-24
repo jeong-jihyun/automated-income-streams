@@ -1,6 +1,0 @@
-node_modules/
-dist/
-output/
-__pycache__/
-.pytest_cache/
-*.pyc
