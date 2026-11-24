@@ -1,5 +1,0 @@
-fonttools
-pillow
-reportlab
-pypdf
-pytest
