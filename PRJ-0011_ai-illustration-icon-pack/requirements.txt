@@ -1,4 +1,0 @@
-pillow
-reportlab
-pypdf
-pytest
